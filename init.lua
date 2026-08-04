@@ -251,10 +251,13 @@ require('blink.cmp').setup({
 -- [x] Ruby          -> ruby_lsp
 -- [x] Elixir        -> elixirls
 -- [x] C#            -> csharp_ls
--- [x] Erlang        -> elp (Erlang Language Platform, by WhatsApp)
---     NOTE: erlang_ls / erlangls is now unmaintained upstream and was
---     replaced with elp -- elp ships as a prebuilt binary via Mason
---     (no rebar3/compiler build step needed, unlike erlang_ls).
+-- [ ] Erlang         -> no LSP on native Windows for now
+--     NOTE: erlang_ls is unmaintained and its recommended replacement, elp,
+--     only ships prebuilt binaries for macOS/Linux (confirmed via ELP's own
+--     install docs -- no Windows binary, and building from source needs
+--     `sbt`/Scala for a sub-component, not worth attempting here).
+--     Treesitter still gives syntax highlighting for .erl files below.
+--     Revisit via WSL later, where `elp`/`erlang_ls` install cleanly.
 -- [x] Ruby on Rails -> ruby_lsp (same server as Ruby)
 -- [ ] Add the 'ruby-lsp-rails' gem to the project for Rails-aware features
 -- [x] Rust          -> rust_analyzer (with clippy as the check command)
@@ -290,7 +293,7 @@ local servers = {
   ruby_lsp = {},    -- Ruby, Ruby on Rails
   elixirls = {},    -- Elixir
   csharp_ls = {},   -- C#
-  elp = {},         -- Erlang (Erlang Language Platform)
+  -- elp = {}, -- Erlang: no native-Windows binary available, see note above
   rust_analyzer = {
     settings = {
       ['rust-analyzer'] = {
