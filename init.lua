@@ -69,8 +69,21 @@ vim.opt.confirm = true
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+-- Disable recursive mapping and silence command-line feedback.
+local opts = { noremap = true, silent = true }
+
+-- Jump to the previous diagnostic
+vim.keymap.set('n', ',d', function() vim.diagnostic.jump({ count = -1, float = true }) end, opts)
+
+-- Jump to the next diagnostic
+vim.keymap.set('n', '.d', function() vim.diagnostic.jump({ count = 1, float = true }) end, opts)
+
+-- Show diagnostic in a floating window (remains unchanged)
+vim.keymap.set('n', '<leader>e', function() vim.diagnostic.open_float() end, opts)
+
+-- Show diagnostics in quickfix list (remains unchanged)
+vim.keymap.set('n', '<leader>q', function() vim.diagnostic.setloclist() end, opts)
+
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
