@@ -190,20 +190,29 @@ local ts_parsers = {
   'query',
   'vim',
   'vimdoc',
-  -- Languages below match the LSP section further down
+  'bicep',
   'c',
   'c_sharp',
   'cpp',
+  'css',
+  'eex', -- HEEx templates embed EEx, treesitter needs both for correct injections
   'elixir',
   'embedded_template', -- embedded_template = ERB, for Rails views
   'erlang',
+  'heex',
+  'javascript',
   'lua',
   'luadoc',
   'python',
   'ruby',
   'rust',
+  'typescript',
 }
 require('nvim-treesitter').install(ts_parsers)
+
+-- HEEx files aren't detected by Neovim's built-in filetype rules by default;
+-- without this, elixirls and the heex treesitter parser never attach.
+vim.filetype.add({ extension = { heex = 'heex' } })
 
 ---@param buf integer
 ---@param language string
@@ -262,6 +271,13 @@ require('blink.cmp').setup({
 -- [ ] Add the 'ruby-lsp-rails' gem to the project for Rails-aware features
 -- [x] Rust          -> rust_analyzer (with clippy as the check command)
 -- [x] Lua           -> lua_ls
+-- [x] HTML          -> html
+-- [x] CSS           -> cssls
+-- [x] JavaScript    -> ts_ls (+ eslint for lint diagnostics/code actions)
+-- [x] TypeScript    -> ts_ls (+ eslint for lint diagnostics/code actions)
+-- [x] Bicep         -> bicep
+-- [x] HEEx          -> elixirls (same server as Elixir; handles .heex via its
+--     filetypes list, see vim.filetype.add above for HEEx detection)
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
@@ -294,6 +310,15 @@ local servers = {
   elixirls = {},    -- Elixir
   csharp_ls = {},   -- C#
   -- elp = {}, -- Erlang: no native-Windows binary available, see note above
+  html = {},   -- HTML
+  cssls = {},  -- CSS
+  ts_ls = {},  -- JavaScript, TypeScript
+  eslint = {
+    -- Runs the project's own local ESLint config; provides lint diagnostics
+    -- and a code action to auto-fix everything ESLint can fix.
+    settings = { workingDirectories = { mode = 'auto' } },
+  },
+  bicep = {}, -- Azure Bicep
   rust_analyzer = {
     settings = {
       ['rust-analyzer'] = {
@@ -326,9 +351,10 @@ require('mason').setup({})
 
 local ensure_installed = vim.tbl_keys(servers)
 vim.list_extend(ensure_installed, {
-  'stylua',  -- Lua formatter
-  'ruff',    -- Python linter + formatter
-  'rubocop', -- Ruby linter + formatter
+  'stylua',     -- Lua formatter
+  'ruff',       -- Python linter + formatter
+  'rubocop',    -- Ruby linter + formatter
+  'stylelint',  -- CSS linter
   -- NOTE: Elixir's `credo` isn't a standalone Mason-installable binary -- it's
   -- added as a project dependency instead (e.g. via `mix.exs`). LSP
   -- diagnostics from elixirls still work without it.
@@ -354,9 +380,12 @@ require('conform').setup({
 vim.keymap.set({ 'n', 'v' }, '<leader>f', function() require('conform').format({ async = true }) end, { desc = '[F]ormat buffer' })
 
 -- [[ Linting: style/lint rules beyond what the LSP flags ]]
+-- NOTE: JS/TS linting comes from the `eslint` LSP server above (surfaces as
+-- diagnostics automatically) -- no nvim-lint entry needed for those.
 require('lint').linters_by_ft = {
   python = { 'ruff' },
   ruby = { 'rubocop' },
+  css = { 'stylelint' }, -- requires a project-local stylelint config to do anything
 }
 vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
   callback = function() require('lint').try_lint() end,
