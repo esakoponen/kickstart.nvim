@@ -251,7 +251,10 @@ require('blink.cmp').setup({
 -- [x] Ruby          -> ruby_lsp
 -- [x] Elixir        -> elixirls
 -- [x] C#            -> csharp_ls
--- [x] Erlang        -> erlangls
+-- [x] Erlang        -> elp (Erlang Language Platform, by WhatsApp)
+--     NOTE: erlang_ls / erlangls is now unmaintained upstream and was
+--     replaced with elp -- elp ships as a prebuilt binary via Mason
+--     (no rebar3/compiler build step needed, unlike erlang_ls).
 -- [x] Ruby on Rails -> ruby_lsp (same server as Ruby)
 -- [ ] Add the 'ruby-lsp-rails' gem to the project for Rails-aware features
 -- [x] Rust          -> rust_analyzer (with clippy as the check command)
@@ -287,7 +290,7 @@ local servers = {
   ruby_lsp = {},    -- Ruby, Ruby on Rails
   elixirls = {},    -- Elixir
   csharp_ls = {},   -- C#
-  erlangls = {},    -- Erlang
+  elp = {},         -- Erlang (Erlang Language Platform)
   rust_analyzer = {
     settings = {
       ['rust-analyzer'] = {
@@ -323,10 +326,9 @@ vim.list_extend(ensure_installed, {
   'stylua',  -- Lua formatter
   'ruff',    -- Python linter + formatter
   'rubocop', -- Ruby linter + formatter
-  -- NOTE: Elixir's `credo` and Erlang tooling aren't standalone
-  -- Mason-installable binaries -- they are added as project dependencies
-  -- instead (e.g. `credo` via `mix.exs`).
-  -- LSP diagnostics from elixirls/erlangls still work without them.
+  -- NOTE: Elixir's `credo` isn't a standalone Mason-installable binary -- it's
+  -- added as a project dependency instead (e.g. via `mix.exs`). LSP
+  -- diagnostics from elixirls still work without it.
 })
 require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
 
