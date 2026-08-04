@@ -150,10 +150,17 @@ require('fzf-lua').setup({})
 -- fzf-lua shells out to ripgrep for grep (rg)
 -- winget install BurntSushi.ripgrep.MSVC
 
-vim.keymap.set('n', '<leader>ff', require('fzf-lua').files, { desc = 'Find files' })
-vim.keymap.set('n', '<leader>fg', require('fzf-lua').live_grep, { desc = 'Live grep' })
-vim.keymap.set('n', '<leader>fb', require('fzf-lua').buffers, { desc = 'Find buffers' })
-vim.keymap.set('n', '<leader>fh', require('fzf-lua').help_tags, { desc = 'Help tags' })
+local fzf = require('fzf-lua')
+vim.keymap.set('n', '<leader>sh', fzf.help_tags, { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>sk', fzf.keymaps, { desc = '[S]earch [K]eymaps' })
+vim.keymap.set('n', '<leader>sf', fzf.files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>ss', fzf.builtin, { desc = '[S]earch [S]elect fzf-lua' })
+vim.keymap.set('n', '<leader>sw', fzf.grep_cword, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>sg', fzf.live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sd', fzf.diagnostics_workspace, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>sr', fzf.resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>s.', fzf.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+vim.keymap.set('n', '<leader><leader>', fzf.buffers, { desc = '[ ] Find existing buffers' })
 
 vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 require('oil').setup({
