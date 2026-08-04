@@ -363,8 +363,8 @@ vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
 })
 
 -- Set indent prefs.
--- NOTE: shiftwidth was 4 while tabstop/softtabstop were 2 -- fixed to match,
--- otherwise <Tab> and >>/<< indent by different amounts.
+-- NOTE: shiftwidth is 4 while tabstop/softtabstop are 2.
+-- <Tab> and >>/<< indent by different amounts intentionally.
 vim.opt.expandtab = true  -- Use spaces instead of tab char.
 vim.opt.tabstop = 2       -- Number of spaces a <Tab> char is displayed as.
 vim.opt.softtabstop = 2   -- Number of spaces inserted with <Tab>
