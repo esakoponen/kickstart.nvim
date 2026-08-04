@@ -302,7 +302,14 @@ local servers = {
     settings = {
       Lua = {
         runtime = { version = 'LuaJIT' },
-        workspace = { checkThirdParty = false },
+        -- Tell lua_ls that `vim` is a real global (it's injected by Neovim's
+        -- runtime, not something lua_ls can infer on its own), and point it
+        -- at Neovim's own Lua API definitions so completion/hover work too.
+        diagnostics = { globals = { 'vim' } },
+        workspace = {
+          checkThirdParty = false,
+          library = { vim.env.VIMRUNTIME },
+        },
         format = { enable = false },
       },
     },
