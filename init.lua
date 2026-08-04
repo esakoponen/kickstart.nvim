@@ -10,6 +10,7 @@ vim.g.maplocalleader = ' '
 -- For more options, you can see `:help option-list`
 
 -- Enable line numbers default
+vim.opt.number = true
 vim.opt.relativenumber = true
 
 -- Disable mouse
