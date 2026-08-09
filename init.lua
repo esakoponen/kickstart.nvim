@@ -13,6 +13,11 @@ vim.g.maplocalleader = ' '
 vim.opt.number = true
 vim.opt.relativenumber = true
 
+-- Borders
+vim.opt.winborder = "rounded"
+
+vim.opt.wrap = false
+
 -- Disable mouse
 vim.opt.mouse = ''
 
@@ -64,6 +69,10 @@ vim.opt.confirm = true
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
+
+-- Source rc
+vim.keymap.set('n', '<leader>o', ':update<CR> :source<CR>')
+vim.keymap.set('n', '<leader>w', ':write<CR>')
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
