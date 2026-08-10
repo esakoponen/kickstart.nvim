@@ -223,6 +223,10 @@ vim.pack.add({
   'https://github.com/nvim-mini/mini.nvim',
   -- Accurate, fast syntax highlighting + indentation
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main' },
+  -- Select/move/swap by syntax node, and the textobject queries mini.ai reads
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects', version = 'main' },
+  -- Close </div> as soon as <div> is typed, in HTML/JSX/HEEx
+  'https://github.com/windwp/nvim-ts-autotag',
   -- Snippet engine + completion engine (text prediction as you type)
   { src = 'https://github.com/L3MON4D3/LuaSnip', version = vim.version.range('2.*') },
   { src = 'https://github.com/saghen/blink.cmp', version = vim.version.range('1.*') },
@@ -273,6 +277,7 @@ require('which-key').setup({
 -- without it which-key would show an empty group rather than everything under [.
 require('which-key').add({
   { '<leader>b', group = 'Buffer' },
+  { '<leader>c', group = 'Code' },
   { '<leader>s', group = 'Search' },
   { '<leader>u', group = 'UI / toggle' },
   { '<leader>r', group = 'Config' },
@@ -323,7 +328,22 @@ require('gitsigns').setup({
 
 -- [[ mini.nvim modules ]]
 -- va) [V]isually select [A]round [)]paren, ci' [C]hange [I]nside [']quote, etc.
-require('mini.ai').setup({ n_lines = 500 })
+-- Uppercase F/C and lowercase o are backed by treesitter queries. They are deliberately not
+-- af/ac: mini.ai already uses lowercase f for a function *call* and a for an argument, and
+-- those keep working in files no parser handles. daF deletes a whole function definition.
+local MiniAi = require('mini.ai')
+local ai_ts = MiniAi.gen_spec.treesitter
+require('mini.ai').setup({
+  n_lines = 500,
+  custom_textobjects = {
+    F = ai_ts({ a = '@function.outer', i = '@function.inner' }), -- function/method definition
+    C = ai_ts({ a = '@class.outer', i = '@class.inner' }),       -- class, module, struct
+    o = ai_ts({                                                  -- block: if/case/for/while
+      a = { '@conditional.outer', '@loop.outer' },
+      i = { '@conditional.inner', '@loop.inner' },
+    }),
+  },
+})
 -- saiw) [S]urround [A]dd [I]nner [W]ord [)]Paren, sd' [S]urround [D]elete [']quotes
 require('mini.surround').setup()
 -- Minimal statusline
@@ -424,6 +444,45 @@ vim.api.nvim_create_autocmd('FileType', {
     end
   end,
 })
+
+-- [[ Treesitter textobjects: move between and swap syntax nodes ]]
+-- Selection (daF, cio, ...) is handled by mini.ai above; this half covers jumping and reordering.
+require('nvim-treesitter-textobjects').setup({
+  move = { set_jumps = true }, -- record each jump so <C-o> walks back out of them
+})
+
+local ts_move = require('nvim-treesitter-textobjects.move')
+local ts_swap = require('nvim-treesitter-textobjects.swap')
+local ts_repeat = require('nvim-treesitter-textobjects.repeatable_move')
+
+-- ]m/[m jump to the start of the next/previous function, ]M/[M to its end (so äm/öm on this layout).
+-- Neovim's built-in ]m only understands brace languages; going through the parser makes it work
+-- in Elixir, Ruby and Python too. Wrapped so the jump can be repeated with ; and ,.
+local function move_map(key, move_fn, capture, desc)
+  local repeatable = ts_repeat.make_repeatable_move(move_fn)
+  vim.keymap.set({ 'n', 'x', 'o' }, key, function() repeatable(capture, 'textobjects') end, { desc = desc })
+end
+move_map(']m', ts_move.goto_next_start, '@function.outer', 'Next function start')
+move_map('[m', ts_move.goto_previous_start, '@function.outer', 'Prev function start')
+move_map(']M', ts_move.goto_next_end, '@function.outer', 'Next function end')
+move_map('[M', ts_move.goto_previous_end, '@function.outer', 'Prev function end')
+
+-- ; and , now repeat the last treesitter jump *or* the last f/F/t/T, whichever came last.
+-- The four expr mappings below are what keep plain f/t repeatable; without them ; would only
+-- know about treesitter moves. Nothing is lost -- this is a superset of the default behaviour.
+vim.keymap.set({ 'n', 'x', 'o' }, ';', ts_repeat.repeat_last_move_next, { desc = 'Repeat move forward' })
+vim.keymap.set({ 'n', 'x', 'o' }, ',', ts_repeat.repeat_last_move_previous, { desc = 'Repeat move backward' })
+vim.keymap.set({ 'n', 'x', 'o' }, 'f', ts_repeat.builtin_f_expr, { expr = true })
+vim.keymap.set({ 'n', 'x', 'o' }, 'F', ts_repeat.builtin_F_expr, { expr = true })
+vim.keymap.set({ 'n', 'x', 'o' }, 't', ts_repeat.builtin_t_expr, { expr = true })
+vim.keymap.set({ 'n', 'x', 'o' }, 'T', ts_repeat.builtin_T_expr, { expr = true })
+
+-- Reorder function parameters in place, without a cut-and-paste round trip.
+vim.keymap.set('n', '<leader>ca', function() ts_swap.swap_next('@parameter.inner') end, { desc = '[C]ode swap [A]rg next' })
+vim.keymap.set('n', '<leader>cA', function() ts_swap.swap_previous('@parameter.inner') end, { desc = '[C]ode swap [A]rg prev' })
+
+-- Keep the closing tag in step with the opening one while typing (html, jsx, tsx, heex, xml).
+require('nvim-ts-autotag').setup({})
 
 -- [[ Autocomplete + snippets: text prediction as you type ]]
 require('luasnip').setup({})
