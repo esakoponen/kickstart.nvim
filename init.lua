@@ -88,6 +88,32 @@ vim.opt.jumpoptions = 'stack,view,clean'
 -- Prompt to save rather than failing with E37 when :q would discard unsaved changes.
 vim.opt.confirm = true
 
+-- [[ Shell: PowerShell 7 ]]
+-- Used by :terminal, :! and system(). Guarded on pwsh being present so the config still loads
+-- on a machine without it, where Neovim falls back to its own default (cmd.exe on Windows).
+-- These settings follow `:help shell-pwsh` rather than being hand-rolled; the parts matter:
+--   -NoProfile          start-up is not slowed by a user profile, and behaviour is reproducible
+--   InputEncoding/...   forces UTF-8 both ways, otherwise non-ASCII output arrives mangled
+--   Out-File:Encoding   makes redirection write UTF-8 too, not the legacy codepage
+--   OutputRendering     strips the ANSI colour codes pwsh 7 emits, which would show as escapes
+--   shellquote/xquote   cleared, because PowerShell does its own quoting
+--   shelltemp = false   pipe command output instead of going via a temporary file
+if vim.fn.executable('pwsh') == 1 then
+  vim.opt.shell = 'pwsh'
+  vim.opt.shellcmdflag = table.concat({
+    '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command',
+    '[Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();',
+    "$PSDefaultParameterValues['Out-File:Encoding']='utf8';",
+    "$PSStyle.OutputRendering='PlainText';",
+  }, ' ')
+  vim.opt.shellredir = '> %s 2>&1'
+  vim.opt.shellpipe = '> %s 2>&1'
+  vim.opt.shellquote = ''
+  vim.opt.shellxquote = ''
+  vim.opt.shelltemp = false
+  vim.env.__SuppressAnsiEscapeSequences = 1 -- workaround pwsh still needs; harmless once it does not
+end
+
 -- Indentation: 4 spaces everywhere. guess-indent overrides these per file when a file disagrees.
 vim.opt.expandtab = true -- <Tab> inserts spaces, never a literal tab character
 vim.opt.tabstop = 4      -- display width of a tab character that is already in the file
