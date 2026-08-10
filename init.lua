@@ -5,67 +5,102 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- [[ Setting options ]]
--- See `:help vim.opt`
--- NOTE: You can change these options as you wish!
--- For more options, you can see `:help option-list`
+-- `:help option-list` lists them all; `:help 'name'` explains any single one.
 
--- Enable line numbers default
+-- Absolute number on the cursor line, relative on the rest, so 5j / 3k are countable at a glance.
 vim.opt.number = true
 vim.opt.relativenumber = true
 
--- Borders
-vim.opt.winborder = "rounded"
+-- Rounded borders on every floating window (hover, diagnostics, fzf-lua).
+vim.opt.winborder = 'rounded'
 
+-- Long lines run off the right edge instead of continuing on the next row, so one line stays one row.
 vim.opt.wrap = false
 
--- Disable mouse
+-- Ignore the mouse entirely, so a stray touchpad brush cannot move the cursor or start a selection.
 vim.opt.mouse = ''
 
--- Don't show the mode, since it's already in the status line
+-- mini.statusline already shows the mode; this drops the duplicate "-- INSERT --" on the last line.
 vim.opt.showmode = false
 
--- Enable break indent
+-- When a line does wrap, the continuation keeps the indent of the line it belongs to.
 vim.opt.breakindent = true
 
--- Save undo history
+-- Persist undo history to disk, so `u` still reaches yesterday's edits after reopening a file.
 vim.opt.undofile = true
 
--- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
+-- Searches ignore case until you type a capital (or \C), which then makes the search exact.
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
--- Keep signcolumn on by default
+-- Always reserve the sign column, so git signs and diagnostics appearing never shift text sideways.
 vim.opt.signcolumn = 'yes'
 
--- Decrease update time
+-- Idle milliseconds before CursorHold fires; this is what paces LSP document highlight.
 vim.opt.updatetime = 250
 
--- Decrease mapped sequence wait time
+-- How long Neovim waits for the rest of a multi-key mapping, and so when which-key will pop up.
 vim.opt.timeoutlen = 300
 
--- Configure how new splits should be opened
+-- New splits open right and below, rather than pushing the current buffer out of position.
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
--- Sets how neovim will display certain whitespace characters in the editor.
---  See `:help 'list'`
---  and `:help 'listchars'`
+-- Keep the text you are reading visually still when a split opens or closes above it.
+vim.opt.splitkeep = 'screen'
+
+-- Render otherwise-invisible characters, so tabs and stray trailing spaces are obvious.
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
--- Preview substitutions live, as you type!
+-- Hide the ~ filler that would otherwise mark every row past the end of the buffer.
+vim.opt.fillchars = { eob = ' ' }
+
+-- Live preview of :s/// as you type it, with off-screen matches shown in a temporary split.
 vim.opt.inccommand = 'split'
 
--- Show which line your cursor is on
+-- Subtle highlight on the line the cursor sits on.
 vim.opt.cursorline = true
 
--- Minimal number of screen lines to keep above and below the cursor.
+-- Start scrolling this many lines/columns before the cursor reaches the edge, instead of at it.
 vim.opt.scrolloff = 10
+vim.opt.sidescrolloff = 8
 
--- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
--- instead raise a dialog asking if you wish to save the current file(s)
--- See `:help 'confirm'`
+-- Scroll wrapped lines by screen row rather than jumping a whole logical line (only bites when wrap is on).
+vim.opt.smoothscroll = true
+
+-- In Visual-block mode only, allow the cursor past end-of-line, so ragged lines still select as a rectangle.
+vim.opt.virtualedit = 'block'
+
+-- Cap the completion popup at 10 rows, so a long candidate list cannot swallow the window.
+vim.opt.pumheight = 10
+
+-- One statusline for the whole window instead of one per split: less chrome once splits are open.
+vim.opt.laststatus = 3
+
+-- Share the Windows clipboard with the unnamed register, so y and p work across applications.
+-- Trade-off: d and x overwrite it too. Use "0p to paste the last *yank* specifically.
+vim.opt.clipboard = 'unnamedplus'
+
+-- Make <C-o>/<C-i> behave as a real stack, and restore the scroll position when jumping back.
+vim.opt.jumpoptions = 'stack,view,clean'
+
+-- Prompt to save rather than failing with E37 when :q would discard unsaved changes.
 vim.opt.confirm = true
+
+-- Indentation: 4 spaces everywhere. guess-indent overrides these per file when a file disagrees.
+vim.opt.expandtab = true -- <Tab> inserts spaces, never a literal tab character
+vim.opt.tabstop = 4      -- display width of a tab character that is already in the file
+vim.opt.softtabstop = 4  -- how far <Tab> and <BS> move in insert mode
+vim.opt.shiftwidth = 4   -- how far >>, << and autoindent shift
+
+-- Sort diagnostics worst-first, and name the source only when more than one is reporting.
+-- Borders come from 'winborder' above, so no border option is needed here.
+vim.diagnostic.config({
+  severity_sort = true,
+  virtual_text = { spacing = 2, source = 'if_many' },
+  float = { source = 'if_many' },
+})
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -433,13 +468,6 @@ vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
   callback = function() require('lint').try_lint() end,
 })
 
--- Set indent prefs.
--- NOTE: shiftwidth is 4 while tabstop/softtabstop are 2.
--- <Tab> and >>/<< indent by different amounts intentionally.
-vim.opt.expandtab = true  -- Use spaces instead of tab char.
-vim.opt.tabstop = 2       -- Number of spaces a <Tab> char is displayed as.
-vim.opt.softtabstop = 2   -- Number of spaces inserted with <Tab>
-vim.opt.shiftwidth = 4    -- Number of spaces used for indent level (>>, <<, auto)
-
--- The line beneath this is called `modeline`. See `:help modeline`
+-- The modeline below applies to this file only, and stays at 2 to match how init.lua
+-- is already indented; the global default set near the top is 4. See `:help modeline`.
 -- vim: ts=2 sts=2 sw=2 et
