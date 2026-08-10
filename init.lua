@@ -81,11 +81,13 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Disable recursive mapping and silence command-line feedback.
 local opts = { noremap = true, silent = true }
 
--- Jump to the previous diagnostic
-vim.keymap.set('n', ',d', function() vim.diagnostic.jump({ count = -1, float = true }) end, opts)
+-- Nordic layout: [ and ] need AltGr, so use the free home-row keys instead.
+-- `remap = true` is required so plugin-defined pairs (]d, ]c, ]q, ...) resolve through them.
+vim.keymap.set({ 'n', 'x', 'o' }, 'ö', '[', { remap = true, desc = 'Prev ([) prefix' })
+vim.keymap.set({ 'n', 'x', 'o' }, 'ä', ']', { remap = true, desc = 'Next (]) prefix' })
 
--- Jump to the next diagnostic
-vim.keymap.set('n', '.d', function() vim.diagnostic.jump({ count = 1, float = true }) end, opts)
+-- Replay macro q without reaching for @ (AltGr+2); Q's default Ex mode is dead weight.
+vim.keymap.set('n', 'Q', '@q', { desc = 'Replay macro q' })
 
 -- Show diagnostic in a floating window (remains unchanged)
 vim.keymap.set('n', '<leader>e', function() vim.diagnostic.open_float() end, opts)
