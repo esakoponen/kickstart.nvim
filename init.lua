@@ -211,6 +211,10 @@ vim.pack.add({
   { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' },
   -- Popup listing the keys that can follow the prefix you just typed
   'https://github.com/folke/which-key.nvim',
+  -- Remembers which files were open, per directory and git branch
+  'https://github.com/folke/persistence.nvim',
+  -- One centred column, everything else hidden, on demand
+  'https://github.com/folke/zen-mode.nvim',
   -- Fuzzy finder (files, live grep, buffers, help)
   'https://github.com/ibhagwan/fzf-lua',
   -- File explorer as an editable buffer
@@ -282,11 +286,37 @@ require('which-key').add({
   { '<leader>c', group = 'Code' },
   { '<leader>g', group = 'Git' },
   { '<leader>s', group = 'Search' },
+  -- Capital S, because <leader>q is already the diagnostics loclist here.
+  { '<leader>S', group = 'Session' },
   { '<leader>u', group = 'UI / toggle' },
   { '<leader>r', group = 'Config' },
   { 'ö', proxy = '[', group = 'Prev ([)' },
   { 'ä', proxy = ']', group = 'Next (])' },
 })
+
+-- [[ Sessions ]]
+-- HEADS UP, this is the one thing here that acts on its own: setup() registers a VimLeavePre
+-- autocmd, so quitting records which files were open. It writes only to
+-- stdpath('state')/sessions, keyed by directory and git branch, and never touches the project.
+-- `need = 1` means quitting an empty Neovim writes nothing. Restoring is always manual, below.
+-- <leader>Sd cancels saving for the current session when you would rather not record it.
+require('persistence').setup()
+
+vim.keymap.set('n', '<leader>Ss', function() require('persistence').load() end, { desc = '[S]ession restore (this dir)' })
+vim.keymap.set('n', '<leader>Sl', function() require('persistence').load({ last = true }) end, { desc = '[S]ession restore [L]ast' })
+vim.keymap.set('n', '<leader>Sf', function() require('persistence').select() end, { desc = '[S]ession pick from list' })
+vim.keymap.set('n', '<leader>Sd', function() require('persistence').stop() end, { desc = '[S]ession do not save on exit' })
+
+-- [[ Zen mode ]]
+-- Purely on demand. Hides the number and sign columns as well as narrowing the window, so
+-- nothing but the text remains; press it again to restore the previous layout exactly.
+require('zen-mode').setup({
+  window = {
+    width = 100,
+    options = { number = false, relativenumber = false, signcolumn = 'no' },
+  },
+})
+vim.keymap.set('n', '<leader>uz', '<cmd>ZenMode<CR>', { desc = 'Toggle [Z]en mode' })
 
 -- List the mappings that only exist in this buffer (LSP, oil, gitsigns).
 vim.keymap.set('n', '<leader>?', function()
