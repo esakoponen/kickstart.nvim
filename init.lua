@@ -647,10 +647,14 @@ require('mason').setup({})
 
 local ensure_installed = vim.tbl_keys(servers)
 vim.list_extend(ensure_installed, {
-  'stylua',     -- Lua formatter
-  'ruff',       -- Python linter + formatter
-  'rubocop',    -- Ruby linter + formatter
-  'stylelint',  -- CSS linter
+  'stylua',        -- Lua formatter
+  'ruff',          -- Python linter + formatter
+  'rubocop',       -- Ruby linter + formatter
+  'stylelint',     -- CSS linter
+  'prettierd',     -- JS/TS/JSON/YAML/HTML/CSS/Markdown formatter (daemon)
+  'prettier',      -- same, used when the daemon is not running
+  'clang-format',  -- C/C++ formatter (mason spells it with a hyphen, conform with an underscore)
+  'shfmt',         -- shell script formatter
   -- NOTE: Elixir's `credo` isn't a standalone Mason-installable binary -- it's
   -- added as a project dependency instead (e.g. via `mix.exs`). LSP
   -- diagnostics from elixirls still work without it.
@@ -663,17 +667,54 @@ for name, server in pairs(servers) do
 end
 
 -- [[ Formatting ]]
+-- prettierd is a background daemon producing the same output as prettier, without paying
+-- node's startup cost on every format; prettier is the fallback if the daemon is unavailable.
+local prettier = { 'prettierd', 'prettier', stop_after_first = true }
+
+-- Off by default, so saving never reformats a file behind your back. <leader>uf turns it on
+-- for the session; <leader>f formats on demand regardless.
+vim.g.format_on_save = false
+
 require('conform').setup({
   notify_on_error = false,
-  default_format_opts = { lsp_format = 'fallback' },
+  default_format_opts = { lsp_format = 'fallback' }, -- filetypes absent below fall back to the LSP
+  format_on_save = function()
+    if not vim.g.format_on_save then return end
+    return { timeout_ms = 1000, lsp_format = 'fallback' }
+  end,
   formatters_by_ft = {
     lua = { 'stylua' },
     python = { 'ruff_format' },
     ruby = { 'rubocop' },
-    rust = { 'rustfmt' }, -- requires `rustup component add rustfmt`
+    rust = { 'rustfmt' },   -- requires `rustup component add rustfmt`
+    elixir = { 'mix' },     -- `mix format` ships with Elixir, so mason has nothing to install
+    heex = { 'mix' },
+    eex = { 'mix' },
+    c = { 'clang_format' },
+    cpp = { 'clang_format' },
+    sh = { 'shfmt' },
+    bash = { 'shfmt' },
+    javascript = prettier,
+    javascriptreact = prettier,
+    typescript = prettier,
+    typescriptreact = prettier,
+    json = prettier,
+    jsonc = prettier,
+    yaml = prettier,
+    html = prettier,
+    css = prettier,
+    scss = prettier,
+    markdown = prettier,
   },
 })
+
 vim.keymap.set({ 'n', 'v' }, '<leader>f', function() require('conform').format({ async = true }) end, { desc = '[F]ormat buffer' })
+
+-- Session-only toggle: it is deliberately not persisted, so a new session starts off again.
+vim.keymap.set('n', '<leader>uf', function()
+  vim.g.format_on_save = not vim.g.format_on_save
+  vim.notify('Format on save: ' .. (vim.g.format_on_save and 'on' or 'off'))
+end, { desc = 'Toggle [F]ormat on save' })
 
 -- [[ Linting: style/lint rules beyond what the LSP flags ]]
 -- NOTE: JS/TS linting comes from the `eslint` LSP server above (surfaces as
