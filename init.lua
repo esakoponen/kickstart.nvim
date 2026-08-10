@@ -150,6 +150,33 @@ vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
+-- Move between splits with one keystroke instead of <C-w> then a direction.
+-- <C-l> was :nohlsearch + :diffupdate + redraw; <Esc> above already clears the search highlight.
+vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Go to left window' })
+vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Go to lower window' })
+vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Go to upper window' })
+vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Go to right window' })
+
+-- Join lines without the cursor jumping to the seam: mark, join, return to the mark.
+vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join line, keep cursor put' })
+
+-- Stay in Visual after shifting, so >>>> is just > pressed four times.
+vim.keymap.set('x', '<', '<gv', { desc = 'Shift left, keep selection' })
+vim.keymap.set('x', '>', '>gv', { desc = 'Shift right, keep selection' })
+
+-- Recentre after a half-page jump or a search hit, so the cursor never lands at a screen edge.
+-- zv additionally opens a fold the match is hidden inside.
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Half page down, centred' })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Half page up, centred' })
+vim.keymap.set('n', 'n', 'nzzzv', { desc = 'Next search hit, centred' })
+vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'Prev search hit, centred' })
+
+-- Replace a selection without losing what you copied: plain p would swap the register contents.
+vim.keymap.set('x', '<leader>p', '"_dP', { desc = '[P]aste over, keep register' })
+
+-- Delete into the black hole register, for throwing text away without disturbing the clipboard.
+vim.keymap.set({ 'n', 'x' }, '<leader>d', '"_d', { desc = '[D]elete to black hole' })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
