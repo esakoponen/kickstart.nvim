@@ -182,6 +182,8 @@ vim.pack.add({
   'https://github.com/folke/tokyonight.nvim',
   -- `name` is needed here: the repo is called "nvim", which would be a confusing directory
   { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' },
+  -- Popup listing the keys that can follow the prefix you just typed
+  'https://github.com/folke/which-key.nvim',
   -- Fuzzy finder (files, live grep, buffers, help)
   'https://github.com/ibhagwan/fzf-lua',
   -- File explorer as an editable buffer
@@ -230,6 +232,30 @@ local saved = vim.fn.filereadable(colorscheme_file) == 1 and vim.fn.readfile(col
 if not (saved and pcall(vim.cmd.colorscheme, saved)) then
   vim.cmd.colorscheme('tokyonight-night')
 end
+
+-- [[ which-key: shows what can follow a half-typed key sequence ]]
+-- It reads the `desc` field of every keymap, so a mapping without one shows as raw Lua.
+require('which-key').setup({
+  preset = 'helix',                 -- centred column; 'classic' and 'modern' are the alternatives
+  delay = vim.o.timeoutlen,         -- pop up in step with the mapping timeout rather than before it
+  icons = { mappings = false },     -- text only, matching the icon-free statusline
+})
+
+-- Name the prefixes, so the popup reads as a menu instead of a flat key dump.
+-- `proxy` is what makes the Nordic bracket keys work: ö is a mapping *to* [, so
+-- without it which-key would show an empty group rather than everything under [.
+require('which-key').add({
+  { '<leader>s', group = 'Search' },
+  { '<leader>u', group = 'UI / toggle' },
+  { '<leader>r', group = 'Config' },
+  { 'ö', proxy = '[', group = 'Prev ([)' },
+  { 'ä', proxy = ']', group = 'Next (])' },
+})
+
+-- List the mappings that only exist in this buffer (LSP, oil, gitsigns).
+vim.keymap.set('n', '<leader>?', function()
+  require('which-key').show({ global = false })
+end, { desc = 'Buffer-local keymaps' })
 
 require('fzf-lua').setup({})
 -- fzf-lua shells out to ripgrep for grep (rg)
