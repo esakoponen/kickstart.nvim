@@ -178,6 +178,10 @@ vim.api.nvim_create_autocmd('PackChanged', {
 
 -- Add all plugins at once
 vim.pack.add({
+  -- Colorschemes (both installed; pick between them at runtime with <leader>uc)
+  'https://github.com/folke/tokyonight.nvim',
+  -- `name` is needed here: the repo is called "nvim", which would be a confusing directory
+  { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' },
   -- Fuzzy finder (files, live grep, buffers, help)
   'https://github.com/ibhagwan/fzf-lua',
   -- File explorer as an editable buffer
@@ -204,6 +208,29 @@ vim.pack.add({
   'https://github.com/mfussenegger/nvim-lint',
 })
 
+-- [[ Colorscheme ]]
+-- Both variants must be configured before one is applied, since setup() decides
+-- what the `tokyonight`/`catppuccin` names resolve to.
+require('tokyonight').setup({ style = 'night' })   -- storm | moon | night | day
+require('catppuccin').setup({ flavour = 'mocha' }) -- latte | frappe | macchiato | mocha
+
+-- The chosen scheme is remembered in Neovim's state directory, outside this repo.
+local colorscheme_file = vim.fs.joinpath(vim.fn.stdpath('state'), 'colorscheme')
+
+-- Record every colorscheme change, wherever it came from (:colorscheme, the picker below).
+vim.api.nvim_create_autocmd('ColorScheme', {
+  group = vim.api.nvim_create_augroup('remember-colorscheme', { clear = true }),
+  callback = function(ev)
+    vim.fn.writefile({ ev.match }, colorscheme_file)
+  end,
+})
+
+-- Restore last session's choice; fall back if the file is missing or names a scheme that is gone.
+local saved = vim.fn.filereadable(colorscheme_file) == 1 and vim.fn.readfile(colorscheme_file)[1] or nil
+if not (saved and pcall(vim.cmd.colorscheme, saved)) then
+  vim.cmd.colorscheme('tokyonight-night')
+end
+
 require('fzf-lua').setup({})
 -- fzf-lua shells out to ripgrep for grep (rg)
 -- winget install BurntSushi.ripgrep.MSVC
@@ -219,6 +246,9 @@ vim.keymap.set('n', '<leader>sd', fzf.diagnostics_workspace, { desc = '[S]earch 
 vim.keymap.set('n', '<leader>sr', fzf.resume, { desc = '[S]earch [R]esume' })
 vim.keymap.set('n', '<leader>s.', fzf.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 vim.keymap.set('n', '<leader><leader>', fzf.buffers, { desc = '[ ] Find existing buffers' })
+
+-- Browse colorschemes with live preview; the choice is persisted by the autocmd above.
+vim.keymap.set('n', '<leader>uc', fzf.colorschemes, { desc = 'Change [C]olorscheme' })
 
 vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 require('oil').setup({
