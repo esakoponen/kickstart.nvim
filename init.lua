@@ -272,6 +272,7 @@ require('which-key').setup({
 -- `proxy` is what makes the Nordic bracket keys work: ö is a mapping *to* [, so
 -- without it which-key would show an empty group rather than everything under [.
 require('which-key').add({
+  { '<leader>b', group = 'Buffer' },
   { '<leader>s', group = 'Search' },
   { '<leader>u', group = 'UI / toggle' },
   { '<leader>r', group = 'Config' },
@@ -327,6 +328,42 @@ require('mini.ai').setup({ n_lines = 500 })
 require('mini.surround').setup()
 -- Minimal statusline
 require('mini.statusline').setup({ use_icons = false })
+
+-- Auto-close brackets and quotes, and make <BS> delete both halves of an empty pair.
+require('mini.pairs').setup()
+
+-- File-type markers for fzf-lua and oil. 'ascii' shows a letter instead of a glyph, because
+-- only stock Cascadia is installed here; switch to 'glyph' after installing a Nerd Font.
+require('mini.icons').setup({ style = 'ascii' })
+MiniIcons.mock_nvim_web_devicons() -- lets plugins that ask for nvim-web-devicons use these instead
+
+-- Alt+hjkl pushes the current line (or Visual selection) around, reindenting as it goes.
+require('mini.move').setup()
+
+-- Close a buffer while leaving the window layout alone, which :bdelete does not do.
+require('mini.bufremove').setup()
+vim.keymap.set('n', '<leader>bd', function() require('mini.bufremove').delete(0, false) end, { desc = '[B]uffer [D]elete' })
+vim.keymap.set('n', '<leader>bD', function() require('mini.bufremove').delete(0, true) end, { desc = '[B]uffer [D]elete, discard changes' })
+
+-- gS toggles an argument list between one line and one-per-line.
+require('mini.splitjoin').setup()
+
+-- Paint #rrggbb strings in their own colour; TODO/FIXME words are left to todo-comments later.
+local hipatterns = require('mini.hipatterns')
+hipatterns.setup({ highlighters = { hex_color = hipatterns.gen_highlighter.hex_color() } })
+
+-- More ö/ä pairs. The six targets Neovim (or diff mode) already provides are disabled rather
+-- than shadowed: b buffer, d diagnostic, l location, q quickfix, t tag, c diff-mode change.
+require('mini.bracketed').setup({
+  buffer = { suffix = '' },
+  comment = { suffix = '' },
+  diagnostic = { suffix = '' },
+  location = { suffix = '' },
+  quickfix = { suffix = '' },
+  treesitter = { suffix = '' },
+  -- Left enabled: x conflict marker, f file in directory, i indent, j jump,
+  -- o oldfile, u undo state, w window, y yank (öy/äy cycles what was just pasted).
+})
 
 -- [[ Treesitter: syntax highlighting + indentation ]]
 local ts_parsers = {
