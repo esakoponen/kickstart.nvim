@@ -118,14 +118,13 @@ vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
--- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.highlight.on_yank()`
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
+-- Briefly highlight the region that was just yanked or pasted; try it with `yap`.
+--  See `:help vim.hl.hl_op()` (replaced vim.highlight.on_yank / vim.hl.on_yank)
+vim.api.nvim_create_autocmd({ 'TextYankPost', 'TextPutPost' }, {
+  desc = 'Highlight yanked/pasted text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
   callback = function()
-    vim.highlight.on_yank()
+    vim.hl.hl_op()
   end,
 })
 
@@ -316,19 +315,31 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local map = function(keys, func, desc, mode)
       vim.keymap.set(mode or 'n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
     end
-    map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
-    map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
+    -- Neovim maps grn/gra/gri/grr/grt/grx/gO globally and K/<C-s> on attach; grd is the gap.
     map('grd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-    map('gri', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-    map('grr', vim.lsp.buf.references, '[G]oto [R]eferences')
-    map('grt', vim.lsp.buf.type_definition, '[G]oto [T]ype Definition')
-    map('K', vim.lsp.buf.hover, 'Hover Documentation')
 
     local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+    -- Underline the other references to the symbol under the cursor while it rests there.
+    if client and client:supports_method('textDocument/documentHighlight', event.buf) then
+      local hl = vim.api.nvim_create_augroup('lsp-highlight', { clear = false })
+      vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+        buffer = event.buf,
+        group = hl,
+        callback = vim.lsp.buf.document_highlight,
+      })
+      vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+        buffer = event.buf,
+        group = hl,
+        callback = vim.lsp.buf.clear_references,
+      })
+    end
+
+    -- Inlay hints are off by default; toggle them per buffer under the UI prefix.
     if client and client:supports_method('textDocument/inlayHint', event.buf) then
-      map('<leader>th', function()
+      map('<leader>uh', function()
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
-      end, '[T]oggle Inlay [H]ints')
+      end, 'Toggle inlay [H]ints')
     end
   end,
 })
