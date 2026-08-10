@@ -278,6 +278,7 @@ require('which-key').setup({
 require('which-key').add({
   { '<leader>b', group = 'Buffer' },
   { '<leader>c', group = 'Code' },
+  { '<leader>g', group = 'Git' },
   { '<leader>s', group = 'Search' },
   { '<leader>u', group = 'UI / toggle' },
   { '<leader>r', group = 'Config' },
@@ -309,6 +310,13 @@ vim.keymap.set('n', '<leader><leader>', fzf.buffers, { desc = '[ ] Find existing
 -- Browse colorschemes with live preview; the choice is persisted by the autocmd above.
 vim.keymap.set('n', '<leader>uc', fzf.colorschemes, { desc = 'Change [C]olorscheme' })
 
+-- Git pickers. These are repo-wide, unlike the gitsigns mappings which act on the current hunk.
+-- <leader>gg is the hub: it lists changed files and can stage/unstage them from the picker.
+vim.keymap.set('n', '<leader>gg', fzf.git_status, { desc = '[G]it status' })
+vim.keymap.set('n', '<leader>gl', fzf.git_commits, { desc = '[G]it [L]og (repo)' })
+vim.keymap.set('n', '<leader>gL', fzf.git_bcommits, { desc = '[G]it [L]og (this file)' })
+vim.keymap.set('n', '<leader>gB', fzf.git_branches, { desc = '[G]it [B]ranches' })
+
 vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 require('oil').setup({
   view_options = { show_hidden = true },
@@ -324,6 +332,38 @@ require('gitsigns').setup({
     topdelete = { text = '‾' },
     changedelete = { text = '~' },
   },
+  -- Buffer-local, so these only exist in a file git actually tracks.
+  on_attach = function(bufnr)
+    local gs = require('gitsigns')
+    local function map(mode, lhs, rhs, desc)
+      vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = 'Git: ' .. desc })
+    end
+
+    -- äh/öh step between changes; capital H jumps straight to the last/first one in the file.
+    -- 'h' rather than the more usual 'c' because ]c/[c is diff mode's own change motion.
+    map('n', ']h', function() gs.nav_hunk('next') end, 'Next hunk')
+    map('n', '[h', function() gs.nav_hunk('prev') end, 'Prev hunk')
+    map('n', ']H', function() gs.nav_hunk('last') end, 'Last hunk')
+    map('n', '[H', function() gs.nav_hunk('first') end, 'First hunk')
+
+    -- Stage or discard just the change under the cursor, or exactly the lines selected.
+    -- stage_hunk toggles: run it on an already-staged hunk to unstage it again.
+    map('n', '<leader>gs', gs.stage_hunk, 'Stage hunk')
+    map('n', '<leader>gr', gs.reset_hunk, 'Reset hunk')
+    map('x', '<leader>gs', function() gs.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, 'Stage selection')
+    map('x', '<leader>gr', function() gs.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, 'Reset selection')
+    map('n', '<leader>gS', gs.stage_buffer, 'Stage whole buffer')
+    map('n', '<leader>gR', gs.reset_buffer, 'Reset whole buffer')
+
+    -- Inspect without leaving the file: the diff inline, who wrote the line, or a full diff split.
+    map('n', '<leader>gp', gs.preview_hunk_inline, 'Preview hunk inline')
+    map('n', '<leader>gb', function() gs.blame_line({ full = true }) end, 'Blame line')
+    map('n', '<leader>gd', gs.diffthis, 'Diff this file')
+    map('n', '<leader>ub', gs.toggle_current_line_blame, 'Toggle inline blame')
+
+    -- Hunk as a textobject, so dih discards a change and vih selects one.
+    map({ 'o', 'x' }, 'ih', gs.select_hunk, 'Select hunk')
+  end,
 })
 
 -- [[ mini.nvim modules ]]
