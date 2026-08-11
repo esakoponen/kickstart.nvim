@@ -256,9 +256,8 @@ vim.pack.add({
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects', version = 'main' },
   -- Close </div> as soon as <div> is typed, in HTML/JSX/HEEx
   'https://github.com/windwp/nvim-ts-autotag',
-  -- Snippet engine + completion engine (text prediction as you type)
-  { src = 'https://github.com/L3MON4D3/LuaSnip', version = vim.version.range('2.*') },
-  -- A library of ready-made snippets; pure data, LuaSnip reads it and there is nothing to set up
+  -- Completion engine (text prediction as you type); snippets go through Neovim's own vim.snippet
+  -- A library of ready-made snippets; pure data, blink discovers it on the runtimepath by itself
   'https://github.com/rafamadriz/friendly-snippets',
   { src = 'https://github.com/saghen/blink.cmp', version = vim.version.range('1.*') },
   -- LSP client config + automatic language-server installer
@@ -582,23 +581,19 @@ vim.keymap.set('n', '<leader>cA', function() ts_swap.swap_previous('@parameter.i
 require('nvim-ts-autotag').setup({})
 
 -- [[ Autocomplete + snippets: text prediction as you type ]]
-require('luasnip').setup({})
-
--- Read friendly-snippets' VS Code-format snippet files. lazy_load defers parsing each
--- language's file until a buffer of that filetype is opened, rather than all of them at startup.
-require('luasnip.loaders.from_vscode').lazy_load()
-
+-- No snippet engine is configured: blink's default preset expands through Neovim's own
+-- vim.snippet, and its snippets source finds friendly-snippets on the runtimepath by itself.
 require('blink.cmp').setup({
   -- <C-y> accept, <C-n>/<C-p> select, <C-space> open/docs, <Tab>/<S-Tab> jump between
   -- the placeholders of an expanded snippet, <C-k> signature help.
   keymap = { preset = 'default' },
   completion = {
-    documentation = { auto_show = true, auto_show_delay_ms = 200 },
+    -- A calmer default; <C-space> shows the documentation when it is actually wanted.
+    documentation = { auto_show = false },
   },
   -- 'buffer' completes words already present in open buffers. It is blink's own default and
   -- is the only source that does anything in a filetype with no LSP, such as Erlang here.
   sources = { default = { 'lsp', 'path', 'snippets', 'buffer' } },
-  snippets = { preset = 'luasnip' },
   fuzzy = { implementation = 'lua' },
   signature = { enabled = true },
   -- Completion in : and / is already on by blink's own default, driven by <Tab>. Its menu is
