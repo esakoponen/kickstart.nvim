@@ -454,33 +454,19 @@ require('mini.pairs').setup()
 require('mini.icons').setup({ style = 'ascii' })
 MiniIcons.mock_nvim_web_devicons() -- lets plugins that ask for nvim-web-devicons use these instead
 
--- Alt+hjkl pushes the current line (or Visual selection) around, reindenting as it goes.
-require('mini.move').setup()
-
 -- Close a buffer while leaving the window layout alone, which :bdelete does not do.
 require('mini.bufremove').setup()
 vim.keymap.set('n', '<leader>bd', function() require('mini.bufremove').delete(0, false) end, { desc = '[B]uffer [D]elete' })
 vim.keymap.set('n', '<leader>bD', function() require('mini.bufremove').delete(0, true) end, { desc = '[B]uffer [D]elete, discard changes' })
 
--- gS toggles an argument list between one line and one-per-line.
-require('mini.splitjoin').setup()
-
 -- Paint #rrggbb strings in their own colour; TODO/FIXME words are left to todo-comments later.
 local hipatterns = require('mini.hipatterns')
 hipatterns.setup({ highlighters = { hex_color = hipatterns.gen_highlighter.hex_color() } })
 
--- More ö/ä pairs. The six targets Neovim (or diff mode) already provides are disabled rather
--- than shadowed: b buffer, d diagnostic, l location, q quickfix, t tag, c diff-mode change.
-require('mini.bracketed').setup({
-  buffer = { suffix = '' },
-  comment = { suffix = '' },
-  diagnostic = { suffix = '' },
-  location = { suffix = '' },
-  quickfix = { suffix = '' },
-  treesitter = { suffix = '' },
-  -- Left enabled: x conflict marker, f file in directory, i indent, j jump,
-  -- o oldfile, u undo state, w window, y yank (öy/äy cycles what was just pasted).
-})
+-- NOTE: mini.move, mini.splitjoin and mini.bracketed were deliberately left out. They were
+-- enabled once and removed again: each adds mappings that are easy to forget you have, and
+-- ö/ä stays easier to reason about when everything under it comes from Neovim itself,
+-- gitsigns or treesitter. Re-enabling any of them is a single setup() call.
 
 -- [[ Treesitter: syntax highlighting + indentation ]]
 local ts_parsers = {
