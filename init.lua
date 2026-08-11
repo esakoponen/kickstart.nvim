@@ -379,6 +379,47 @@ require('oil').setup({
   view_options = { show_hidden = true },
 })
 
+-- Windows has no single root above C:/, so oil's parent action at a drive root tries to list the
+-- machine's drives -- and it does that by shelling out to `wmic`, which Windows 11 no longer
+-- ships. The result is E475 "'wmic' is not executable" and a buffer stuck on "loading".
+-- Intercept `-` at a drive root and offer the drives found here instead. vim.uv.fs_stat needs no
+-- subprocess, takes a few milliseconds for A-Z, and naturally skips drives that exist but hold no
+-- media, such as an empty card reader.
+if vim.fn.has('win32') == 1 then
+  local function drive_roots()
+    local roots = {}
+    for letter in ('ABCDEFGHIJKLMNOPQRSTUVWXYZ'):gmatch('.') do
+      local root = letter .. ':/'
+      if vim.uv.fs_stat(root) then roots[#roots + 1] = root end
+    end
+    return roots
+  end
+
+  vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'oil',
+    group = vim.api.nvim_create_augroup('oil-windows-drive-root', { clear = true }),
+    callback = function(ev)
+      vim.keymap.set('n', '-', function()
+        -- get_current_dir() returns a trailing-separator path, so a drive root looks like `C:\`
+        local dir = require('oil').get_current_dir()
+        if not (dir and dir:match('^%a:[/\\]$')) then
+          require('oil').open() -- not at a root, so oil's own parent behaviour is correct
+          return
+        end
+        local roots = drive_roots()
+        if #roots < 2 then
+          vim.notify(dir .. ' is the only drive ready; nothing above it', vim.log.levels.INFO)
+          return
+        end
+        require('fzf-lua').fzf_exec(roots, {
+          prompt = 'Drive> ',
+          actions = { default = function(selected) require('oil').open(selected[1]) end },
+        })
+      end, { buffer = ev.buf, desc = 'Parent directory, or pick a drive at a drive root' })
+    end,
+  })
+end
+
 require('guess-indent').setup({})
 
 require('gitsigns').setup({
