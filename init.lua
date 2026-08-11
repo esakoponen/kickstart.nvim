@@ -657,10 +657,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
       })
     end
 
-    -- Inlay hints are off by default; toggle them per buffer under the UI prefix.
+    -- Inlay hints are off by default; toggle them for this buffer alone, under the UI prefix.
+    -- Both calls must carry the same filter. enable() without one sets the global state and
+    -- walks every loaded buffer, so reading one buffer's state and then writing globally would
+    -- toggle hints everywhere -- and per-buffer enables never update the global flag, so the
+    -- two can disagree.
     if client and client:supports_method('textDocument/inlayHint', event.buf) then
+      local filter = { bufnr = event.buf }
       map('<leader>uh', function()
-        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(filter), filter)
       end, 'Toggle inlay [H]ints')
     end
   end,
