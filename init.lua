@@ -356,7 +356,16 @@ local fzf = require('fzf-lua')
 vim.keymap.set('n', '<leader>sh', fzf.help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sk', fzf.keymaps, { desc = '[S]earch [K]eymaps' })
 vim.keymap.set('n', '<leader>sf', fzf.files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>ss', fzf.builtin, { desc = '[S]earch [S]elect fzf-lua' })
+vim.keymap.set('n', '<leader>sp', fzf.builtin, { desc = '[S]earch [P]ickers (list every fzf-lua picker)' })
+
+-- Symbols: function, class, module and method names, rather than file names or raw text.
+-- ss covers the current file and sS the whole project. Both come from the language server, so
+-- they know what a symbol *is*; st asks treesitter instead, which needs no server running and is
+-- therefore the only one of the three that works in Erlang here.
+-- The built-in gO does the same job as ss, but dumps into the location list instead of a picker.
+vim.keymap.set('n', '<leader>ss', fzf.lsp_document_symbols, { desc = '[S]earch [S]ymbols (this file)' })
+vim.keymap.set('n', '<leader>sS', fzf.lsp_live_workspace_symbols, { desc = '[S]earch [S]ymbols (project)' })
+vim.keymap.set('n', '<leader>st', fzf.treesitter, { desc = '[S]earch [T]reesitter symbols (no LSP needed)' })
 vim.keymap.set('n', '<leader>sw', fzf.grep_cword, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', fzf.live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', fzf.diagnostics_workspace, { desc = '[S]earch [D]iagnostics' })
