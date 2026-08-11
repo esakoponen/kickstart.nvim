@@ -49,8 +49,9 @@ vim.opt.splitbelow = true
 -- Keep the text you are reading visually still when a split opens or closes above it.
 vim.opt.splitkeep = 'screen'
 
--- Render otherwise-invisible characters, so tabs and stray trailing spaces are obvious.
-vim.opt.list = true
+-- How tabs, trailing spaces and non-breaking spaces are drawn *when* 'list' is on. Off by
+-- default, since the texture is a distraction outside review; <leader>ul turns it on.
+vim.opt.list = false
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Hide the ~ filler that would otherwise mark every row past the end of the buffer.
@@ -777,6 +778,12 @@ require('conform').setup({
 })
 
 vim.keymap.set({ 'n', 'v' }, '<leader>f', function() require('conform').format({ async = true }) end, { desc = '[F]ormat buffer' })
+
+-- Reveal tabs and trailing whitespace when reviewing. 'list' is window-local, so this toggles
+-- the current window alone; a split inherits whatever the window it was split from had.
+vim.keymap.set('n', '<leader>ul', function()
+  vim.wo.list = not vim.wo.list
+end, { desc = 'Toggle invisible characters' })
 
 -- Session-only toggle: it is deliberately not persisted, so a new session starts off again.
 vim.keymap.set('n', '<leader>uf', function()
