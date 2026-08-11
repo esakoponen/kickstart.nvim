@@ -57,6 +57,15 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 -- Hide the ~ filler that would otherwise mark every row past the end of the buffer.
 vim.opt.fillchars = { eob = ' ' }
 
+-- Fold by syntax tree rather than by indent, so a fold is a real function or block. Files open
+-- fully unfolded (foldlevel 99) so nothing is hidden until asked for. Neovim's own fold keys do
+-- the work and need no remapping: za toggles the fold at the cursor, zR opens all, zM closes all.
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.opt.foldlevel = 99
+vim.opt.foldtext = ''    -- show the folded line itself, highlighted, instead of a summary string
+vim.opt.foldcolumn = '0' -- no extra gutter; a closed fold is already visible in the text
+
 -- Live preview of :s/// as you type it, with off-screen matches shown in a temporary split.
 vim.opt.inccommand = 'split'
 
@@ -164,6 +173,35 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Diagnostic
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+-- A floating shell on <leader>t. The buffer is kept between toggles, so hiding the window leaves
+-- the shell running with its scrollback intact rather than starting a new one each time.
+-- To dismiss it: <Esc><Esc> to leave terminal mode, then <leader>t.
+local terminal = { buf = nil, win = nil }
+local function toggle_terminal()
+  if terminal.win and vim.api.nvim_win_is_valid(terminal.win) then
+    vim.api.nvim_win_hide(terminal.win)
+    terminal.win = nil
+    return
+  end
+  local reused = terminal.buf and vim.api.nvim_buf_is_valid(terminal.buf)
+  local width = math.floor(vim.o.columns * 0.8)
+  local height = math.floor(vim.o.lines * 0.8)
+  terminal.win = vim.api.nvim_open_win(reused and terminal.buf or vim.api.nvim_create_buf(false, true), true, {
+    relative = 'editor',
+    width = width,
+    height = height,
+    row = math.floor((vim.o.lines - height) / 2),
+    col = math.floor((vim.o.columns - width) / 2),
+    style = 'minimal', -- no numbers or sign column inside the shell
+  })
+  if not reused then
+    vim.cmd.terminal() -- runs 'shell', which is PowerShell 7 (set above)
+    terminal.buf = vim.api.nvim_get_current_buf()
+  end
+  vim.cmd.startinsert()
+end
+vim.keymap.set('n', '<leader>t', toggle_terminal, { desc = '[T]erminal (floating, toggles)' })
 
 -- :echo stdpath('config')
 -- In Windows, ~/AppData/Local/nvim/init.lua
@@ -512,6 +550,17 @@ vim.keymap.set('n', '<leader>bD', function() require('mini.bufremove').delete(0,
 -- Paint #rrggbb strings in their own colour; TODO/FIXME words are left to todo-comments later.
 local hipatterns = require('mini.hipatterns')
 hipatterns.setup({ highlighters = { hex_color = hipatterns.gen_highlighter.hex_color() } })
+
+-- Underline other occurrences of the word under the cursor. The LSP document highlight does this
+-- properly where a server is attached; this is purely textual, so it also covers files without
+-- one. Same delay as 'updatetime' so the two appear together rather than in two steps.
+require('mini.cursorword').setup({ delay = vim.o.updatetime })
+
+-- Trailing whitespace. Its passive red highlight is switched off, to match 'list' defaulting off;
+-- removing the disable line below brings it back. What is kept is trim(), as a deliberate action.
+require('mini.trailspace').setup()
+vim.g.minitrailspace_disable = true
+vim.keymap.set('n', '<leader>cw', MiniTrailspace.trim, { desc = '[C]lean trailing [W]hitespace' })
 
 -- NOTE: mini.move, mini.splitjoin and mini.bracketed were deliberately left out. They were
 -- enabled once and removed again: each adds mappings that are easy to forget you have, and
