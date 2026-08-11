@@ -131,16 +131,15 @@ vim.diagnostic.config({
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
--- Source rc
-vim.keymap.set('n', '<leader>o', ':update<CR> :source<CR>')
-vim.keymap.set('n', '<leader>w', ':write<CR>')
+-- Write, then re-run this buffer. `:source` with no filename sources the current buffer,
+-- so this reloads init.lua after editing it. Sits next to <leader>rc under the Config group.
+vim.keymap.set('n', '<leader>rr', '<cmd>update<CR><cmd>source<CR>', { desc = '[R]eload current Lua/Vim buffer' })
+
+vim.keymap.set('n', '<leader>w', '<cmd>write<CR>', { desc = '[W]rite buffer' })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-
--- Disable recursive mapping and silence command-line feedback.
-local opts = { noremap = true, silent = true }
 
 -- Nordic layout: [ and ] need AltGr, so use the free home-row keys instead.
 -- `remap = true` is required so plugin-defined pairs (]d, ]c, ]q, ...) resolve through them.
@@ -150,11 +149,11 @@ vim.keymap.set({ 'n', 'x', 'o' }, 'ä', ']', { remap = true, desc = 'Next (]) pr
 -- Replay macro q without reaching for @ (AltGr+2); Q's default Ex mode is dead weight.
 vim.keymap.set('n', 'Q', '@q', { desc = 'Replay macro q' })
 
--- Show diagnostic in a floating window (remains unchanged)
-vim.keymap.set('n', '<leader>e', function() vim.diagnostic.open_float() end, opts)
+-- Show the diagnostics for the current line in a floating window.
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open diagnostic float' })
 
--- Show diagnostics in quickfix list (remains unchanged)
-vim.keymap.set('n', '<leader>q', function() vim.diagnostic.setloclist() end, opts)
+-- Collect the buffer's diagnostics into the location list (window-local, not the quickfix list).
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Diagnostics to location list' })
 
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
