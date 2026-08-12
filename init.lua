@@ -279,6 +279,8 @@ vim.pack.add({
   'https://github.com/folke/persistence.nvim',
   -- One centred column, everything else hidden, on demand
   'https://github.com/folke/zen-mode.nvim',
+  -- Browser preview for markdown and HTML, with mermaid diagrams and KaTeX maths rendered
+  'https://github.com/brianhuster/live-preview.nvim',
   -- Fuzzy finder (files, live grep, buffers, help)
   'https://github.com/ibhagwan/fzf-lua',
   -- File explorer as an editable buffer
@@ -380,6 +382,17 @@ require('zen-mode').setup({
   },
 })
 vim.keymap.set('n', '<leader>uz', '<cmd>ZenMode<CR>', { desc = 'Toggle [Z]en mode' })
+
+-- [[ Markdown preview ]]
+-- Serves the current file to the browser and reloads it as you type. The server is written in Lua,
+-- so unlike the usual markdown-preview plugins there is no Node or Deno to install and nothing to
+-- rebuild after :packupdate. It binds 127.0.0.1 only, and runs solely while a preview is open.
+require('livepreview.config').set({
+  picker = 'fzf-lua', -- :LivePreview pick reuses the finder already configured here
+  sync_scroll = true, -- the browser follows the cursor
+})
+vim.keymap.set('n', '<leader>up', '<cmd>LivePreview start<CR>', { desc = '[P]review in browser' })
+vim.keymap.set('n', '<leader>uP', '<cmd>LivePreview close<CR>', { desc = '[P]review stop' })
 
 -- List the mappings that only exist in this buffer (LSP, oil, gitsigns).
 vim.keymap.set('n', '<leader>?', function()
