@@ -141,9 +141,18 @@ vim.diagnostic.config({
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
--- Write, then re-run this buffer. `:source` with no filename sources the current buffer,
--- so this reloads init.lua after editing it. Sits next to <leader>rc under the Config group.
+-- [[ Config maintenance ]]
+-- <leader>r is reserved for editing and maintaining this configuration: r as in vim*rc*.
+-- Every key here either opens part of the config or runs one of the commands that keeps it
+-- working, so the whole group can be browsed by pressing <leader>r and reading the menu.
+-- rr sources whatever Lua/Vim buffer is current, which in practice means this file.
+vim.keymap.set('n', '<leader>rc', '<cmd>edit $MYVIMRC<CR>', { desc = 'Edit init.lua' })
+vim.keymap.set('n', '<leader>rv', '<cmd>vsplit $MYVIMRC<CR>', { desc = 'Edit init.lua in a [V]ertical split' })
 vim.keymap.set('n', '<leader>rr', '<cmd>update<CR><cmd>source<CR>', { desc = '[R]eload current Lua/Vim buffer' })
+vim.keymap.set('n', '<leader>rd', function() vim.cmd.Oil(vim.fn.stdpath('config')) end, { desc = 'Config [D]irectory in oil' })
+vim.keymap.set('n', '<leader>rp', '<cmd>packupdate<CR>', { desc = 'Update [P]lugins (:packupdate)' })
+vim.keymap.set('n', '<leader>rm', '<cmd>Mason<CR>', { desc = '[M]ason: servers, formatters, linters' })
+vim.keymap.set('n', '<leader>rh', '<cmd>checkhealth<CR>', { desc = 'Check[h]ealth' })
 
 vim.keymap.set('n', '<leader>w', '<cmd>write<CR>', { desc = '[W]rite buffer' })
 
@@ -202,11 +211,6 @@ local function toggle_terminal()
   vim.cmd.startinsert()
 end
 vim.keymap.set('n', '<leader>t', toggle_terminal, { desc = '[T]erminal (floating, toggles)' })
-
--- :echo stdpath('config')
--- In Windows, ~/AppData/Local/nvim/init.lua
--- :e $MYVIMRC and :source $
-vim.keymap.set('n', '<leader>rc', ':e $MYVIMRC<CR>', { desc = 'Edit init.lua' })
 
 -- Disable arrow keys in normal mode
 vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
