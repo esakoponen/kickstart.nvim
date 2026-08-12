@@ -569,11 +569,33 @@ hipatterns.setup({ highlighters = { hex_color = hipatterns.gen_highlighter.hex_c
 -- one. Same delay as 'updatetime' so the two appear together rather than in two steps.
 require('mini.cursorword').setup({ delay = vim.o.updatetime })
 
--- Trailing whitespace. Its passive red highlight is switched off, to match 'list' defaulting off;
--- removing the disable line below brings it back. What is kept is trim(), as a deliberate action.
+-- Trailing whitespace, shown as a pastel pink block. It only marks normal buffers, never the line
+-- being typed on, and disappears in insert mode, so it flags leftovers without nagging mid-edit.
 require('mini.trailspace').setup()
-vim.g.minitrailspace_disable = true
+
+-- A colorscheme reset wipes custom highlight groups, so re-apply on every ColorScheme as well as
+-- now -- otherwise the pink survives until the first <leader>uc and then silently reverts.
+local function set_trailspace_hl()
+  vim.api.nvim_set_hl(0, 'MiniTrailspace', { bg = '#f5c2e7' })
+end
+set_trailspace_hl()
+vim.api.nvim_create_autocmd('ColorScheme', {
+  group = vim.api.nvim_create_augroup('trailspace-colour', { clear = true }),
+  callback = set_trailspace_hl,
+})
+
+-- Strip them: <leader>cw, or :TrimWhitespace when a command is easier to reach for.
 vim.keymap.set('n', '<leader>cw', MiniTrailspace.trim, { desc = '[C]lean trailing [W]hitespace' })
+vim.api.nvim_create_user_command('TrimWhitespace', function() MiniTrailspace.trim() end,
+  { desc = 'Remove trailing whitespace from every line in this buffer' })
+
+-- Toggle the highlight. Flipping the flag alone only takes effect at the next buffer event, so
+-- highlight/unhighlight is called directly to make it immediate.
+vim.keymap.set('n', '<leader>uw', function()
+  vim.g.minitrailspace_disable = not vim.g.minitrailspace_disable
+  if vim.g.minitrailspace_disable then MiniTrailspace.unhighlight() else MiniTrailspace.highlight() end
+  vim.notify('Trailing whitespace highlight: ' .. (vim.g.minitrailspace_disable and 'off' or 'on'))
+end, { desc = 'Toggle trailing [W]hitespace highlight' })
 
 -- NOTE: mini.move, mini.splitjoin and mini.bracketed were deliberately left out. They were
 -- enabled once and removed again: each adds mappings that are easy to forget you have, and
