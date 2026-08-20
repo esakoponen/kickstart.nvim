@@ -422,6 +422,15 @@ vim.keymap.set('n', '<leader>ss', fzf.lsp_document_symbols, { desc = '[S]earch [
 vim.keymap.set('n', '<leader>sS', fzf.lsp_live_workspace_symbols, { desc = '[S]earch [S]ymbols (project)' })
 vim.keymap.set('n', '<leader>st', fzf.treesitter, { desc = '[S]earch [T]reesitter symbols (no LSP needed)' })
 vim.keymap.set('n', '<leader>sw', fzf.grep_cword, { desc = '[S]earch current [W]ord' })
+
+-- Code navigation through the language server, as pickers with a preview pane rather than a flat
+-- list. grr already lists references in the quickfix window; <leader>cr shows the same data with a
+-- preview and type-to-filter, which is what makes forty call sites manageable.
+-- The call hierarchy pair is the one thing grr cannot do: references answer "who calls this" one
+-- level deep, while incoming calls can be walked up the chain repeatedly.
+vim.keymap.set('n', '<leader>cr', fzf.lsp_references, { desc = '[C]ode [R]eferences (preview)' })
+vim.keymap.set('n', '<leader>ci', fzf.lsp_incoming_calls, { desc = '[C]ode [I]ncoming calls (who calls this)' })
+vim.keymap.set('n', '<leader>co', fzf.lsp_outgoing_calls, { desc = '[C]ode [O]utgoing calls (what this calls)' })
 vim.keymap.set('n', '<leader>sg', fzf.live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', fzf.diagnostics_workspace, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', fzf.resume, { desc = '[S]earch [R]esume' })
