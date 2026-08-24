@@ -391,9 +391,12 @@ vim.keymap.set('n', '<leader>uz', '<cmd>ZenMode<CR>', { desc = 'Toggle [Z]en mod
 -- Serves the current file to the browser and reloads it as you type. The server is written in Lua,
 -- so unlike the usual markdown-preview plugins there is no Node or Deno to install and nothing to
 -- rebuild after :packupdate. It binds 127.0.0.1 only, and runs solely while a preview is open.
+-- WSL runs no Linux browser of its own: wslview (from the wslu package) hands the URL to
+-- Windows. On a plain Linux desktop and on Windows, 'default' already does the right thing.
 require('livepreview.config').set({
   picker = 'fzf-lua', -- :LivePreview pick reuses the finder already configured here
   sync_scroll = true, -- the browser follows the cursor
+  browser = vim.fn.has('wsl') == 1 and 'wslview' or 'default',
 })
 vim.keymap.set('n', '<leader>up', '<cmd>LivePreview start<CR>', { desc = '[P]review in browser' })
 vim.keymap.set('n', '<leader>uP', '<cmd>LivePreview close<CR>', { desc = '[P]review stop' })
@@ -741,13 +744,13 @@ require('blink.cmp').setup({
 -- [x] Ruby          -> ruby_lsp
 -- [x] Elixir        -> elixirls
 -- [x] C#            -> csharp_ls
--- [ ] Erlang         -> no LSP on native Windows for now
---     NOTE: erlang_ls is unmaintained and its recommended replacement, elp,
---     only ships prebuilt binaries for macOS/Linux (confirmed via ELP's own
---     install docs -- no Windows binary, and building from source needs
---     `sbt`/Scala for a sub-component, not worth attempting here).
---     Treesitter still gives syntax highlighting for .erl files below.
---     Revisit via WSL later, where `elp`/`erlang_ls` install cleanly.
+-- [~] Erlang        -> elp, on Linux and WSL only
+--     NOTE: erlang_ls is unmaintained and its replacement, elp, ships prebuilt
+--     binaries for macOS/Linux only -- no Windows binary, and building from
+--     source needs `sbt`/Scala for a sub-component. So elp is enabled when
+--     has('win32') is 0, which covers both WSL and a plain Linux install.
+--     On native Windows there is still no server; treesitter keeps the
+--     syntax highlighting and <leader>st keeps symbol search working.
 -- [x] Ruby on Rails -> ruby_lsp (same server as Ruby)
 -- [ ] Add the 'ruby-lsp-rails' gem to the project for Rails-aware features
 -- [x] Rust          -> rust_analyzer (with clippy as the check command)
@@ -807,7 +810,6 @@ local servers = {
   ruby_lsp = {},    -- Ruby, Ruby on Rails
   elixirls = {},    -- Elixir
   csharp_ls = {},   -- C#
-  -- elp = {}, -- Erlang: no native-Windows binary available, see note above
   html = {},   -- HTML
   cssls = {},  -- CSS
   ts_ls = {},  -- JavaScript, TypeScript
@@ -844,6 +846,13 @@ local servers = {
     },
   },
 }
+
+-- Erlang: elp ships prebuilt binaries for Linux and macOS only, so it is enabled everywhere
+-- except native Windows. Under WSL this counts as Linux, which is exactly where the gap closes.
+-- Adding it to `servers` is enough for mason-tool-installer to install it too.
+if vim.fn.has('win32') == 0 then
+  servers.elp = {} -- Erlang
+end
 
 require('mason').setup({})
 
