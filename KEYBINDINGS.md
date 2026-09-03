@@ -122,6 +122,66 @@ Trailing whitespace is marked with a pastel pink block as you work — never on 
 typing, and not at all in insert mode. `<leader>uw` turns that marking off, `<leader>cw` removes
 the whitespace itself: **`uw` to stop seeing it, `cw` to clean it.**
 
+## Visual mode
+
+Enter with `v` (character), `V` (whole lines) or `<C-v>` (block). Everything in this table applies
+to the selection.
+
+### From this config
+
+| Key | Action |
+|---|---|
+| `<` / `>` | shift left / right and **keep the selection**, so it repeats |
+| `<leader>p` | paste over the selection without losing what you copied |
+| `<leader>d` | delete into the black hole register, clipboard untouched |
+| `<leader>f` | format just the selected lines |
+| `<leader>gs` / `<leader>gr` | stage / discard **exactly the selected lines** (tracked files) |
+| `a` / `i` + object | any textobject — `aF`, `ao`, `af`, `a)`, `it` … |
+| `sa` + char | surround the selection: select, then `sa)` wraps it in parens |
+| `ö` / `ä` | the bracket prefixes work here too, so `ä)` extends to the next unmatched `)` |
+| `;` / `,` | repeat the last motion, extending the selection |
+| `äm` / `öm` | extend to the next / previous function |
+
+### Neovim's own, worth knowing
+
+| Key | Action |
+|---|---|
+| `gv` | reselect the previous selection — the undo for a lost selection |
+| `o` | jump to the **other end** of the selection, to adjust the side you got wrong |
+| `gc` | toggle comment on the selected lines |
+| `gra` | code action for the selection |
+| `u` / `U` / `g~` | lowercase / uppercase / toggle case |
+| `J` | join the selected lines into one |
+| `=` | reindent the selection |
+| `gq` | reflow to `textwidth` — for comments and prose |
+| `r` + char | replace every selected character with that char |
+| `:` | starts a command already scoped to the selection (`:'<,'>`) |
+| `än` / `ön` | select the next / previous **syntax node** (`äN` / `öN` extend to a sibling) |
+
+### Block mode is the one to learn
+
+`<C-v>` selects a rectangle, and two keys make it powerful:
+
+- `I` inserts at the start of **every** selected line, `A` appends at the end of each.
+- `g<C-a>` on a column of zeros turns them into 1, 2, 3 … — renumbering a list in one keystroke.
+
+`<C-v>` then `$` then `A` appends to the end of every line regardless of length, which is how you
+add a trailing comma or semicolon to a whole block.
+
+### Two habits worth forming
+
+**Select by structure, not by counting lines.** `vaF` selects the whole function, `vao` the
+enclosing `if`/loop, `va)` the parenthesised group. That beats counting `j`s and understands the
+language, because it comes from treesitter.
+
+Note that Neovim's own incremental-selection keys `an` and `in` (grow to the parent node, shrink to
+the child) are **not available here**: mini.ai claims `an`/`in` for its own "next textobject"
+variants, so `an)` means "around the *next* parens" rather than "grow the selection". mini.ai's
+structural objects above cover the same ground, and `än`/`äN` remain for node-by-node movement.
+
+**Plain `p` over a selection clobbers your register** — it replaces the selection *and* copies what
+it replaced, so you cannot paste the same thing twice. `<leader>p` is the version that does not.
+
 ## Textobjects
 
 Use with any operator: `d`, `c`, `y`, `v`. `a` = around (includes delimiters), `i` = inside.
