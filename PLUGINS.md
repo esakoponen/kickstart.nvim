@@ -79,6 +79,12 @@ The three pieces are deliberately kept from overlapping:
 Language coverage, including deliberate gaps and the reasons for them, is tracked in the comment
 block above the `LspAttach` autocmd in `init.lua`.
 
+## Fun
+
+| Plugin | Purpose |
+|---|---|
+| **donut.nvim** | A spinning ASCII donut on `:Donut`; any keypress dismisses it. Its `timeout` is set to 0 here. The README calls that option milliseconds, but the source counts once per second, so the default 300 would make it a screensaver that claims every window after five minutes idle. Set it back to 300 if that is what you want. |
+
 ## Things intentionally not installed
 
 - **No file tree** — oil.nvim plus fzf-lua covers it.

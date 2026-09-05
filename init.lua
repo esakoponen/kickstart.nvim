@@ -314,6 +314,8 @@ vim.pack.add({
   'https://github.com/stevearc/conform.nvim',
   -- Standalone linters (for style/lint rules the LSP doesn't cover)
   'https://github.com/mfussenegger/nvim-lint',
+  -- A spinning ASCII donut, purely for fun
+  'https://github.com/NStefan002/donut.nvim',
 })
 
 -- [[ Colorscheme ]]
@@ -944,6 +946,13 @@ require('lint').linters_by_ft = {
 vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
   callback = function() require('lint').try_lint() end,
 })
+
+-- [[ Donut ]]
+-- A spinning ASCII donut, on demand with :Donut. Any keypress dismisses it.
+-- timeout is in *seconds* despite what the README implies, and 300 would turn this into a
+-- screensaver that takes over every window after five minutes idle. Set to 0 so it only ever
+-- appears when asked; change it back to 300 if the screensaver is what you want.
+require('donut').setup({ timeout = 0 })
 
 -- The modeline below applies to this file only, and stays at 2 to match how init.lua
 -- is already indented; the global default set near the top is 4. See `:help modeline`.
