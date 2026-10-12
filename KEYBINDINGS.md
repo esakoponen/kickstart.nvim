@@ -125,7 +125,8 @@ the whitespace itself: **`uw` to stop seeing it, `cw` to clean it.**
 ## Visual mode
 
 Enter with `v` (character), `V` (whole lines) or `<C-v>` (block). Everything in this table applies
-to the selection.
+to the selection. Use **`<C-q>`** for block mode in Windows Terminal, which swallows `<C-v>` as
+paste before Neovim sees it; `<C-q>` is Vim's documented synonym.
 
 ### From this config
 
@@ -210,7 +211,7 @@ Mostly Neovim built-ins, so they work the same in any modern config.
 | `K` / `<C-s>` (insert) | hover documentation / signature help |
 | `grd` / `gri` / `grr` / `grt` | go to definition / implementation / references / type |
 | `grn` / `gra` / `grx` | rename / code action / run codelens |
-| `gO` | document symbols into the location list — `<leader>ss` is the picker version |
+| `gO` | document symbols into the location list — `<leader>jj the picker version |
 | `<leader>e` / `<leader>q` | diagnostic float / diagnostics to location list |
 | `<leader>f` | format buffer (also visual) |
 | `<leader>ca` / `<leader>cA` | swap this parameter with the next / previous |
