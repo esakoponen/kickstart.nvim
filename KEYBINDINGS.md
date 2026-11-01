@@ -38,7 +38,8 @@ first/last**.
 Everything under `ö`/`ä` comes from Neovim itself, gitsigns or treesitter — there is no fourth
 source to remember.
 
-Other Nordic substitutes: **`Q`** replays macro `q` (avoids AltGr `@`).
+Macros without AltGr `@`: **`Q`** replays the last recorded macro, whichever register it went
+into (`qq` … `q`, then `Q`; `3Q` runs it three times). This is Neovim's own `Q`, not a mapping.
 
 ## Files, search, buffers
 

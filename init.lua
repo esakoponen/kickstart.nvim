@@ -165,9 +165,6 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set({ 'n', 'x', 'o' }, 'ö', '[', { remap = true, desc = 'Prev ([) prefix' })
 vim.keymap.set({ 'n', 'x', 'o' }, 'ä', ']', { remap = true, desc = 'Next (]) prefix' })
 
--- Replay macro q without reaching for @ (AltGr+2); Q's default Ex mode is dead weight.
-vim.keymap.set('n', 'Q', '@q', { desc = 'Replay macro q' })
-
 -- Show the diagnostics for the current line in a floating window.
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open diagnostic float' })
 
