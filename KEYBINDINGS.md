@@ -286,6 +286,23 @@ column has every step.
 Python launches the current file. C/C++/Rust and C# ask for the program to run (the executable,
 or the `.dll`), so build it first. Elixir runs `mix test` under the debugger.
 
+## Tests — `<leader>T`
+
+vim-test runs each language's own test command (pytest, `cargo test`, `mix test`, rspec/minitest,
+`dotnet test`, jest/vitest, rebar3 eunit/ct, ctest, busted) in one terminal split at the bottom.
+The split is reused for every run and stays open, so the output is there to read; `:q` closes it,
+and the next run brings it back.
+
+| Key | Action |
+|---|---|
+| `<leader>Tn` | the test nearest the cursor |
+| `<leader>Tf` | every test in this file |
+| `<leader>Ta` | the whole suite |
+| `<leader>Tl` | the last run again — works from any file, not only the test |
+| `<leader>Tv` | jump back to the test file that last ran |
+
+The loop: `Tn` in the test, jump into the code to fix it, `Tl` from there, `Tv` to go back.
+
 ## Completion (insert mode)
 
 | Key | Action |
@@ -345,6 +362,7 @@ family, every `z*` fold key, `gcc`. That knowledge transfers to any config, any 
 | `<leader>S` | **S**ession |
 | `<leader>x` | lists — quickfix, and later diagnostics lists |
 | `<leader>D` | **D**ebug |
+| `<leader>T` | **T**est |
 
 **Known rough edges, kept on purpose.** These are real, and changing them would cost more than it
 saves once the keys are learned:
@@ -363,7 +381,6 @@ Decided in advance so that adding a plugin later never forces a key you already 
 |---|---|
 | `<leader>r` | **configuration only** — see the section above; the letters are already fixed |
 | `<leader>x` | lists: `xq` is taken by the quickfix toggle; the rest is kept for diagnostics lists, e.g. trouble.nvim (`<leader>xx`) |
-| `<leader>T` | test runner — keeps `<leader>t` as the terminal |
 | `<leader>a` | AI / agent tooling |
 | `<leader>n` | notes or notifications |
 | `<leader>m` | marks, or make / build |

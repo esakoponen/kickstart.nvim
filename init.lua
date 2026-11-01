@@ -321,6 +321,8 @@ vim.pack.add({
   -- Debugger (DAP client), and the bridge that configures the debug adapters mason installs
   'https://github.com/mfussenegger/nvim-dap',
   'https://github.com/jay-babu/mason-nvim-dap.nvim',
+  -- Test runner: nearest test, file or whole suite, through each language's own test command
+  'https://github.com/vim-test/vim-test',
 })
 
 -- [[ Colorscheme ]]
@@ -368,6 +370,7 @@ require('which-key').add({
   { '<leader>r', group = 'Config' },
   { '<leader>x', group = 'Lists' },
   { '<leader>D', group = 'Debug' },
+  { '<leader>T', group = 'Test' },
   { 'ö', proxy = '[', group = 'Prev ([)' },
   { 'ä', proxy = ']', group = 'Next (])' },
 })
@@ -1006,6 +1009,19 @@ vim.keymap.set('n', '<leader>Do', dap.step_out, { desc = 'Debug: step [O]ut' })
 vim.keymap.set('n', '<leader>Dl', dap.run_last, { desc = 'Debug: run [L]ast again' })
 vim.keymap.set('n', '<leader>Dt', dap.terminate, { desc = 'Debug: [T]erminate' })
 vim.keymap.set('n', '<leader>Dr', dap.repl.toggle, { desc = 'Debug: [R]EPL' })
+
+-- [[ Tests: vim-test ]]
+-- It already knows each language's runner (pytest, cargo test, mix test, rspec/minitest, dotnet
+-- test, jest/vitest, rebar3 eunit/ct, ctest, busted), so there are no adapters to install.
+-- neovim_sticky types the command into one terminal split that is reused for every run and stays
+-- open afterwards; reopen_window brings that split back if it was closed in between.
+vim.g['test#strategy'] = 'neovim_sticky'
+vim.g['test#neovim_sticky#reopen_window'] = 1
+vim.keymap.set('n', '<leader>Tn', '<cmd>TestNearest<CR>', { desc = '[T]est [N]earest' })
+vim.keymap.set('n', '<leader>Tf', '<cmd>TestFile<CR>', { desc = '[T]est [F]ile' })
+vim.keymap.set('n', '<leader>Ta', '<cmd>TestSuite<CR>', { desc = '[T]est [A]ll: the whole suite' })
+vim.keymap.set('n', '<leader>Tl', '<cmd>TestLast<CR>', { desc = '[T]est [L]ast again' })
+vim.keymap.set('n', '<leader>Tv', '<cmd>TestVisit<CR>', { desc = '[T]est [V]isit the last test file' })
 
 -- [[ Donut ]]
 -- A spinning ASCII donut, on demand with :Donut. Any keypress dismisses it.
