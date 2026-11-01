@@ -321,6 +321,8 @@ vim.pack.add({
   -- Debugger (DAP client), and the bridge that configures the debug adapters mason installs
   'https://github.com/mfussenegger/nvim-dap',
   'https://github.com/jay-babu/mason-nvim-dap.nvim',
+  -- Debugger UI: variables, watches, call stack, breakpoints and the REPL in one panel
+  { src = 'https://github.com/igorlfs/nvim-dap-view', version = vim.version.range('1.*') },
   -- Test runner: nearest test, file or whole suite, through each language's own test command
   'https://github.com/vim-test/vim-test',
 })
@@ -1009,6 +1011,11 @@ vim.keymap.set('n', '<leader>Do', dap.step_out, { desc = 'Debug: step [O]ut' })
 vim.keymap.set('n', '<leader>Dl', dap.run_last, { desc = 'Debug: run [L]ast again' })
 vim.keymap.set('n', '<leader>Dt', dap.terminate, { desc = 'Debug: [T]erminate' })
 vim.keymap.set('n', '<leader>Dr', dap.repl.toggle, { desc = 'Debug: [R]EPL' })
+
+-- The panel opens when a session starts and closes when the last one ends; <leader>Dv in between.
+-- virtual_text shows each variable's current value inline, next to the code, while paused.
+require('dap-view').setup({ auto_toggle = true, virtual_text = { enabled = true } })
+vim.keymap.set('n', '<leader>Dv', function() require('dap-view').toggle() end, { desc = 'Debug: [V]iew panel' })
 
 -- [[ Tests: vim-test ]]
 -- It already knows each language's runner (pytest, cargo test, mix test, rspec/minitest, dotnet

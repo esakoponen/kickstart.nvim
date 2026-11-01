@@ -278,6 +278,11 @@ Python, C/C++/Rust, C# and Elixir debug out of the box; Mason installs their ada
 | `<leader>Dl` | run the last configuration again |
 | `<leader>Dt` | terminate the session |
 | `<leader>Dr` | REPL: evaluate expressions in the paused program |
+| `<leader>Dv` | show / hide the debug panel |
+
+The **debug panel** opens by itself when a session starts and closes when it ends. Its tabs
+(variables, watches, call stack, breakpoints, REPL) are picked with the letter shown in its title
+bar; `g?` inside it lists its keys. While paused, each variable's value is shown inline in the code.
 
 Windows Terminal uses F11 for fullscreen, so `<F11>` never reaches Neovim there: use `<leader>Di`,
 or unbind F11 in Windows Terminal's settings. On a laptop where F-keys need Fn, the `<leader>D`

@@ -74,6 +74,7 @@ One plugin providing many independent modules; each is enabled by its own `setup
 |---|---|
 | **nvim-dap** | The debugger client (Debug Adapter Protocol): breakpoints, stepping, a REPL. F5/F9–F12 and `<leader>D`. Also reads a project's `.vscode/launch.json`. |
 | **mason-nvim-dap.nvim** | Gives each debug adapter Mason installs (debugpy, codelldb, netcoredbg, and elixir-ls's debugger) a ready-made adapter definition and launch configuration, so `init.lua` holds no per-language tables. Two handlers fill its gaps: Elixir's adapter name, and starting debugpy attached on Windows. |
+| **nvim-dap-view** | The debugger UI: one panel for variables, watches, call stack, breakpoints and the REPL, opening and closing with the session (`<leader>Dv` toggles it). Also shows variable values inline while paused. Pinned to `1.*`. Needs a Neovim nightly recent enough to have the `SessionWritePre` event. |
 
 ## Tests
 
