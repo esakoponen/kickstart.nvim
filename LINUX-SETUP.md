@@ -55,11 +55,9 @@ Plugins install themselves, then mason fetches the servers and formatters. Then:
 |---|---|
 | JS/TS, prettier | `nodejs npm` |
 | Python | `python3 python3-venv` |
-| Ruby | `ruby ruby-dev` |
-| Rust | `rustup` + `rustup component add rustfmt clippy` |
-| C# | `dotnet-sdk-8.0` (or newer) |
-| Elixir | `elixir` (brings `mix format`) |
-| Erlang | `erlang` — **elp is enabled here**, unlike on Windows |
+
+Ruby, C#, Elixir, Erlang and Rust need version-specific toolchains (apt's Elixir and Erlang are
+too old); see [LANGUAGE-RUNTIMES.md](LANGUAGE-RUNTIMES.md) for Windows, Ubuntu and Arch.
 
 ## What differs from Windows
 
