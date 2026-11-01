@@ -265,16 +265,31 @@ working file on the right. These are Neovim's own diff-mode keys:
 | `:diffupdate` | recompute the diff after edits |
 | `:q` | close the diff window |
 
-
 **Merge conflicts** — run `git mergetool` in the shell. Each conflicted file opens in Neovim as
 three panes: **LOCAL** (ours) | **MERGED** (the result, which you edit) | **REMOTE** (theirs).
+In a **rebase** the roles swap: LOCAL is the branch you are rebasing onto, REMOTE is your commit.
 
 | Key | Action |
 |---|---|
+| `<C-h>` / `<C-l>` | move between panes |
 | `äc` / `öc` | next / previous conflict |
-| `:diffget LOCAL` / `:diffget REMOTE` | in the middle pane: take ours / theirs for this conflict |
-| `:wqa` | save the result and go on to the next conflicted file |
+| `:diffget LOCAL` / `:diffget REMOTE` | in the middle pane: take that side's version of this conflict |
+| `:diffupdate` | refresh the highlighting after editing by hand |
+| `:wqa` | save the result; git marks the file resolved (`git add`) and opens the next one |
 | `:cq` | give up on this file; git leaves it conflicted |
+
+Every line that differs in the LOCAL and REMOTE panes ends with the 8-character hash and author of
+the commit that last changed it. During a rebase, REMOTE shows your commit's hash from before
+the rebase.
+
+To keep both sides, delete the three marker lines (`<<<<<<<`, `=======`, `>>>>>>>`) instead of
+using `:diffget`. To take only some lines, yank them in a side pane and paste them into the middle.
+
+Finishing a rebase without leaving Neovim: `:!git status`, `:!git add %` for the current file, then
+`:!git -c core.editor=true rebase --continue`. That keeps the commit message as it was. To edit the
+message, run `git rebase --continue` in the `<leader>t` terminal instead. A plain `:!git rebase
+--continue` would try to open the editor where it has no terminal. If anything is left unstaged,
+git refuses to continue: `git stash --keep-index` puts it aside without touching what is staged.
 
 A Neovim started this way does not save a session, so `<leader>Ss` still restores your real one.
 The tool is set in git, not in this repo — once per machine (Windows and WSL each have their own):

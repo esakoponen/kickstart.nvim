@@ -556,6 +556,46 @@ require('gitsigns').setup({
   end,
 })
 
+-- [[ Merge view: who wrote each conflicting line ]]
+-- In git mergetool's LOCAL and REMOTE panes, each line that differs between the panes ends with
+-- the 8-character hash and author of the commit that last changed it. LOCAL is blamed at HEAD,
+-- REMOTE at the commit being brought in (REBASE_HEAD, MERGE_HEAD, CHERRY_PICK_HEAD, REVERT_HEAD).
+-- During a rebase REMOTE is your own commit, shown under its hash from before the rebase.
+local function annotate_merge_side(buf)
+  local name = vim.api.nvim_buf_get_name(buf)
+  local stem, side, ext = vim.fs.basename(name):match('^(.*)_(%u+)_%d+(.*)$') -- file_LOCAL_123.ext
+  if side ~= 'LOCAL' and side ~= 'REMOTE' then return end
+  local function git(...)
+    local r = vim.system({ 'git', '-C', vim.fs.dirname(name), ... }, { text = true }):wait()
+    return r.code == 0 and r.stdout or nil
+  end
+  local rev = side == 'LOCAL' and 'HEAD' or vim.iter({ 'REBASE_HEAD', 'MERGE_HEAD', 'CHERRY_PICK_HEAD', 'REVERT_HEAD' })
+    :find(function(ref) return git('rev-parse', '-q', '--verify', ref) end)
+  local out = rev and git('blame', '--porcelain', rev, '--', stem .. ext)
+  if not out then return end
+  local sha_at, author, sha = {}, {}, nil -- porcelain: "<sha> <orig> <final>" per line, author once
+  for line in out:gmatch('[^\n]+') do
+    local s, lnum = line:match('^(%x+) %d+ (%d+)')
+    if s and #s == 40 then sha, sha_at[tonumber(lnum)] = s, s
+    elseif sha and line:sub(1, 7) == 'author ' then author[sha] = author[sha] or line:sub(8) end
+  end
+  local ns = vim.api.nvim_create_namespace('merge-blame')
+  vim.api.nvim_buf_call(buf, function()
+    for lnum, s in pairs(sha_at) do
+      if vim.fn.diff_hlID(lnum, 1) ~= 0 then -- only lines that differ, i.e. the ones being merged
+        vim.api.nvim_buf_set_extmark(buf, ns, lnum - 1, 0,
+          { virt_text = { { ('  %s %s'):format(s:sub(1, 8), author[s] or '?'), 'Comment' } } })
+      end
+    end
+  end)
+end
+vim.api.nvim_create_autocmd('VimEnter', {
+  callback = function()
+    if not vim.o.diff then return end
+    for _, buf in ipairs(vim.api.nvim_list_bufs()) do annotate_merge_side(buf) end
+  end,
+})
+
 -- [[ mini.nvim modules ]]
 -- va) [V]isually select [A]round [)]paren, ci' [C]hange [I]nside [']quote, etc.
 -- Uppercase F/C and lowercase o are backed by treesitter queries. They are deliberately not
