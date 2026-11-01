@@ -289,6 +289,7 @@ from friendly-snippets through Neovim's own `vim.snippet`; there is no separate 
 | `<leader>ul` | all invisible characters — tabs, trailing dots, nbsp (off by default, this window) |
 | `<leader>uf` | format on save (off by default, session only) |
 | `<leader>uh` / `<leader>ub` | inlay hints (this buffer only) / inline git blame |
+| `<leader>uu` | undo tree: every earlier state, including undone branches; moving the cursor in it restores that state |
 | `<leader>Ss` / `<leader>Sl` / `<leader>Sf` | restore session: this directory / last / pick |
 | `<leader>Sd` | do not save the session on exit |
 

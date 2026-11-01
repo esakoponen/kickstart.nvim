@@ -936,6 +936,10 @@ vim.keymap.set('n', '<leader>uf', function()
   vim.notify('Format on save: ' .. (vim.g.format_on_save and 'on' or 'off'))
 end, { desc = 'Toggle [F]ormat on save' })
 
+-- Neovim's built-in undo tree (an opt-in package, not a plugin): every earlier state, undone branches too.
+vim.cmd.packadd('nvim.undotree')
+vim.keymap.set('n', '<leader>uu', '<cmd>Undotree<CR>', { desc = '[U]ndo tree (toggle)' })
+
 -- [[ Linting: style/lint rules beyond what the LSP flags ]]
 -- NOTE: JS/TS linting comes from the `eslint` LSP server above (surfaces as
 -- diagnostics automatically) -- no nvim-lint entry needed for those.
