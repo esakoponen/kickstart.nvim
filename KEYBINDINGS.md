@@ -255,6 +255,15 @@ appear in an untracked file or a scratch buffer:
 `<leader>gs` toggles: run it on a staged hunk to unstage. Note `<leader>gd` is git **d**iff, while
 `grd` is **g**o to definition — different `d`, different prefix.
 
+**Commit messages** — when git opens Neovim for a message (`git commit`, `git rebase --continue`),
+lines wrap at **72 columns** as you type, and `<leader>f` rewraps the whole body to 72. Each
+paragraph is joined and refilled, and list items (`- `, `1. `) keep a hanging indent. Left alone:
+the subject line, `#` comments, code indented by 4 spaces or a tab, a closing trailer paragraph
+(`Signed-off-by: …`), and the diff below `git commit -v`'s scissors line. In visual mode
+`<leader>f` wraps only the selection. Lines that must stay apart need a blank line between them,
+or a `- ` in front. 72 is git's convention: `git log` indents the body by 4, so it still fits
+in 80 columns.
+
 **Inside a diff** — `<leader>gd` opens a 2-way diff: the staged version (index) on the left, your
 working file on the right. These are Neovim's own diff-mode keys:
 

@@ -988,6 +988,36 @@ require('conform').setup({
 -- would format the buffer instead of inserting the text.
 vim.keymap.set({ 'n', 'x' }, '<leader>f', function() require('conform').format({ async = true }) end, { desc = '[F]ormat buffer' })
 
+-- [[ Commit messages: <leader>f wraps the body at 72 columns ]]
+-- Neovim's gitcommit ftplugin already sets textwidth=72, git's convention (`git log` indents the
+-- body by 4, so 72 stays inside 80 columns), wraps while typing and knows "- " / "1. " list items.
+-- conform has no formatter for commit messages, so here <leader>f reflows each body paragraph with
+-- gq instead. Untouched: the subject, comment lines, code indented by a tab or 4 spaces, a closing
+-- "Key: value" trailer paragraph (Signed-off-by: ...), and all below `git commit -v`'s scissors line.
+local function wrap_commit_message()
+  local lines, cc = vim.api.nvim_buf_get_lines(0, 0, -1, false), vim.pesc(vim.bo.commentstring:sub(1, 1))
+  local function wrappable(l) return l ~= nil and l ~= '' and not l:match('^' .. cc) and not l:match('^\t') and not l:match('^    ') end
+  local last = #lines
+  for i, l in ipairs(lines) do if l:match('^' .. cc .. ' %-+ >8 %-+$') then last = i - 1; break end end
+  local view, b = vim.fn.winsaveview(), last
+  while b >= 2 do -- bottom-up, so reflowing one paragraph never shifts the ones still to do
+    if wrappable(lines[b]) then
+      local a = b
+      while a > 2 and wrappable(lines[a - 1]) do a = a - 1 end
+      local trailers = vim.iter({ unpack(lines, a, b) }):all(function(l) return l:match('^[%w-]+: %S') ~= nil end)
+      if not trailers then vim.cmd(('silent keepjumps normal! %dGgq%dG'):format(a, b)) end
+      b = a - 1
+    else
+      b = b - 1
+    end
+  end
+  vim.fn.winrestview(view)
+end
+vim.api.nvim_create_autocmd('FileType', { pattern = 'gitcommit', callback = function(ev)
+  vim.keymap.set('n', '<leader>f', wrap_commit_message, { buffer = ev.buf, desc = '[F]ormat: wrap the message body at 72' })
+  vim.keymap.set('x', '<leader>f', 'gq', { buffer = ev.buf, desc = '[F]ormat: wrap the selection at 72' })
+end })
+
 -- Reveal tabs and trailing whitespace when reviewing. 'list' is window-local, so this toggles
 -- the current window alone; a split inherits whatever the window it was split from had.
 vim.keymap.set('n', '<leader>ul', function()
