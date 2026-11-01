@@ -32,6 +32,7 @@ first/last**.
 | `öa` `äa` / `öt` `ät` | arglist files / tags | Neovim |
 | `ö<Space>` `ä<Space>` | add a blank line above / below | Neovim |
 | `öh` `äh` | git hunks (`öH` `äH` = first/last) | gitsigns |
+| `öc` `äc` | changes, in a diff window (`<leader>gd`) | Neovim |
 | `öm` `äm` | function starts (`öM` `äM` = ends) | treesitter |
 | `ön` `än` (visual) | select prev/next syntax node (`öN` `äN` = sibling) | Neovim |
 
@@ -95,6 +96,9 @@ The natural loop: `rv` to open it beside your work, edit, `rr` to apply.
 Inside an oil buffer `<C-h>` and `<C-l>` belong to oil, not to window movement — use `<C-w>h` and
 `<C-w>l` there.
 
+`<C-l>` replaces Neovim's own redraw key, which also ran `:diffupdate`. If a diff looks stale after
+an edit, run `:diffupdate` yourself.
+
 ## Folds
 
 Folds follow the syntax tree, so a fold is a real function or block. Files open unfolded. These are
@@ -118,7 +122,8 @@ all Neovim defaults, nothing is remapped.
 | `<leader>cw` | strip trailing whitespace from the buffer (also `:TrimWhitespace`) |
 | `gcc` / `gc` (visual) | toggle comment (Neovim built-in) |
 
-Deletes and yanks go to the **Windows clipboard**. `"0p` pastes the last *yank*, ignoring deletes.
+Deletes and yanks go to the **system clipboard** (the Windows one, under WSL too). `"0p` pastes the
+last *yank*, ignoring deletes.
 
 Trailing whitespace is marked with a pastel pink block as you work — never on the line you are
 typing, and not at all in insert mode. `<leader>uw` turns that marking off, `<leader>cw` removes
@@ -204,6 +209,9 @@ Use with any operator: `d`, `c`, `y`, `v`. `a` = around (includes delimiters), `
 Surround: `sa` add (`saiw)` = wrap word in parens), `sd` delete (`sd'`), `sr` replace (`sr'"`),
 `sf`/`sF` find, `sh` highlight.
 
+Plain `s` (substitute one character) is switched off so that `s` always waits for the surround key.
+`cl` does the same job.
+
 ## LSP
 
 Mostly Neovim built-ins, so they work the same in any modern config.
@@ -213,7 +221,9 @@ Mostly Neovim built-ins, so they work the same in any modern config.
 | `K` / `<C-s>` (insert) | hover documentation / signature help |
 | `grd` / `gri` / `grr` / `grt` | go to definition / implementation / references / type |
 | `grn` / `gra` / `grx` | rename / code action / run codelens |
-| `gO` | document symbols into the location list — `<leader>jj the picker version |
+| `gO` | document symbols into the location list — `<leader>ss` is the picker version |
+| `<leader>cr` | references in a picker with preview — the picker version of `grr` |
+| `<leader>ci` / `<leader>co` | incoming / outgoing calls — who calls this, what this calls |
 | `<leader>e` / `<leader>q` | diagnostic float / diagnostics to location list |
 | `<leader>f` | format buffer (also visual) |
 | `<leader>ca` / `<leader>cA` | swap this parameter with the next / previous |
@@ -244,6 +254,17 @@ appear in an untracked file or a scratch buffer:
 
 `<leader>gs` toggles: run it on a staged hunk to unstage. Note `<leader>gd` is git **d**iff, while
 `grd` is **g**o to definition — different `d`, different prefix.
+
+**Inside a diff** — `<leader>gd` opens a 2-way diff: the staged version (index) on the left, your
+working file on the right. These are Neovim's own diff-mode keys:
+
+| Key | Action |
+|---|---|
+| `äc` / `öc` | next / previous change |
+| `do` / `dp` | take the other side's version of this change / push yours to the other side |
+| `:diffupdate` | recompute the diff after edits |
+| `:q` | close the diff window |
+
 
 **Merge conflicts** — run `git mergetool` in the shell. Each conflicted file opens in Neovim as
 three panes: **LOCAL** (ours) | **MERGED** (the result, which you edit) | **REMOTE** (theirs).
@@ -315,6 +336,7 @@ The loop: `Tn` in the test, jump into the code to fix it, `Tl` from there, `Tv` 
 | `<C-y>` | accept the selected item |
 | `<C-n>` / `<C-p>` | next / previous item |
 | `<C-space>` | show menu, then toggle documentation |
+| `<C-k>` / `<C-s>` | signature help (blink's key / Neovim's own) |
 | `<Tab>` / `<S-Tab>` | jump between placeholders of an expanded snippet |
 | `<C-b>` / `<C-f>` | scroll the documentation window |
 | `<C-e>` | cancel |
@@ -327,7 +349,7 @@ from friendly-snippets through Neovim's own `vim.snippet`; there is no separate 
 
 | Key | Action |
 |---|---|
-| `<leader>t` | floating terminal, toggles; PowerShell 7, keeps running when hidden |
+| `<leader>t` | floating terminal, toggles; keeps running when hidden. PowerShell 7 on Windows, bash on Linux/WSL |
 | `<Esc><Esc>` (terminal) | leave terminal mode — then `<leader>t` hides the window |
 | `<leader>up` / `<leader>uP` | markdown preview in the browser: start / stop |
 | `<leader>uc` | change colorscheme (live preview, remembered across restarts) |
@@ -350,9 +372,10 @@ Sessions are **saved automatically on quit**, per directory and git branch; rest
 
 ## Why the keys are where they are
 
-**Most of what you press is Neovim's own.** `grd grr grn gra grx gO K`, the whole `ö`/`ä` bracket
-family, every `z*` fold key, `gcc`. That knowledge transfers to any config, any tutorial and
-`:help` — it is not specific to this setup.
+**Most of what you press is Neovim's own.** `grr grn gra gri grt grx gO K`, the whole `ö`/`ä`
+bracket family, every `z*` fold key, `gcc`. That knowledge transfers to any config, any tutorial and
+`:help` — it is not specific to this setup. `grd` is the one `gr` key this config adds, because
+Neovim leaves go-to-definition unmapped.
 
 **The prefixes are namespaces**, not arbitrary letters:
 
