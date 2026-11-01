@@ -54,6 +54,7 @@ into (`qq` … `q`, then `Q`; `3Q` runs it three times). This is Neovim's own `Q
 | `<leader>sh` / `<leader>sk` | search help / search keymaps |
 | `<leader>sd` / `<leader>sr` | workspace diagnostics / resume last picker |
 | `<leader>sp` | list all fzf-lua pickers |
+| `<leader>xq` | show / hide the quickfix list — `grr` results, `:make` errors, or `alt-q` from any picker; `äq`/`öq` step through it |
 | `<leader>bd` / `<leader>bD` | close buffer keeping layout / discard changes |
 | `<leader>w` | write buffer |
 
@@ -318,6 +319,7 @@ family, every `z*` fold key, `gcc`. That knowledge transfers to any config, any 
 | `<leader>c` | **c**ode |
 | `<leader>r` | **r**c / config |
 | `<leader>S` | **S**ession |
+| `<leader>x` | lists — quickfix, and later diagnostics lists |
 
 **Known rough edges, kept on purpose.** These are real, and changing them would cost more than it
 saves once the keys are learned:
@@ -335,7 +337,7 @@ Decided in advance so that adding a plugin later never forces a key you already 
 | Reserved | For |
 |---|---|
 | `<leader>r` | **configuration only** — see the section above; the letters are already fixed |
-| `<leader>x` | diagnostics and lists, e.g. trouble.nvim (`<leader>xx`, `<leader>xq`) |
+| `<leader>x` | lists: `xq` is taken by the quickfix toggle; the rest is kept for diagnostics lists, e.g. trouble.nvim (`<leader>xx`) |
 | `<leader>T` | test runner — keeps `<leader>t` as the terminal |
 | `<leader>a` | AI / agent tooling |
 | `<leader>n` | notes or notifications |

@@ -171,6 +171,11 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open diagn
 -- Collect the buffer's diagnostics into the location list (window-local, not the quickfix list).
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Diagnostics to location list' })
 
+-- <leader>x holds lists. xq shows the quickfix list (grr, :make, fzf-lua's alt-q) or hides it if open.
+vim.keymap.set('n', '<leader>xq', function()
+  vim.cmd(vim.fn.getqflist({ winid = 0 }).winid ~= 0 and 'cclose' or 'copen')
+end, { desc = '[Q]uickfix list (toggle)' })
+
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -358,6 +363,7 @@ require('which-key').add({
   { '<leader>S', group = 'Session' },
   { '<leader>u', group = 'UI / toggle' },
   { '<leader>r', group = 'Config' },
+  { '<leader>x', group = 'Lists' },
   { 'ö', proxy = '[', group = 'Prev ([)' },
   { 'ä', proxy = ']', group = 'Next (])' },
 })
