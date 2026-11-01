@@ -369,6 +369,8 @@ require('which-key').add({
 -- `need = 1` means quitting an empty Neovim writes nothing. Restoring is always manual, below.
 -- <leader>Sd cancels saving for the current session when you would rather not record it.
 require('persistence').setup()
+-- git mergetool/difftool start Neovim in diff mode on temp files; saving that would replace the real session.
+vim.api.nvim_create_autocmd('VimEnter', { callback = function() if vim.o.diff then require('persistence').stop() end end })
 
 vim.keymap.set('n', '<leader>Ss', function() require('persistence').load() end, { desc = '[S]ession restore (this dir)' })
 vim.keymap.set('n', '<leader>Sl', function() require('persistence').load({ last = true }) end, { desc = '[S]ession restore [L]ast' })

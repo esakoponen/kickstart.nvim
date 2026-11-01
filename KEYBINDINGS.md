@@ -244,6 +244,23 @@ appear in an untracked file or a scratch buffer:
 `<leader>gs` toggles: run it on a staged hunk to unstage. Note `<leader>gd` is git **d**iff, while
 `grd` is **g**o to definition — different `d`, different prefix.
 
+**Merge conflicts** — run `git mergetool` in the shell. Each conflicted file opens in Neovim as
+three panes: **LOCAL** (ours) | **MERGED** (the result, which you edit) | **REMOTE** (theirs).
+
+| Key | Action |
+|---|---|
+| `äc` / `öc` | next / previous conflict |
+| `:diffget LOCAL` / `:diffget REMOTE` | in the middle pane: take ours / theirs for this conflict |
+| `:wqa` | save the result and go on to the next conflicted file |
+| `:cq` | give up on this file; git leaves it conflicted |
+
+A Neovim started this way does not save a session, so `<leader>Ss` still restores your real one.
+The tool is set in git, not in this repo — once per machine (Windows and WSL each have their own):
+
+    git config --global merge.tool nvimdiff2
+    git config --global mergetool.keepBackup false   # no .orig files left behind
+    git config --global mergetool.prompt false       # no "Hit return" before each file
+
 ## Completion (insert mode)
 
 | Key | Action |
