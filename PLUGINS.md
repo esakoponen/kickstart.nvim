@@ -64,9 +64,16 @@ One plugin providing many independent modules; each is enabled by its own `setup
 | **nvim-lspconfig** | Server configurations (paths, root markers, default settings) that `vim.lsp.config`/`vim.lsp.enable` then apply. Diagnostics, navigation and hover. |
 | **mason.nvim** | Installs language servers, formatters and linters into Neovim's own data directory, so nothing has to be installed system-wide. |
 | **mason-lspconfig.nvim** | Bridges mason's package names to lspconfig's server names. |
-| **mason-tool-installer.nvim** | Installs everything in the `servers` table plus a hand-listed set of formatters and linters. Adding a server is enough to get it installed; a new formatter must also be added to that list. |
+| **mason-tool-installer.nvim** | Installs everything in the `servers` table plus a hand-listed set of formatters, linters and debug adapters. Adding a server is enough to get it installed; a new formatter or adapter must also be added to that list. |
 | **conform.nvim** | Formatting, on demand via `<leader>f`. Owns formatting exclusively — where a server would also format, that is disabled server-side so there is exactly one formatter per filetype. Save-time formatting is off unless `<leader>uf` enables it. |
 | **nvim-lint** | Standalone linters for rules no language server covers (ruff, rubocop, stylelint). Runs on save. JS/TS linting comes from the `eslint` server instead, not from here. |
+
+## Debugging
+
+| Plugin | Purpose |
+|---|---|
+| **nvim-dap** | The debugger client (Debug Adapter Protocol): breakpoints, stepping, a REPL. F5/F9–F12 and `<leader>D`. Also reads a project's `.vscode/launch.json`. |
+| **mason-nvim-dap.nvim** | Gives each debug adapter Mason installs (debugpy, codelldb, netcoredbg, and elixir-ls's debugger) a ready-made adapter definition and launch configuration, so `init.lua` holds no per-language tables. Two handlers fill its gaps: Elixir's adapter name, and starting debugpy attached on Windows. |
 
 ## How the language tooling divides up
 

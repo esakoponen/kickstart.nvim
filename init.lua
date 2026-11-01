@@ -318,6 +318,9 @@ vim.pack.add({
   'https://github.com/mfussenegger/nvim-lint',
   -- A spinning ASCII donut, purely for fun
   'https://github.com/NStefan002/donut.nvim',
+  -- Debugger (DAP client), and the bridge that configures the debug adapters mason installs
+  'https://github.com/mfussenegger/nvim-dap',
+  'https://github.com/jay-babu/mason-nvim-dap.nvim',
 })
 
 -- [[ Colorscheme ]]
@@ -364,6 +367,7 @@ require('which-key').add({
   { '<leader>u', group = 'UI / toggle' },
   { '<leader>r', group = 'Config' },
   { '<leader>x', group = 'Lists' },
+  { '<leader>D', group = 'Debug' },
   { 'ö', proxy = '[', group = 'Prev ([)' },
   { 'ä', proxy = ']', group = 'Next (])' },
 })
@@ -873,6 +877,9 @@ vim.list_extend(ensure_installed, {
   'prettier',      -- same, used when the daemon is not running
   'clang-format',  -- C/C++ formatter (mason spells it with a hyphen, conform with an underscore)
   'shfmt',         -- shell script formatter
+  'debugpy',       -- Python debug adapter (nvim-dap)
+  'codelldb',      -- C/C++/Rust debug adapter (nvim-dap)
+  'netcoredbg',    -- C# debug adapter (nvim-dap)
   -- NOTE: Elixir's `credo` isn't a standalone Mason-installable binary -- it's
   -- added as a project dependency instead (e.g. via `mix.exs`). LSP
   -- diagnostics from elixirls still work without it.
@@ -957,6 +964,48 @@ require('lint').linters_by_ft = {
 vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
   callback = function() require('lint').try_lint() end,
 })
+
+-- [[ Debugging: nvim-dap ]]
+-- The adapters are mason packages (ensure_installed above). handlers gives each installed one
+-- mason-nvim-dap's ready-made adapter and launch configuration, as soon as it is installed:
+-- Python (debugpy), C/C++/Rust (codelldb), C# (netcoredbg), and Elixir through elixir-ls, which
+-- is already there as the language server. nvim-dap also reads a project's .vscode/launch.json.
+-- JS/TS, Ruby and Erlang have no adapter configured.
+require('mason-nvim-dap').setup({
+  handlers = {
+    -- Elixir's launch configuration asks for an adapter named mix_task, but the default handler
+    -- registers it as 'elixir' and with no filetype, so without this nothing is set up.
+    elixir = function(config)
+      config.name, config.filetypes = 'mix_task', { 'elixir' }
+      config.adapters = require('mason-nvim-dap.mappings.adapters').mix_task
+      require('mason-nvim-dap').default_setup(config)
+    end,
+    -- On Windows debugpy never answers when spawned detached (nvim-dap's default); mason-nvim-dap
+    -- already turns that off for codelldb and netcoredbg there, but not for Python.
+    python = function(config)
+      if vim.fn.has('win32') == 1 then config.adapters.options = { detached = false } end
+      require('mason-nvim-dap').default_setup(config)
+    end,
+  },
+})
+local dap = require('dap')
+
+-- F-keys as in VS Code. Windows Terminal keeps F11 for fullscreen, so <leader>D has every step too.
+vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: start / continue' })
+vim.keymap.set('n', '<F9>', dap.toggle_breakpoint, { desc = 'Debug: toggle breakpoint' })
+vim.keymap.set('n', '<F10>', dap.step_over, { desc = 'Debug: step over' })
+vim.keymap.set('n', '<F11>', dap.step_into, { desc = 'Debug: step into' })
+vim.keymap.set('n', '<F12>', dap.step_out, { desc = 'Debug: step out' })
+vim.keymap.set('n', '<leader>Dc', dap.continue, { desc = 'Debug: start / [C]ontinue' })
+vim.keymap.set('n', '<leader>Db', dap.toggle_breakpoint, { desc = 'Debug: toggle [B]reakpoint' })
+vim.keymap.set('n', '<leader>DB', function() dap.set_breakpoint(vim.fn.input('Condition: ')) end,
+  { desc = 'Debug: conditional [B]reakpoint' })
+vim.keymap.set('n', '<leader>Dn', dap.step_over, { desc = 'Debug: step over ([N]ext line)' })
+vim.keymap.set('n', '<leader>Di', dap.step_into, { desc = 'Debug: step [I]nto' })
+vim.keymap.set('n', '<leader>Do', dap.step_out, { desc = 'Debug: step [O]ut' })
+vim.keymap.set('n', '<leader>Dl', dap.run_last, { desc = 'Debug: run [L]ast again' })
+vim.keymap.set('n', '<leader>Dt', dap.terminate, { desc = 'Debug: [T]erminate' })
+vim.keymap.set('n', '<leader>Dr', dap.repl.toggle, { desc = 'Debug: [R]EPL' })
 
 -- [[ Donut ]]
 -- A spinning ASCII donut, on demand with :Donut. Any keypress dismisses it.

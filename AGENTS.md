@@ -63,9 +63,10 @@ The three pieces divide responsibility and should not be made to overlap:
 - nvim-lint — only for lint rules no LSP covers. JS/TS lint comes from the `eslint` *server*, not nvim-lint.
 
 `mason-tool-installer` receives `vim.tbl_keys(servers)` plus a hand-listed
-set of formatters/linters, so adding a server to the `servers` table is
-sufficient to get it installed — but a new formatter or linter must also
-be appended to that `vim.list_extend` list.
+set of formatters/linters/debug adapters, so adding a server to the `servers`
+table is sufficient to get it installed — but a new formatter, linter or debug
+adapter must also be appended to that `vim.list_extend` list. mason-nvim-dap
+then configures each installed adapter for nvim-dap.
 
 Language support status, including deliberate gaps and why (e.g. Erlang has
 no usable native-Windows LSP), is tracked in the comment block above the

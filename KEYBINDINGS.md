@@ -262,6 +262,30 @@ The tool is set in git, not in this repo — once per machine (Windows and WSL e
     git config --global mergetool.keepBackup false   # no .orig files left behind
     git config --global mergetool.prompt false       # no "Hit return" before each file
 
+## Debugging — F-keys and `<leader>D`
+
+Python, C/C++/Rust, C# and Elixir debug out of the box; Mason installs their adapters. A project's
+`.vscode/launch.json` is read too. JS/TS, Ruby and Erlang have no debugger configured.
+
+| Key | Action |
+|---|---|
+| `<F5>` / `<leader>Dc` | start a session (pick a configuration), or continue to the next breakpoint |
+| `<F9>` / `<leader>Db` | toggle a breakpoint on this line |
+| `<leader>DB` | conditional breakpoint — prompts for the condition |
+| `<F10>` / `<leader>Dn` | step over (next line) |
+| `<F11>` / `<leader>Di` | step into |
+| `<F12>` / `<leader>Do` | step out |
+| `<leader>Dl` | run the last configuration again |
+| `<leader>Dt` | terminate the session |
+| `<leader>Dr` | REPL: evaluate expressions in the paused program |
+
+Windows Terminal uses F11 for fullscreen, so `<F11>` never reaches Neovim there: use `<leader>Di`,
+or unbind F11 in Windows Terminal's settings. On a laptop where F-keys need Fn, the `<leader>D`
+column has every step.
+
+Python launches the current file. C/C++/Rust and C# ask for the program to run (the executable,
+or the `.dll`), so build it first. Elixir runs `mix test` under the debugger.
+
 ## Completion (insert mode)
 
 | Key | Action |
@@ -320,6 +344,7 @@ family, every `z*` fold key, `gcc`. That knowledge transfers to any config, any 
 | `<leader>r` | **r**c / config |
 | `<leader>S` | **S**ession |
 | `<leader>x` | lists — quickfix, and later diagnostics lists |
+| `<leader>D` | **D**ebug |
 
 **Known rough edges, kept on purpose.** These are real, and changing them would cost more than it
 saves once the keys are learned:
