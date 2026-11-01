@@ -921,7 +921,9 @@ require('conform').setup({
   },
 })
 
-vim.keymap.set({ 'n', 'v' }, '<leader>f', function() require('conform').format({ async = true }) end, { desc = '[F]ormat buffer' })
+-- 'x' rather than 'v': 'v' also covers select mode, where Space+f typed over a snippet placeholder
+-- would format the buffer instead of inserting the text.
+vim.keymap.set({ 'n', 'x' }, '<leader>f', function() require('conform').format({ async = true }) end, { desc = '[F]ormat buffer' })
 
 -- Reveal tabs and trailing whitespace when reviewing. 'list' is window-local, so this toggles
 -- the current window alone; a split inherits whatever the window it was split from had.
