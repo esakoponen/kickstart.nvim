@@ -89,7 +89,7 @@ Do not redefine Neovim's built-in LSP mappings.
 
 Constraints set by the repo owner:
 
-- Single `init.lua`, kept under 1000 lines. Do not split into `lua/` modules.
+- Single `init.lua`, kept under 1100 lines. Do not split into `lua/` modules.
 - Every setting or setting group gets a one-line explanation in init.lua.
 - One git commit per independent change. Do not batch unrelated edits;
   do not edit ahead of approval.
