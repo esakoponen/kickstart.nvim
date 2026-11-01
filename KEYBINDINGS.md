@@ -277,6 +277,7 @@ In a **rebase** the roles swap: LOCAL is the branch you are rebasing onto, REMOT
 | `:diffupdate` | refresh the highlighting after editing by hand |
 | `:wqa` | save the result; git marks the file resolved (`git add`) and opens the next one |
 | `:cq` | give up on this file; git leaves it conflicted |
+| `<leader>gb` | in LOCAL or REMOTE: the commit behind the line under the cursor — hash, author, committer, both dates, full message. Press it again to step into the popup and scroll |
 
 Every line that differs in the LOCAL and REMOTE panes ends with the 8-character hash and author of
 the commit that last changed it. During a rebase, REMOTE shows your commit's hash from before

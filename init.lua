@@ -579,6 +579,12 @@ local function annotate_merge_side(buf)
     if s and #s == 40 then sha, sha_at[tonumber(lnum)] = s, s
     elseif sha and line:sub(1, 7) == 'author ' then author[sha] = author[sha] or line:sub(8) end
   end
+  -- <leader>gb, as gitsigns' blame-line elsewhere: the full commit behind the line under the cursor.
+  vim.keymap.set('n', '<leader>gb', function()
+    local info = sha_at[vim.fn.line('.')] and git('show', '-s', '--format=fuller', '--abbrev-commit',
+      '--abbrev=8', '--date=format:%Y-%m-%d %H:%M', sha_at[vim.fn.line('.')])
+    if info then vim.lsp.util.open_floating_preview(vim.split(vim.trim(info), '\n'), 'git', { focus_id = 'merge-commit' }) end
+  end, { buffer = buf, desc = 'Git: commit of this line (hash, author, committer, dates, message)' })
   local ns = vim.api.nvim_create_namespace('merge-blame')
   vim.api.nvim_buf_call(buf, function()
     for lnum, s in pairs(sha_at) do
