@@ -395,7 +395,8 @@ from friendly-snippets through Neovim's own `vim.snippet`; there is no separate 
 on; **`ul`** reveals every invisible character including tabs and non-breaking spaces, and is off.
 
 `<leader>up` serves the current file and reloads it as you type. Mermaid diagrams and KaTeX maths
-render, and both ship inside the plugin, so neither needs a network connection.
+render, and both ship inside the plugin, so neither needs a network connection. Why a browser, and
+the alternatives that were compared: [MARKDOWN-PREVIEW.md](MARKDOWN-PREVIEW.md).
 
 Sessions are **saved automatically on quit**, per directory and git branch; restoring is manual.
 
