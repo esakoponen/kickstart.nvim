@@ -126,7 +126,8 @@ Deletes and yanks go to the **system clipboard** (the Windows one, under WSL too
 last *yank*, ignoring deletes.
 
 A faint vertical line marks where lines should end. It sits just past column 80 (the Unix/Linux
-convention), past 72 in commit messages and past 100 in Rust, which set their own limits.
+convention), past 72 in commit messages and past 100 in Rust, which set their own limits. Why
+those numbers: [LINE-WIDTH.md](LINE-WIDTH.md).
 
 Trailing whitespace is marked with a pastel pink block as you work — never on the line you are
 typing, and not at all in insert mode. `<leader>uw` turns that marking off, `<leader>cw` removes
