@@ -260,6 +260,37 @@ vim.api.nvim_create_autocmd({ 'TextYankPost', 'TextPutPost' }, {
   end,
 })
 
+-- [[ Ruler: a faint vertical line just past the ideal maximum line width ]]
+-- 80 columns is the Unix convention (80x24 terminals such as the VT100, which inherited the
+-- 80-column punch card) and still the Linux kernel's preferred limit for code. So the line sits in
+-- column 81: text should end left of it. A filetype that sets its own 'textwidth' gets the line
+-- one past that instead, via '+1': 73 for commit messages (72), 101 for Rust (rustfmt's 100).
+-- Special buffers (help, oil, quickfix, terminals, debug panels) get no line.
+vim.api.nvim_create_autocmd({ 'BufWinEnter', 'FileType', 'TermOpen' }, {
+  group = vim.api.nvim_create_augroup('ruler', { clear = true }),
+  callback = function()
+    vim.opt_local.colorcolumn = vim.bo.buftype ~= '' and '' or vim.bo.textwidth > 0 and '+1' or '81'
+  end,
+})
+
+-- Draw the line faintly: the background nudged 6% towards the text colour, recomputed on every
+-- colorscheme change so it stays a hint in light and dark schemes alike.
+local function set_ruler_hl()
+  local n = vim.api.nvim_get_hl(0, { name = 'Normal', link = false })
+  if not (n.bg and n.fg) then return end
+  local rgb = 0
+  for _, shift in ipairs({ 16, 8, 0 }) do
+    local bg, fg = bit.band(bit.rshift(n.bg, shift), 255), bit.band(bit.rshift(n.fg, shift), 255)
+    rgb = rgb + bit.lshift(math.floor(bg + (fg - bg) * 0.06 + 0.5), shift)
+  end
+  vim.api.nvim_set_hl(0, 'ColorColumn', { bg = rgb })
+end
+set_ruler_hl()
+vim.api.nvim_create_autocmd('ColorScheme', {
+  group = vim.api.nvim_create_augroup('ruler-colour', { clear = true }),
+  callback = set_ruler_hl,
+})
+
 -- Run build steps for plugins that need them after install/update.
 -- See `:help vim.pack-events`
 vim.api.nvim_create_autocmd('PackChanged', {
