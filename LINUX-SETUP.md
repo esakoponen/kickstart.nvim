@@ -12,6 +12,9 @@ Needs **0.13-dev or newer** (`vim.pack`, `vim.hl.hl_op`). Distro packages are fa
     sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
     sudo ln -s /opt/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
 
+Other ways to install a nightly (AppImage, AUR, bob, building from source) and where each puts the
+binary: [INSTALLING-NEOVIM.md](INSTALLING-NEOVIM.md).
+
 ## 2. Config
 
     git clone <this-repo> ~/.config/nvim
