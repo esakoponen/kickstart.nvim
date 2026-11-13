@@ -50,7 +50,7 @@ actually does without reading it line by line.
 |---|---|
 | `äq` / `öq` | next / previous hit, **without** focusing the window |
 | `<CR>` | in the window, jump to the hit under the cursor |
-| `:cclose` / `:copen` | hide / reopen the same list |
+| `<leader>xq` | hide / reopen the same list (`:cclose` / `:copen`) |
 
 `grr` then `äq` repeatedly is the fastest way to visit every call site in order.
 
@@ -183,7 +183,8 @@ workspace symbols, and call hierarchy in both directions.
 
 ## When the language server is not available
 
-Erlang has no server in this config, and any server takes time to start. These still work:
+Erlang has no server on native Windows (Linux and WSL run `elp`), and any server takes time to
+start. These still work:
 
 - `<leader>st` — treesitter symbols, instantly, no server
 - `<leader>sg` / `<leader>sw` — ripgrep over contents
