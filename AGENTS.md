@@ -49,6 +49,7 @@ Useful in-editor checks: `:checkhealth`, `:checkhealth vim.deprecated`, `:Mason`
 3. `vim.pack.add({...})` — a single call listing every plugin. Neovim's native package manager (0.12+).
 4. Per-plugin `require(...).setup()` blocks — each immediately followed by its own keymaps, so a plugin and its bindings read as one unit.
 5. LSP → mason → conform → lint — the toolchain pipeline (see below).
+6. Debugging (nvim-dap, mason-nvim-dap, nvim-dap-view), then tests (vim-test) — they use the adapters and runners the toolchain installed.
 
 Two `PackChanged`/`FileType` autocmds drive treesitter: parsers install
 asynchronously on first encounter with a filetype, then attach. A parser
