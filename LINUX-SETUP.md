@@ -19,7 +19,9 @@ binary: [INSTALLING-NEOVIM.md](INSTALLING-NEOVIM.md).
 
     git clone <this-repo> ~/.config/nvim
 
-`nvim-pack-lock.json` pins plugin revisions, so both machines get identical versions.
+`nvim-pack-lock.json`, vim.pack's record of plugin revisions, is not committed, so a fresh clone
+installs each plugin's latest revision. Run `:packupdate` on every machine now and then to keep
+them level.
 
 ## 3. Packages
 
@@ -48,7 +50,9 @@ Ubuntu names the fd binary `fdfind`; link it so fzf-lua finds it:
 
     nvim
 
-Plugins install themselves, then mason fetches the servers and formatters. Then:
+vim.pack lists the plugins it is about to install and asks to proceed; answer **Yes**. Then
+treesitter compiles its parsers and mason fetches the servers, formatters and debug adapters in
+the background. When they have finished:
 
     :checkhealth        " or <leader>rh
 
