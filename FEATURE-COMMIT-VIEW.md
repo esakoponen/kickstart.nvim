@@ -1,13 +1,14 @@
 # Feature proposal: a commit view inside Neovim
 
-**Status:** proposal, not implemented. One of three:
+**Status:** proposal, not implemented. One of four:
 [FEATURE-COMMIT-FILES.md](FEATURE-COMMIT-FILES.md) ·
 [FEATURE-COMMIT-VIEW.md](FEATURE-COMMIT-VIEW.md) ·
-[FEATURE-SEMANTIC-SEARCH.md](FEATURE-SEMANTIC-SEARCH.md)
+[FEATURE-SEMANTIC-SEARCH.md](FEATURE-SEMANTIC-SEARCH.md) ·
+[FEATURE-EXPLAIN-LINE.md](FEATURE-EXPLAIN-LINE.md)
 
 ## The requirement
 
-All three tools serve live code review. In a Teams meeting with a shared screen, the developer jumps
+All four tools serve live code review. In a Teams meeting with a shared screen, the developer jumps
 to the relevant code, moves through it, and walks the team through what changed. Finding and
 stepping through the changes has to be fast, easy and intuitive, so the audience follows the
 explanation, not the tooling.
