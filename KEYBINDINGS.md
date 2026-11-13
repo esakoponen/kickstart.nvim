@@ -289,7 +289,7 @@ In a **rebase** the roles swap: LOCAL is the branch you are rebasing onto, REMOT
 | `:diffget LOCAL` / `:diffget REMOTE` | in the middle pane: take that side's version of this conflict |
 | `:diffupdate` | refresh the highlighting after editing by hand |
 | `:wqa` | save the result; git marks the file resolved (`git add`) and opens the next one |
-| `:cq` | give up on this file; git leaves it conflicted |
+| `:cq` | give up on this file: git puts back the conflicted version, **dropping your edits to it**, leaves it unresolved and asks whether to go on to the next file |
 | `<leader>gb` | in LOCAL or REMOTE: the commit behind the line under the cursor — hash, author, committer, both dates, full message. Press it again to step into the popup and scroll |
 
 Every line that differs in the LOCAL and REMOTE panes ends with the 8-character hash and author of
