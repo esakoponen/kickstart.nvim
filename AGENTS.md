@@ -1,6 +1,7 @@
 # AGENTS.md
 
-ALL COMMITS AUTHORED BY DEVELOPER - DO NOT SIGN GIT COMMITS.
+Commits are authored by the developer alone: do not sign them, and add no
+`Co-Authored-By:` or other attribution trailer to the message.
 
 ## What this is
 
