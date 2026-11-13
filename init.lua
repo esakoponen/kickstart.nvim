@@ -88,7 +88,8 @@ vim.opt.pumheight = 10
 -- One statusline for the whole window instead of one per split: less chrome once splits are open.
 vim.opt.laststatus = 3
 
--- Share the Windows clipboard with the unnamed register, so y and p work across applications.
+-- Share the system clipboard with the unnamed register, so y and p work across applications
+-- (under WSL that is the Windows clipboard, through wl-clipboard).
 -- Trade-off: d and x overwrite it too. Use "0p to paste the last *yank* specifically.
 vim.opt.clipboard = 'unnamedplus'
 
@@ -100,7 +101,7 @@ vim.opt.confirm = true
 
 -- [[ Shell: PowerShell 7 ]]
 -- Used by :terminal, :! and system(). Guarded on pwsh being present so the config still loads
--- on a machine without it, where Neovim falls back to its own default (cmd.exe on Windows).
+-- on a machine without it, where Neovim keeps its own default ($SHELL on Linux, cmd.exe on Windows).
 -- These settings follow `:help shell-pwsh` rather than being hand-rolled; the parts matter:
 --   -NoProfile          start-up is not slowed by a user profile, and behaviour is reproducible
 --   InputEncoding/...   forces UTF-8 both ways, otherwise non-ASCII output arrives mangled
@@ -207,7 +208,7 @@ local function toggle_terminal()
     style = 'minimal', -- no numbers or sign column inside the shell
   })
   if not reused then
-    vim.cmd.terminal() -- runs 'shell', which is PowerShell 7 (set above)
+    vim.cmd.terminal() -- runs 'shell': bash on Linux and WSL, PowerShell 7 on Windows (set above)
     terminal.buf = vim.api.nvim_get_current_buf()
   end
   vim.cmd.startinsert()
@@ -454,8 +455,8 @@ vim.keymap.set('n', '<leader>?', function()
 end, { desc = 'Buffer-local keymaps' })
 
 require('fzf-lua').setup({})
--- fzf-lua shells out to ripgrep for grep (rg)
--- winget install BurntSushi.ripgrep.MSVC
+-- fzf-lua shells out to fzf, ripgrep (rg) and fd: apt or pacman on Linux (LINUX-SETUP.md),
+-- winget on Windows.
 
 local fzf = require('fzf-lua')
 vim.keymap.set('n', '<leader>sh', fzf.help_tags, { desc = '[S]earch [H]elp' })
@@ -660,7 +661,7 @@ require('mini.statusline').setup({ use_icons = false })
 require('mini.pairs').setup()
 
 -- File-type markers for fzf-lua and oil. 'ascii' shows a letter instead of a glyph, because
--- only stock Cascadia is installed here; switch to 'glyph' after installing a Nerd Font.
+-- no Nerd Font is installed; switch to 'glyph' after pointing the terminal at one.
 require('mini.icons').setup({ style = 'ascii' })
 MiniIcons.mock_nvim_web_devicons() -- lets plugins that ask for nvim-web-devicons use these instead
 
