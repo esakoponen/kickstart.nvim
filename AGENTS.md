@@ -8,6 +8,11 @@ Commits are authored by the developer alone: do not sign them, and add no
 A personal Neovim config, derived from kickstart.nvim. Its aim is an optimal,
 minimal and powerful code editor. Keep a single `init.lua`.
 
+Weigh every addition, change or removal of a plugin, tool, key or setting
+against [PRINCIPLES.md](PRINCIPLES.md): focus, context, the big picture, and
+keeping the craft of writing code by hand. Its "test for every change" is the
+checklist.
+
 Target runtime is Neovim 0.13.* (`nvim --version` to confirm).
 Version matters: config may use APIs that do not exist on older versions.
 Check installed runtime before assuming an API's availability; deprecation
