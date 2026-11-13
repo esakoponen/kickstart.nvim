@@ -1,9 +1,8 @@
 # Previewing markdown
 
-**Recommendation: use the browser preview that is already installed, live-preview.nvim.** In this
-setup (WSL inside Windows Terminal, plus Arch), it is the only option that draws Mermaid diagrams
-correctly. If you also want rendered markdown inside the terminal, add an in-editor renderer
-alongside it (option B below), but diagrams still need the browser.
+**Decision: markdown is previewed in the browser, with live-preview.nvim.** In this setup (WSL
+inside Windows Terminal, plus Arch), it is the only option that draws Mermaid diagrams correctly.
+No in-terminal renderer is installed; the alternatives below were compared and not adopted.
 
 ## Using it
 
@@ -59,13 +58,13 @@ Activity and GitHub stars as of November 2026.
 
 ## The options
 
-**A. live-preview.nvim in the browser (recommended, in use).** Nothing to change. The one
-competitor worth a look is selimacerbas/markdown-preview.nvim, if interactive zoom, pan and export
-of diagrams would be useful; it has not been tested here, and whether it also works without a
-network connection was not checked.
+**A. live-preview.nvim in the browser (chosen, in use).** The one competitor worth a look is
+selimacerbas/markdown-preview.nvim, if interactive zoom, pan and export of diagrams would be
+useful; it has not been tested here, and whether it also works without a network connection was
+not checked.
 
-**B. A rendered view inside the terminal, without diagrams (optional, not installed).** This is
-the "side panel in the same terminal" idea:
+**B. A rendered view inside the terminal, without diagrams (not adopted).** This is the "side
+panel in the same terminal" idea:
 
 - **markview.nvim's split view** shows the raw markdown on the left and the rendered version on
   the right.
@@ -74,9 +73,9 @@ the "side panel in the same terminal" idea:
 
 With either one, a Mermaid block stays a code block, so diagrams still go through A.
 
-**C. Real diagrams inside the terminal, only in a different terminal.** On Arch with Kitty,
-WezTerm or Ghostty, md-render.nvim can show Mermaid as pictures in a Neovim float. It cannot work in
-Windows Terminal until Windows Terminal supports the Kitty graphics protocol.
+**C. Real diagrams inside the terminal, only in a different terminal (not adopted).** On Arch
+with Kitty, WezTerm or Ghostty, md-render.nvim can show Mermaid as pictures in a Neovim float. It
+cannot work in Windows Terminal until Windows Terminal supports the Kitty graphics protocol.
 
 ## What was tested
 
