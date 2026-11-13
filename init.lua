@@ -292,6 +292,14 @@ vim.api.nvim_create_autocmd('ColorScheme', {
   callback = set_ruler_hl,
 })
 
+-- [[ Markdown: gw and gq wrap at 80 columns, just left of the ruler ]]
+-- Without a 'textwidth' they wrap at the window width, capped at 79. Wrapping stays on request:
+-- the ftplugin's wrap-while-typing ('t', and 'c' for list items and quotes) is switched off.
+vim.api.nvim_create_autocmd('FileType', { pattern = 'markdown', callback = function()
+  vim.bo.textwidth = 80
+  vim.opt_local.formatoptions:remove({ 't', 'c' })
+end })
+
 -- Run build steps for plugins that need them after install/update.
 -- See `:help vim.pack-events`
 vim.api.nvim_create_autocmd('PackChanged', {

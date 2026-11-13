@@ -209,4 +209,4 @@ None of these is implemented; each needs its own approval and its own commit.
 | Architecture diagrams as Mermaid in each repository | The big picture | none |
 | The four feature proposals (`FEATURE-*.md`) | The big picture, presenting | see each |
 
-`init.lua` is at 1150 of its 1200 lines.
+`init.lua` is at 1158 of its 1200 lines.

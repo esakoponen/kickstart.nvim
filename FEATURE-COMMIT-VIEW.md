@@ -111,7 +111,7 @@ with tig is the file list at the top, moving between files, and folding.
 7. **One entry point shared with [FEATURE-COMMIT-FILES.md](FEATURE-COMMIT-FILES.md).** One commit
    picker with two actions.
 8. **Merge commits.** `git show --first-parent`, or `-m` for a diff against each parent?
-9. **Line budget.** `init.lua` is at 1150 of its 1200 lines. A key for gitsigns' `show_commit` or for
+9. **Line budget.** `init.lua` is at 1158 of its 1200 lines. A key for gitsigns' `show_commit` or for
    a terminal float is about 5 lines; our own view with a file list and folding is roughly 40.
 10. **Windows.** Check that lazygit and tig are available there if the embedded-terminal route is
     chosen; Windows is the secondary platform.

@@ -149,7 +149,7 @@ need a language model, and its inferences must be kept apart from recorded facts
    the `Comment` colour gitsigns' blame uses is faint.
 9. **A privacy guard.** Which repositories may send code to a model? A per-project opt-in, such as a
    marker file in the repository or an environment variable?
-10. **Line budget.** `init.lua` is at 1150 of its 1200 lines. A facts-only label is about 15 lines
+10. **Line budget.** `init.lua` is at 1158 of its 1200 lines. A facts-only label is about 15 lines
     (a gitsigns formatter and a key); the model explanation roughly 30–40 more.
 11. **Platforms.** `claude` is installed on Windows and in WSL; `gh` only on Windows so far.
 

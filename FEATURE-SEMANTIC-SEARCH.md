@@ -134,7 +134,7 @@ choosing one.
    the language servers. Otherwise document it in [LINUX-SETUP.md](LINUX-SETUP.md).
 10. **Judging quality.** Keep a short list of queries with the locations they should find, per
     project, to compare tools and models.
-11. **Line budget.** `init.lua` is at 1150 of its 1200 lines.
+11. **Line budget.** `init.lua` is at 1158 of its 1200 lines.
 
 ### For live review sessions
 

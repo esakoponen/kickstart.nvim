@@ -8,6 +8,7 @@ left of it. It is set in the "Ruler" block of `init.lua` (search for `[[ Ruler`)
 | Buffer | Line drawn at column | Width limit | Where the limit comes from |
 |---|---|---|---|
 | Code and text (the default) | 81 | 80 | Unix/Linux convention; see the history below |
+| Markdown | 81 | 80 | the default, set as `textwidth=80` in `init.lua` so `gw` wraps there |
 | Commit messages | 73 | 72 | git convention; Neovim's gitcommit ftplugin sets `textwidth=72` |
 | Email | 73 | 72 | Neovim's mail ftplugin sets `textwidth=72` |
 | Rust | 101 | 100 | rustfmt's `max_width`; Neovim's rust ftplugin sets `textwidth=100` |
@@ -33,6 +34,11 @@ To change the default for good, edit the `'81'` in the Ruler block of `init.lua`
 
 Commit messages are also *wrapped* at their limit: `<leader>f` in a commit message rewraps the body
 to 72 columns (see the Git section of [KEYBINDINGS.md](KEYBINDINGS.md)).
+
+Markdown is wrapped on request, never while typing: `gwip` rewraps the paragraph under the cursor
+to 80 columns, and `gw` on a visual selection rewraps those lines. Do not run it over the whole
+file (`gggwG`): it joins every run of non-blank lines, so tables and fenced code blocks collapse
+into single lines.
 
 ## Where the numbers come from
 
