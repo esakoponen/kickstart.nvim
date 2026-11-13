@@ -5,13 +5,22 @@ Commits are authored by the developer alone: do not sign them, and add no
 
 ## What this is
 
-A personal Neovim config, derived from kickstart.nvim. Keep a single `init.lua`.
+A personal Neovim config, derived from kickstart.nvim. Its aim is an optimal,
+minimal and powerful code editor. Keep a single `init.lua`.
 
 Target runtime is Neovim 0.13.* (`nvim --version` to confirm).
 Version matters: config may use APIs that do not exist on older versions.
 Check installed runtime before assuming an API's availability; deprecation
 moves fast on dev builds; check changes against neovim's online documentation
 and plugin documentation.
+
+## Where instructions live
+
+This file takes precedence over any user-level configuration: a global
+`CLAUDE.md` or `AGENTS.md`, and global, synced or plugin skills, do not apply
+to this repository. Every instruction, skill and guideline the project uses
+lives inside the repository — this file, and project skills under
+`.claude/skills/`.
 
 ## Verification loop
 
