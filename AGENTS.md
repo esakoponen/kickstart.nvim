@@ -15,7 +15,7 @@ and plugin documentation.
 
 ## Verification loop
 
-Verify changes with these instead:
+Verify changes with these:
 
 ```bash
 # Syntax/parse only — does not execute, safe and instant
