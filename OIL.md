@@ -71,7 +71,7 @@ Three ways to be reminded, in order of detail: press **`g`** for the `g`-prefixe
 
 | Key | Action |
 |---|---|
-| `-` | parent directory; at a drive root, pick from the drives instead |
+| `-` | parent directory; on Windows, at a drive root, pick from the drives instead |
 | `_` | open the current working directory |
 | `<CR>` | open file / enter directory |
 | `<C-p>` | preview the entry under the cursor in a split |
@@ -106,11 +106,16 @@ keymaps = {
 },
 ```
 
-## Recommended change: send deletes to the Recycle Bin
+## Recommended change: send deletes to the trash
 
 `delete_to_trash` is currently `false`, which means **`dd` plus `:w` deletes permanently** — no
-Recycle Bin, and `u` does not help once written. Oil supports the Windows Recycle Bin properly
-(it drives it through PowerShell), so this is worth turning on:
+trash, and `u` does not help once written. Oil supports each platform's own trash, so this is
+worth turning on:
+
+- **Linux and WSL**: the freedesktop trash that desktop file managers share: `~/.local/share/Trash`,
+  or a `.Trash-<uid>` folder at the top of another drive (for example `/mnt/c` under WSL). Never
+  the Windows Recycle Bin, even under WSL.
+- **Windows**: the Recycle Bin, driven through PowerShell.
 
 ```lua
 require('oil').setup({
@@ -119,8 +124,8 @@ require('oil').setup({
 })
 ```
 
-With it enabled, `g\` browses the Recycle Bin as just another oil directory, and restoring a file
-is moving it back out with `dd` and `p`.
+With it enabled, `g\` browses the trash as just another oil directory, and restoring a file is
+moving it back out with `dd` and `p`.
 
 ## Tips
 
