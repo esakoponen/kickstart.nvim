@@ -50,6 +50,7 @@ To update: `<leader>rp` (`:packupdate`) for plugins, `:MasonToolsUpdate` for Mas
 
 | File | Covers |
 |---|---|
+| [PRINCIPLES.md](PRINCIPLES.md) | what the editor is for (focus, context, the big picture, keeping the craft), and the test every change must pass |
 | [KEYBINDINGS.md](KEYBINDINGS.md) | every key, grouped by task, including merge conflicts, debugging and tests |
 | [CODE-NAVIGATION.md](CODE-NAVIGATION.md) | moving through code and learning an unfamiliar codebase |
 | [OIL.md](OIL.md) | managing files with oil.nvim |
