@@ -1,0 +1,218 @@
+{
+  "panels": [
+    {
+      "title": "Basics", "hint": "ö = [   ä = ]", "accent": "cyan",
+      "rows": [
+        {"keys": "<leader>", "desc": "leader is Space; pause for the menu"},
+        {"keys": "<leader>sk / <leader>?", "desc": "search all keys / this buffer's"},
+        {"keys": "ö / ä", "desc": "bracket prefix: press, wait, browse"},
+        {"keys": "öb / äb", "desc": "previous / next buffer"},
+        {"keys": "öq / äq", "desc": "quickfix entries"},
+        {"keys": "öl / äl", "desc": "location-list entries"},
+        {"keys": "ö<Space> / ä<Space>", "desc": "blank line above / below"},
+        {"keys": "Q", "desc": "replay the last recorded macro"},
+        {"comment": "Uppercase jumps to first / last: öD äH öM"}
+      ]
+    },
+    {
+      "title": "Find", "hint": "<leader>s", "accent": "blue",
+      "rows": [
+        {"keys": "<leader>sf / <leader>s.", "desc": "find files / recent files"},
+        {"keys": "<leader>sg / <leader>sw", "desc": "grep project / word under cursor"},
+        {"keys": "<leader><leader>", "desc": "switch buffer"},
+        {"keys": "<leader>ss / <leader>sS", "desc": "symbols: this file / project"},
+        {"keys": "<leader>st", "desc": "treesitter symbols", "note": "no LSP"},
+        {"keys": "<leader>sh / <leader>sd", "desc": "help / diagnostics"},
+        {"keys": "<leader>sr / <leader>sp", "desc": "resume picker / all pickers"},
+        {"keys": "<leader>xq", "desc": "quickfix list on / off"},
+        {"section": "Buffers"},
+        {"keys": "<leader>w", "desc": "write buffer"},
+        {"keys": "<leader>bd / <leader>bD", "desc": "close buffer / discard changes"}
+      ]
+    },
+    {
+      "title": "Files", "hint": "oil", "accent": "cyan",
+      "rows": [
+        {"keys": "- / C-c", "desc": "open the directory / back to the file"},
+        {"keys": "Enter", "desc": "open a file / enter a directory"},
+        {"keys": "o", "desc": "create: type a name", "note": "name/ = directory"},
+        {"keys": "cw", "desc": "rename: edit the name"},
+        {"keys": "dd", "desc": "delete", "note": "permanent"},
+        {"keys": "dd … p", "desc": "move: paste in another directory"},
+        {"keys": "yy … p", "desc": "copy"},
+        {"keys": ":w", "desc": "apply: lists the changes, asks first"},
+        {"keys": "u / :e!", "desc": "undo / discard unsaved changes"},
+        {"keys": "C-p / gx", "desc": "preview / open in the system app"},
+        {"keys": "C-s / C-h / C-t", "desc": "open in vsplit / split / tab"},
+        {"keys": "g. / g?", "desc": "hidden files / all oil keys"}
+      ]
+    },
+    {
+      "title": "Config", "hint": "<leader>r", "accent": "purple",
+      "rows": [
+        {"keys": "<leader>rc / <leader>rv", "desc": "edit init.lua / in a split"},
+        {"keys": "<leader>rr", "desc": "save and source this file"},
+        {"keys": "<leader>rd", "desc": "config directory in oil"},
+        {"keys": "<leader>rp / <leader>rm", "desc": "update plugins / Mason"},
+        {"keys": "<leader>rh", "desc": "checkhealth"}
+      ]
+    },
+    {
+      "title": "Tests", "hint": "<leader>T", "accent": "teal",
+      "rows": [
+        {"keys": "<leader>Tn / <leader>Tf", "desc": "nearest test / this file"},
+        {"keys": "<leader>Ta / <leader>Tl", "desc": "whole suite / last run again"},
+        {"keys": "<leader>Tv", "desc": "back to the last test file"}
+      ]
+    },
+    {
+      "title": "LSP", "hint": "gr", "accent": "blue",
+      "rows": [
+        {"keys": "K / C-s", "desc": "hover / signature help", "note": "insert"},
+        {"keys": "grd / gri", "desc": "definition / implementation"},
+        {"keys": "grr / grt", "desc": "references / type definition"},
+        {"keys": "grn / gra", "desc": "rename / code action"},
+        {"keys": "grx / gO", "desc": "run codelens / doc symbols"},
+        {"keys": "<leader>cr", "desc": "references in a picker"},
+        {"keys": "<leader>ci / <leader>co", "desc": "incoming / outgoing calls"},
+        {"keys": "<leader>ca / <leader>cA", "desc": "swap argument next / prev"},
+        {"keys": "<leader>f", "desc": "format buffer or selection"},
+        {"section": "Diagnostics"},
+        {"keys": "öd / äd", "desc": "previous / next", "note": "öD äD ends"},
+        {"keys": "<leader>e / <leader>q", "desc": "float / to location list"}
+      ]
+    },
+    {
+      "title": "Git", "hint": "<leader>g", "accent": "teal",
+      "rows": [
+        {"keys": "äh / öh", "desc": "next / previous hunk", "note": "äH öH ends"},
+        {"keys": "<leader>gp", "desc": "preview hunk inline"},
+        {"keys": "<leader>gs / <leader>gr", "desc": "stage / reset hunk", "note": "visual: lines"},
+        {"keys": "<leader>gS / <leader>gR", "desc": "stage / reset whole buffer"},
+        {"keys": "<leader>gb / <leader>ub", "desc": "blame line / inline blame"},
+        {"keys": "<leader>gd", "desc": "diff vs index", "note": "äc öc  do dp"},
+        {"keys": "ih", "desc": "hunk textobject", "note": "dih discards"},
+        {"section": "Repository"},
+        {"keys": "<leader>gg", "desc": "changed files", "note": "← stage  → unstage"},
+        {"keys": "<leader>gl / <leader>gL", "desc": "log: repo / this file"},
+        {"keys": "<leader>gB", "desc": "branches"}
+      ]
+    },
+    {
+      "title": "Debug", "hint": "F-keys  <leader>D", "accent": "purple",
+      "rows": [
+        {"keys": "F5 / <leader>Dc", "desc": "start / continue"},
+        {"keys": "F9 / <leader>Db", "desc": "toggle breakpoint"},
+        {"keys": "<leader>DB", "desc": "conditional breakpoint"},
+        {"keys": "F10 / <leader>Dn", "desc": "step over"},
+        {"keys": "F11 / <leader>Di", "desc": "step into"},
+        {"keys": "F12 / <leader>Do", "desc": "step out"},
+        {"keys": "<leader>Dl / <leader>Dt", "desc": "run last / terminate"},
+        {"keys": "<leader>Dr / <leader>Dv", "desc": "REPL / debug panel"},
+        {"comment": "Windows Terminal takes F11 for fullscreen: use the right-hand key"}
+      ]
+    },
+    {
+      "title": "Merge conflicts", "hint": "git mergetool", "accent": "rose",
+      "rows": [
+        {"comment": "LOCAL  |  MERGED (you edit)  |  REMOTE"},
+        {"comment": "Rebase: LOCAL = branch onto, REMOTE = your commit"},
+        {"keys": "C-h / C-l", "desc": "move between panes"},
+        {"keys": "äc / öc", "desc": "next / previous conflict"},
+        {"keys": ":diffget LOCAL", "desc": "take the LOCAL side"},
+        {"keys": ":diffget REMOTE", "desc": "take the REMOTE side"},
+        {"keys": "dd", "desc": "on the marker lines: keep both"},
+        {"keys": ":diffupdate", "desc": "refresh after hand edits"},
+        {"keys": "<leader>gb", "desc": "commit behind this line", "note": "side panes"},
+        {"comment": "Side panes: 8-char hash + author on differing lines"},
+        {"section": "Finish a file"},
+        {"keys": "/<<<<<<<", "desc": "markers left? git does not check"},
+        {"keys": ":xa", "desc": "save + close: git adds it, next file"},
+        {"keys": ":cq", "desc": "give up: drops your edits to it"},
+        {"section": "Commit message editor"},
+        {"keys": "<leader>f", "desc": "wrap the body at 72 columns"},
+        {"keys": ":wq / :cq", "desc": "accept, rebase goes on / pause"},
+        {"section": "Shell"},
+        {"command": "git mergetool", "note": "one file at a time"},
+        {"command": "git mergetool -t nvimdiff", "note": "adds BASE"},
+        {"command": "git checkout -m -- <file>", "note": "redo a file"},
+        {"command": "git stash --keep-index", "note": "park unstaged leftovers"},
+        {"section": "Without mergetool"},
+        {"command": ":!git add %", "note": "stage the current file"},
+        {"command": ":!git -c core.editor=true rebase --continue"}
+      ]
+    },
+    {
+      "title": "Move", "hint": "", "accent": "cyan",
+      "rows": [
+        {"keys": "C-h/j/k/l", "desc": "window left / down / up / right"},
+        {"keys": "C-d / C-u", "desc": "half page down / up, centred"},
+        {"keys": "n / N", "desc": "next / previous match, centred"},
+        {"keys": "äm / öm", "desc": "next / prev function", "note": "äM öM ends"},
+        {"keys": "; / ,", "desc": "repeat last jump or f / t"},
+        {"keys": "Esc", "desc": "clear search highlight"},
+        {"section": "Folds"},
+        {"keys": "za / zo / zc", "desc": "toggle / open / close fold"},
+        {"keys": "zR / zM", "desc": "open all / close all"},
+        {"keys": "zj / zk", "desc": "next / previous fold"}
+      ]
+    },
+    {
+      "title": "Completion", "hint": "insert", "accent": "purple",
+      "rows": [
+        {"keys": "C-y / C-e", "desc": "accept / cancel"},
+        {"keys": "C-n / C-p", "desc": "next / previous item"},
+        {"keys": "C-Space", "desc": "menu, then documentation"},
+        {"keys": "C-k", "desc": "signature help"},
+        {"keys": "Tab / S-Tab", "desc": "snippet placeholders"}
+      ]
+    },
+    {
+      "title": "Edit", "hint": "", "accent": "sky",
+      "rows": [
+        {"keys": "J", "desc": "join lines, cursor stays"},
+        {"keys": "< / >", "desc": "shift, keep selection", "note": "visual"},
+        {"keys": "<leader>p", "desc": "paste over, keep register", "note": "visual"},
+        {"keys": "<leader>d", "desc": "delete to black hole register"},
+        {"keys": "gcc / gc", "desc": "toggle comment"},
+        {"keys": "\"0p", "desc": "paste last yank, not delete"},
+        {"keys": "<leader>cw", "desc": "trim trailing whitespace"}
+      ]
+    },
+    {
+      "title": "Textobjects", "hint": "d c y v + a / i", "accent": "teal",
+      "rows": [
+        {"keys": "aF / iF", "desc": "function / its body"},
+        {"keys": "aC / iC", "desc": "class, module, struct"},
+        {"keys": "ao / io", "desc": "block: if, for, while"},
+        {"keys": "af / aa", "desc": "function call / argument"},
+        {"keys": "at / a)", "desc": "HTML tag / brackets, quotes"},
+        {"keys": "sa / sd / sr", "desc": "surround: add / delete / replace"}
+      ]
+    },
+    {
+      "title": "Visual", "hint": "", "accent": "cyan",
+      "rows": [
+        {"keys": "v / V / C-q", "desc": "char / line / block"},
+        {"keys": "gv / o", "desc": "reselect / other end"},
+        {"keys": "än / ön", "desc": "next / prev syntax node"},
+        {"keys": "I / A", "desc": "insert / append on every line", "note": "block"},
+        {"keys": "g C-a", "desc": "number a column 1, 2, 3 …"}
+      ]
+    },
+    {
+      "title": "Toggles", "hint": "<leader>u", "accent": "blue",
+      "rows": [
+        {"keys": "<leader>t / Esc Esc", "desc": "terminal / leave terminal mode"},
+        {"keys": "<leader>uc / <leader>uz", "desc": "colorscheme / zen mode"},
+        {"keys": "<leader>uw / <leader>ul", "desc": "whitespace / invisibles"},
+        {"keys": "<leader>uf / <leader>uh", "desc": "format on save / inlay hints"},
+        {"keys": "<leader>up / <leader>uP", "desc": "markdown preview on / off"},
+        {"keys": "<leader>uu", "desc": "undo tree"},
+        {"section": "Sessions", "keys": "<leader>S"},
+        {"keys": "<leader>Ss / <leader>Sl", "desc": "restore this dir / last"},
+        {"keys": "<leader>Sf / <leader>Sd", "desc": "pick / do not save on exit"}
+      ]
+    }
+  ]
+}
