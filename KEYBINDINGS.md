@@ -99,6 +99,21 @@ Inside an oil buffer `<C-h>` and `<C-l>` belong to oil, not to window movement â
 `<C-l>` replaces Neovim's own redraw key, which also ran `:diffupdate`. If a diff looks stale after
 an edit, run `:diffupdate` yourself.
 
+### Resizing windows (Neovim's own)
+
+A count sets the size of the step; without one, the step is a single column or row.
+
+| Key | Action |
+|---|---|
+| `<C-w>>` / `<C-w><` | wider / narrower: `40<C-w>>` adds 40 columns |
+| `<C-w>+` / `<C-w>-` | taller / shorter |
+| `<C-w>=` | make all splits the same size |
+| `{N}<C-w>_` | set the height to N rows; without a count, as tall as possible |
+| `{N}<C-w>\|` | set the width to N columns; without a count, as wide as possible (`\|` needs AltGr) |
+
+They work in zen mode too, and the zen window re-centres on the next cursor move: `40<C-w>>` to
+see a wide table, `40<C-w><` to return to the 100-column window.
+
 ## Folds
 
 Folds follow the syntax tree, so a fold is a real function or block. Files open unfolded. These are
