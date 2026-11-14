@@ -11,10 +11,8 @@ word. Everything you already know about editing text applies to managing files.
 
 Press `-` to open the parent directory of the current file, with the cursor on that file's name.
 Press `-` again to go further up. `<CR>` enters a directory or opens a file.
-To leave without opening anything, press `<C-c>`; `:b#` switches to previous
-buffer as a fallback, though it leaves the oil buffer loaded rather than closing it properly.
-Note the cursor returns to the top of the file rather than where you were;
-`` `` `` (backtick twice) or `'"` jumps back to your last position.
+To leave without opening anything, press `<C-c>`: the file you came from comes back, with the
+cursor and the view exactly where they were.
 
 ## The four operations
 
@@ -95,7 +93,7 @@ mappings win, so `<C-h>` opens the entry in a horizontal split and `<C-l>` refre
 Use `<C-w>h` and `<C-w>l` to change window while in oil.
 
 **Three of oil's keys are awkward on a Finnish layout.** `` ` `` is Shift+´ and `g~` needs
-AltGr+¨, both dead keys requiring a following space; `g\` needs AltGr+`<`. The `:cd` and `:tcd`
+AltGr+¨, both dead keys requiring a following space; `g\` needs AltGr++. The `:cd` and `:tcd`
 commands do the same job as the first two. If you use them often, remapping is easy — add to the
 `oil.setup()` call:
 
@@ -133,7 +131,10 @@ moving it back out with `dd` and `p`.
   you were just editing.
 - Oil replaces netrw, so `:e some/directory` opens oil rather than the old file explorer.
 - `<C-p>` preview is a fast way to skim files without opening them properly.
-- Oil can edit remote directories over SSH: `:Oil ssh://user@host/path`.
+- Oil can edit remote directories over SSH: `:e oil-ssh://user@host/path`.
+- Renaming or moving a source file asks the language server to update the imports that point to
+  it, where the server supports that (TypeScript's and rust-analyzer do). The files it changes are
+  left unsaved, so you can review them before `:w`.
 - Deleting a directory line removes it and its contents — the confirmation dialog is where you
   notice that, so read the count it reports.
 - `skip_confirm_for_simple_edits = true` removes the dialog for single unambiguous operations.

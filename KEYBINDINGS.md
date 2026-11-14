@@ -62,6 +62,27 @@ into (`qq` … `q`, then `Q`; `3Q` runs it three times). This is Neovim's own `Q
 Three different questions: `<leader>sf` searches **file names**, `<leader>ss`/`<leader>sS` search
 **symbol names**, `<leader>sg` searches **file contents**.
 
+### Managing files in oil
+
+A directory is a buffer of file names. Edit the names as text; `:w` lists the changes, asks for
+confirmation, then carries them out. The full guide is [OIL.md](OIL.md).
+
+| Key | Action |
+|---|---|
+| `-` / `<C-c>` | parent directory, cursor on the current file / close oil, back to the file |
+| `<CR>` | open the file or enter the directory |
+| `o`, type a name, `:w` | create a file; a name ending in `/` creates a directory |
+| `cw` (or any edit), `:w` | rename |
+| `dd`, `:w` | delete, **permanently**: this config does not use the trash |
+| `dd` … `p`, `:w` | move: cut the line here, paste it in another directory |
+| `yy` … `p`, `:w` | copy |
+| `u` / `:e!` | undo an edit / discard every change not yet written |
+| `<C-p>` | preview the file under the cursor |
+| `<C-s>` / `<C-h>` / `<C-t>` | open in a vertical split / horizontal split / new tab |
+| `gx` | open with the system's default application |
+| `g.` / `_` | hidden files on / off / the working directory |
+| `g?` | oil's own list of keys |
+
 ## Configuration — `<leader>r`
 
 `r` as in vim**rc**. Everything that edits or maintains this configuration lives here, so the whole
