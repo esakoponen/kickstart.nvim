@@ -54,6 +54,7 @@ To update: `<leader>rp` (`:packupdate`) for plugins, `:MasonToolsUpdate` for Mas
 | [KEYBINDINGS.md](KEYBINDINGS.md) | every key, grouped by task, including merge conflicts, debugging and tests |
 | [CODE-NAVIGATION.md](CODE-NAVIGATION.md) | moving through code and learning an unfamiliar codebase |
 | [OIL.md](OIL.md) | managing files with oil.nvim |
+| [PICKERS.md](PICKERS.md) | harpoon, fzf.vim and Telescope compared with fzf-lua, and listing a commit's files from `<leader>gl` |
 | [PLUGINS.md](PLUGINS.md) | each plugin, what it is for, and what was deliberately left out |
 | [LINUX-SETUP.md](LINUX-SETUP.md) | setting up WSL or Arch from scratch |
 | [INSTALLING-NEOVIM.md](INSTALLING-NEOVIM.md) | install methods for a Neovim nightly, and where each puts it |
