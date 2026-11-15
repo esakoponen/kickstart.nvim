@@ -16,6 +16,7 @@ Requires Python 3 and Pillow (`pip install pillow`).
 import argparse
 import json
 import os
+import re
 import sys
 from xml.sax.saxutils import escape
 
@@ -30,6 +31,10 @@ BOTTOM = 2235   # keep clear of the taskbar
 GUT = 40        # gutter between columns / panels
 NCOL = 4
 COLW = (W - 2 * MX - (NCOL - 1) * GUT) / NCOL
+# In keycaps, what is not a typed character: a modifier (C- Ctrl, S- Shift, A- or M- Alt) or a
+# named key. Drawn in the leader's colour, so C-c (Ctrl+c) never reads as C (Shift+c) and c.
+SPECIAL = re.compile(r'(?<![\w-])[CSAM]-(?=\S)'
+                     r'|(?<![A-Za-z])(?:Tab|Esc|Enter|Space|BS|Del|F1[0-2]|F[1-9])(?![A-Za-z0-9])')
 LEADER = '\u2423'  # ␣, drawn as an open box
 
 C = dict(
@@ -223,23 +228,28 @@ out = []
 a = out.append
 
 
-def run(x, base, text, size, color=None, anchor_end=False):
-    """Mono text with every ␣ drawn as an open-box leader symbol."""
+def run(x, base, text, size, color=None, anchor_end=False, special=False):
+    """Mono text with every ␣ drawn as an open-box leader symbol.
+
+    With special (keycaps), what SPECIAL matches is drawn in the leader's colour.
+    """
     m = M.mono(size)
     lw = m.getlength('M') * 1.2
     width = M.run_width(text, size)
     if anchor_end:
         x -= width
+    hot = {i for mt in SPECIAL.finditer(text) for i in range(*mt.span())} if special else set()
     style = f' style="font-size:{size}px' + (f';fill:{color}' if color else '') + '"'
     parts, buf, bx, cx = [], '', x, x
 
     def flush():
         nonlocal buf
         if buf:
-            parts.append(f'<text class="key" x="{bx:.1f}" y="{base:.1f}"{style} xml:space="preserve">{escape(buf)}</text>')
+            buf = buf.replace('</tspan><tspan class="mod">', '')  # one span per highlighted run
+            parts.append(f'<text class="key" x="{bx:.1f}" y="{base:.1f}"{style} xml:space="preserve">{buf}</text>')
         buf = ''
 
-    for ch in text:
+    for i, ch in enumerate(text):
         if ch == LEADER:
             flush()
             x0, x1 = cx + lw * 0.16, cx + lw * 0.84
@@ -250,7 +260,7 @@ def run(x, base, text, size, color=None, anchor_end=False):
         else:
             if not buf:
                 bx = cx
-            buf += ch
+            buf += f'<tspan class="mod">{escape(ch)}</tspan>' if i in hot else escape(ch)
             cx += m.getlength(ch)
     flush()
     return parts, width
@@ -262,7 +272,7 @@ def keycaps(x, y_mid, keys):
     for i, t in enumerate(toks):
         w = M.keyw(t)
         parts.append(f'<rect class="cap" x="{x:.1f}" y="{y_mid - M.key_h / 2:.1f}" width="{w:.1f}" height="{M.key_h}" rx="9"/>')
-        parts.extend(run(x + M.key_padx, y_mid + M.key_fs / 3, t, M.key_fs)[0])
+        parts.extend(run(x + M.key_padx, y_mid + M.key_fs / 3, t, M.key_fs, special=True)[0])
         x += w
         if i < len(toks) - 1:
             parts.append(f'<text class="sep" x="{x + M.key_gap / 2:.1f}" y="{y_mid + M.key_fs * 0.3:.1f}" text-anchor="middle">/</text>')
@@ -286,6 +296,7 @@ a(f'''<defs>
   </pattern>
   <style>
     .key  {{ font-family: 'Cascadia Mono', Consolas, monospace; font-size: {M.key_fs}px; fill: {C['keytext']}; }}
+    .mod  {{ fill: {C['leader']}; }}
     .desc {{ font-family: 'Segoe UI', sans-serif; font-size: {M.desc_fs}px; fill: {C['desc']}; }}
     .note {{ font-family: 'Segoe UI', sans-serif; font-style: italic; font-size: {M.note_fs}px; fill: {C['dim']}; }}
     .sep  {{ font-family: 'Segoe UI', sans-serif; font-size: {M.key_fs * 0.87:.1f}px; fill: {C['dim']}; }}
