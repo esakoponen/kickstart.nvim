@@ -1,21 +1,25 @@
-# Pickers: harpoon, fzf.vim and Telescope
+# Pickers: fzf-lua, harpoon, fzf.vim and Telescope
 
-Three well-known plugins, weighed against this configuration, which already has
-one finder: fzf-lua. For each, what it was made for, the thinking behind it, and
+fzf-lua, the finder this configuration uses, and three well-known plugins
+weighed against it. For each, what it was made for, the thinking behind it, and
 how to use it well. Then how each fits the daily workflow, and one requirement
 in particular:
 
 > Find a commit by its hash, list the files it changed, and preview each file's
 > diff.
 
+The last section compares their keys.
+
 **Status:** analysis only. Nothing is installed or changed; the one proposed
-change is at the end. Researched on 2026-11-15 from each project's README and
-source, and from the installed fzf-lua.
+change is under [The commit requirement](#the-commit-requirement). Researched on
+2026-11-15 from each project's README and source, and from the installed
+fzf-lua.
 
 ## Verdict
 
 | Plugin | What it is | For this configuration |
 |---|---|---|
+| **fzf-lua** | A finder over fzf, in Lua, for Neovim only | **Selected**, and in use: files, grep, symbols, buffers, git and help from one plugin |
 | **harpoon** (`harpoon2` branch) | A short, hand-picked file list per project, each file one key away | Not needed: Neovim's argument list, saved in every session, does the same job |
 | **fzf.vim** | The original fzf integration for Vim, in Vimscript | Not needed: fzf-lua is its Lua successor and is already installed |
 | **Telescope** | A fuzzy-finder framework in Lua: finders, sorters, previewers, actions | Not needed: it would be a second finder doing fzf-lua's job |
@@ -25,6 +29,105 @@ For the commit requirement, none of the three beats what is installed:
 preview. One snag makes it awkward, and a change of about ten lines in
 `init.lua` removes it. The change was tested, but not applied; see
 [The commit requirement](#the-commit-requirement).
+
+## fzf-lua
+
+[ibhagwan/fzf-lua](https://github.com/ibhagwan/fzf-lua): the picker this
+configuration uses, and the one selected.
+
+### Original purpose
+
+"Improved fzf.vim written in lua", in the repository's own description. Its
+README credits fzf.vim, and nvim-fzf, a Lua library for running fzf from Neovim,
+"which started this endeavour". From fzf.vim's set of commands it grew to cover
+most of what Neovim keeps as a list: files, grep, buffers, LSP symbols,
+references and calls, diagnostics, treesitter, git, help, keymaps, marks,
+registers, the quickfix list and nvim-dap.
+
+### Philosophy
+
+- **fzf does the filtering**, as in fzf.vim: in its own process, fast on large
+  inputs, with fzf's search syntax.
+- **"As plug and play as possible with sane defaults"** (README). An empty
+  `setup({})` gives every picker with its preview and keys, and that is exactly
+  what this configuration calls.
+- **Neovim only, in Lua.** Each picker is a Lua function that takes a table of
+  options; the same options work on the command line, as in
+  `:FzfLua files cwd=~/.config`. Previews are Neovim buffers, highlighted by
+  treesitter.
+- **Profiles instead of rewriting.** One argument to `setup` copies another
+  finder's look and keys: `fzf-vim`, `telescope`, `fzf-native`, `ivy` and
+  others.
+- **Coming back is part of the design.** In the default profile `Esc` hides
+  the list rather than closing it, so `resume` restores the query, the cursor
+  and the marked entries.
+- **Few hard dependencies:** Neovim 0.9 or later, and fzf newer than 0.36. rg
+  and fd are optional, and icons are optional too.
+
+### Using it effectively
+
+- **Find the pickers.** `<leader>sp` lists all of them, `:FzfLua <Tab>`
+  completes their names, and `F1` inside any list shows its keys. The keys
+  bound here are in [Quick keys](#quick-keys).
+- **The search syntax** (fzf's). Words separated by spaces must all match, in
+  any order. `'word` matches exactly, `^` anchors to the start of the line, `$`
+  to the end, and `!` excludes.
+- **Grep, then narrow.** In `<leader>sg` the query is a ripgrep regex, run again
+  on every keystroke. Text after ` -- ` filters the files by glob:
+  `setup -- *.lua` searches Lua files only, and `setup -- !*_spec.rb` leaves
+  spec files out.
+  `ctrl-g` switches to fuzzy filtering of the results found so far, and back.
+- **Many results to work through.** `tab` marks entries and `alt-a` marks them
+  all; Enter with entries marked, or `alt-q`, sends them to the quickfix list,
+  to step through with `]q`.
+- **Leave and come back.** `Esc` hides the list; `<leader>sr` reopens it as it
+  was. Useful when one look at the code answers a question and the search goes
+  on.
+- **The preview.** `shift-down` / `shift-up` scroll it a page at a time, `F4`
+  hides it and `F2` makes the list full screen, which helps on a shared screen.
+- **Git from the list.** In `<leader>gg`, `left` stages the file and `right`
+  unstages it. In `<leader>gl`, `ctrl-d` lists a commit's files and `ctrl-y`
+  copies its hash. Some git keys change the repository; see Fit, below.
+- **Coming from fzf.vim.** Its commands do not exist here: `:BLines` fails with
+  `E492: Not an editor command`. What replaces each:
+
+  | fzf.vim | Here |
+  |---|---|
+  | `:Files` | `<leader>sf` |
+  | `:Rg` / `:RG` | `:FzfLua grep` (asks for a pattern) / `<leader>sg` |
+  | `:BLines` / `:Lines` | `:FzfLua blines` / `:FzfLua lines` |
+  | `:Buffers` | `<leader><leader>` |
+  | `:History` / `:History:` | `<leader>s.` / `:FzfLua command_history` |
+  | `:GFiles?` | `<leader>gg` |
+  | `:Commits` / `:BCommits` | `<leader>gl` / `<leader>gL` |
+  | `:Helptags` / `:Maps` | `<leader>sh` / `<leader>sk` |
+
+  `:FzfLua setup_fzfvim_cmds` creates fzf.vim's command names, running fzf-lua,
+  for the rest of the session. It is not called at startup here, so that each
+  picker has one name.
+
+### Fit with this configuration
+
+- **Installed and in use.** 21 keys call it, and so do two pieces of
+  `init.lua`: oil's drive list at a drive root (`fzf_exec`), and live-preview's
+  picker setting. Its options are the defaults.
+- **The same on Arch, WSL and Windows.** It needs fzf newer than 0.36: WSL has
+  0.44.1 and Windows 0.74.1. Its Windows README advises fzf 0.52.1 or later on
+  Windows, which is met. The commit workflow below was tested on WSL and
+  Windows.
+- **No Lua dependencies** and no build step: no plenary.nvim, no compiled
+  sorter.
+- **Activity:** pushes to the repository in November 2026; the installed copy
+  is from 2026-07-26, and `<leader>rp` updates it.
+- **Keys that change the repository** (the ones to avoid in a live review):
+  - `<leader>gl`: Enter checks out the commit, after a Yes/No prompt;
+  - `<leader>gB`: Enter switches to the branch with no prompt; `ctrl-x`
+    deletes the branch after a Yes/No prompt; `ctrl-a` creates a branch named
+    by the query;
+  - `<leader>gg`: `ctrl-x` discards a file's changes after a Yes/No prompt
+    (`git checkout HEAD --`, or `git clean -f` for an untracked file).
+- **Finnish layout:** its keys are Ctrl, Alt and function keys, and none needs
+  AltGr. `alt-Q` is Alt+Shift+q.
 
 ## harpoon
 
@@ -118,6 +221,9 @@ commands, maps and help tags.
 - **Vim and Neovim alike.**
 
 ### Using it effectively
+
+These commands exist only where fzf.vim is installed; it is not installed here.
+[fzf-lua](#fzf-lua) lists what replaces each.
 
 - Learn the core commands:
   - `:Files`, `:GFiles?` (changed files), `:Buffers` and `:History`;
@@ -226,7 +332,7 @@ fzf-lua is included as the baseline: it is what the configuration uses now.
 | Language | Lua | Vimscript | Lua | Lua |
 | Needs | plenary.nvim | fzf ≥ 0.54 and fzf's Vim plugin; fugitive for commits | plenary.nvim; fzf-native (a C build) advised | fzf, rg, fd (installed) |
 | Arch / WSL / Windows | yes / yes / yes | yes / no (fzf 0.44) / no commit preview | yes / yes / C build for fzf-native | yes / yes / yes |
-| Last activity | 2025-10 | 2026-11 | 2026-11 | installed copy 2026-07 |
+| Last activity | 2025-10 | 2026-11 | 2026-11 | 2026-11; installed copy 2026-07 |
 | Overlaps with | argument list, marks, buffers | fzf-lua, entirely | fzf-lua, entirely | — |
 | Search commits by hash | — | `:Commits` | `git_commits` | `<leader>gl` |
 | Commit → its files | — | Enter opens the commit in fugitive | not built in: a custom picker | `ctrl-d` |
@@ -237,16 +343,17 @@ fzf-lua is included as the baseline: it is what the configuration uses now.
 
 Against [PRINCIPLES.md](PRINCIPLES.md)'s test for every change:
 
-| Test | harpoon | fzf.vim | Telescope |
-|---|---|---|---|
-| Focus | quiet: keys only | quiet | quiet |
-| Context | helps: the task's files one key away | same as fzf-lua | same as fzf-lua |
-| Big picture | no | same as fzf-lua | same as fzf-lua |
-| Mastery | neutral | neutral | neutral |
-| Minimal | fails: the argument list does it | fails: duplicates fzf-lua | fails: duplicates fzf-lua |
+| Test | harpoon | fzf.vim | Telescope | fzf-lua |
+|---|---|---|---|---|
+| Focus | quiet: keys only | quiet | quiet | quiet: opens only on a key, and `Esc` hides it |
+| Context | helps: the task's files one key away | same as fzf-lua | same as fzf-lua | helps: every match previewed in its code, and `<leader>sr` returns to the list |
+| Big picture | no | same as fzf-lua | same as fzf-lua | helps: project symbols, call hierarchy and the git log |
+| Mastery | neutral | neutral | neutral | neutral: it finds, it does not write |
+| Minimal | fails: the argument list does it | fails: duplicates fzf-lua | fails: duplicates fzf-lua | passes: one plugin, no Lua dependencies, does the work of several |
 
-All three fail on the minimal test. Of the three, harpoon is the only one that
-would add something new; that something is already built into Neovim.
+The three alternatives fail on the minimal test, and fzf-lua passes it. Of the
+three, harpoon is the only one that would add something new; that something is
+already built into Neovim.
 
 ## The commit requirement
 
@@ -345,15 +452,91 @@ step for either.
 
 ## Sources
 
+- fzf-lua: the installed copy:
+  - `README.md` (usage, profiles, credits), `README-Win.md` and `OPTIONS.md`
+    (`grep.rg_glob`);
+  - `lua/fzf-lua/defaults.lua`: the `keymap` table, `actions.files`, and the
+    `git` and `grep` pickers;
+  - `actions.lua`: `git_checkout`, `git_switch`, `git_reset` and
+    `git_branch_del`;
+  - `profiles/default.lua` and `profiles/hide.lua`;
+  - `make_entry.lua` (`glob_parse`).
+- fzf: `fzf --man` (fzf 0.74.1), its default key bindings.
 - harpoon: the
-  [README on `harpoon2`](https://github.com/ThePrimeagen/harpoon/blob/harpoon2/README.md).
+  [README on `harpoon2`](https://github.com/ThePrimeagen/harpoon/blob/harpoon2/README.md)
+  and `lua/harpoon/buffer.lua` (the quick menu's keys).
 - fzf.vim: the [README](https://github.com/junegunn/fzf.vim/blob/master/README.md)
-  and `autoload/fzf/vim.vim` (`s:commits`, `s:commits_sink`).
+  and `autoload/fzf/vim.vim` (`s:commits`, `s:commits_sink`, `:Buffers`).
 - Telescope: the
   [README](https://github.com/nvim-telescope/telescope.nvim/blob/master/README.md),
-  `lua/telescope/builtin/__git.lua` and `lua/telescope/actions/init.lua`
-  (`git_checkout`, `git_reset_branch`).
-- fzf-lua: the installed source, `lua/fzf-lua/defaults.lua` (`git.commits`,
-  `git.diff`, the `fzf` keymap) and `actions.lua` (`git_checkout`), and its
-  README (profiles, credits).
+  `lua/telescope/mappings.lua`, `lua/telescope/builtin/__git.lua`,
+  `lua/telescope/builtin/__internal.lua` (`buffers`) and
+  `lua/telescope/actions/init.lua` (`git_checkout`,
+  `git_checkout_current_buffer`, `git_reset_branch`).
 - Activity dates: GitHub's API, 2026-11-15.
+
+## Quick keys
+
+The keys of the four, side by side. fzf-lua's column is this configuration as
+it is. harpoon and Telescope bind no keys of their own outside their lists:
+their columns show the keys their READMEs suggest, or the picker's name, which
+runs as `:Telescope <name>`. fzf.vim has commands only. Inside a list, every
+column is the plugin's defaults; fzf.vim and fzf-lua also get fzf's own.
+
+| Action | harpoon | fzf.vim | Telescope | fzf-lua (here) |
+|---|---|---|---|---|
+| **Open a list** | | | | |
+| Files | — | `:Files` | `<leader>ff` | `<leader>sf` |
+| Grep the project | — | `:Rg`, `:RG` | `<leader>fg` | `<leader>sg` |
+| The word under the cursor | — | — | `grep_string` | `<leader>sw` |
+| Lines of this file | — | `:BLines` | `current_buffer_fuzzy_find` | `:FzfLua blines` |
+| Buffers | — | `:Buffers` | `<leader>fb` | `<leader><leader>` |
+| Recent files | — | `:History` | `oldfiles` | `<leader>s.` |
+| Help | — | `:Helptags` | `<leader>fh` | `<leader>sh` |
+| Keymaps | — | `:Maps` | `keymaps` | `<leader>sk` |
+| Changed files | — | `:GFiles?` | `git_status` | `<leader>gg` |
+| Commits | — | `:Commits` | `git_commits` | `<leader>gl` |
+| This file's commits | — | `:BCommits` | `git_bcommits` | `<leader>gL` |
+| Branches | — | — | `git_branches` | `<leader>gB` |
+| Reopen the last list | — | — | `resume` | `<leader>sr` |
+| Every picker | — | — | `:Telescope` | `<leader>sp` |
+| **A hand-picked file list** | | | | **built in: the argument list** |
+| Add the current file | `<leader>a` | — | — | `:argadd` |
+| Show the list | `<C-e>` | — | — | `:args`, `:FzfLua args` |
+| Go to file 1, 2, 3, 4 | `<C-h>`, `<C-t>`, `<C-n>`, `<C-s>` | — | — | `:1argu` … `:4argu` |
+| Previous / next file | `<C-S-P>` / `<C-S-N>` | — | — | `[a` / `]a` |
+| **Inside a list** | | | | |
+| Next / previous entry | `j` / `k` (the menu is a buffer) | `ctrl-j` / `ctrl-k`, `ctrl-n` / `ctrl-p` | `<C-n>` / `<C-p>`; `j` / `k` in normal mode | `ctrl-j` / `ctrl-k`, `ctrl-n` / `ctrl-p` |
+| Open | `<CR>` | `enter` | `<CR>` | `enter` |
+| Open in a split | `<C-x>`¹ | `ctrl-x` | `<C-x>` | `ctrl-s` |
+| Open in a vertical split | `<C-v>`¹ | `ctrl-v` | `<C-v>` | `ctrl-v` |
+| Open in a tab | `<C-t>`¹ | `ctrl-t` | `<C-t>` | `ctrl-t` |
+| Mark entries | — | `tab` / `shift-tab` | `<Tab>` / `<S-Tab>` | `tab` / `shift-tab` |
+| Mark all | — | `alt-a` (`:Rg`, `:Ag`) | — | `alt-a` (toggles) |
+| To the quickfix list | — | `enter` with entries marked (`:Rg`, `:Lines`, `:Tags`) | `<C-q>` all, `<M-q>` the marked | `alt-q` the marked; `enter` with entries marked |
+| Insert into the buffer | — | `alt-enter` | — | — |
+| Open, keeping the list open | — | `ctrl-o` (fzf 0.74.4+, not on Windows) | — | — (`Esc`, then `<leader>sr`) |
+| Close a buffer (buffer list) | — | `ctrl-alt-x` | `<M-d>` | `ctrl-x` |
+| Clear the query | — | `ctrl-u` | — (`<C-u>` scrolls the preview) | `ctrl-u` |
+| Scroll the preview | — | `shift-up` / `shift-down` (a line) | `<C-u>` / `<C-d>` | `shift-up` / `shift-down` (a page) |
+| Show or hide the preview | — | `ctrl-/` | — | `F4` |
+| Full screen | — | the command with `!`: `:Rg!` | — | `F2` |
+| List the keys | — | — | `<C-/>`; `?` in normal mode | `F1` |
+| Close | `q`, `<Esc>` | `esc`, `ctrl-c` | `<C-c>`; `<Esc>` in normal mode | `esc` hides it for `<leader>sr`; `alt-esc` closes |
+| **Git lists** | | | | |
+| Enter on a commit | — | opens it in fugitive | `git checkout`, no prompt | `git checkout`, after Yes/No |
+| A commit's files, each diff in the preview | — | — | — | `ctrl-d` |
+| Copy the hash | — | `ctrl-y` | — | `ctrl-y` |
+| Enter on one of this file's commits | — | opens the commit in fugitive | `git checkout <commit> -- <file>`, no prompt | opens the file as it was in that commit |
+| Diff this file against the commit | — | `ctrl-d` | — | — |
+| Reset the branch to a commit | — | — | `<C-r>m`, `<C-r>s`, `<C-r>h` (mixed, soft, hard), after `[Y/n]` | — |
+| Stage / unstage a file | — | — | `<Tab>` toggles | `left` / `right` |
+| Discard a file's changes | — | — | — | `ctrl-x`, after Yes/No |
+| Enter on a branch | — | — | `git checkout`, no prompt | `git switch`, no prompt |
+| Create / delete a branch | — | — | `<C-a>` / `<C-d>` | `ctrl-a` (named by the query) / `ctrl-x`, after Yes/No |
+
+¹ Only after adding them with `harpoon:extend()`, as its README shows.
+
+The git keys that check out, switch, reset, stage, discard, or create or delete
+a branch change the repository or the working tree. In a live review, those are
+the ones to avoid.
