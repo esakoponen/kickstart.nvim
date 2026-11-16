@@ -86,7 +86,10 @@ Already in place:
   only on `<C-space>`; which-key appears only after a pause; trailing whitespace is marked only
   outside insert mode.
 - **No notification plugin.** Messages stay on the command line.
-- **Little chrome.** One statusline, no tab or buffer bar, no file tree.
+- **Little chrome.** *Chrome* is everything on screen that is not the content: bars, tabs, panels and
+  borders. It is kept to what gives enough context to work effectively, such as which file is open
+  and where it sits in the project, so that I, and anyone following a shared screen, can focus on
+  the code.
 - **Zen mode** on `<leader>uz`.
 
 What follows:
@@ -208,5 +211,3 @@ None of these is implemented; each needs its own approval and its own commit.
 | A work-period timer, in the statusline or (better) the desktop bar | Determination, energy | 15 lines, or none on the desktop |
 | Architecture diagrams as Mermaid in each repository | The big picture | none |
 | The four feature proposals (`FEATURE-*.md`) | The big picture, presenting | see each |
-
-`init.lua` is at 1158 of its 1200 lines.

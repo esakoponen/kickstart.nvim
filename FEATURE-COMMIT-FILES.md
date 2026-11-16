@@ -106,8 +106,8 @@ one key that walks through every change across files.
    `<hash>~:path`.
 8. **Shared code with [FEATURE-COMMIT-VIEW.md](FEATURE-COMMIT-VIEW.md).** One commit picker with two
    actions: list the files (this feature) or open the whole commit (that one).
-9. **Line budget.** `init.lua` is at 1158 of its 1200 lines. Hand-written, this feature is roughly
-   30–40 lines. Raise the limit, or choose designs that are mostly configuration?
+9. **Size in `init.lua`.** Hand-written, this feature is roughly 30–40 lines. Are they all needed,
+   or would a design that is mostly configuration do?
 10. **Windows.** The git commands are the same; check path handling in temporary revision buffers.
 
 ### For live review sessions

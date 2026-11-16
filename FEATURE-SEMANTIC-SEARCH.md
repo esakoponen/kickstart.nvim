@@ -134,16 +134,15 @@ choosing one.
    the language servers. Otherwise document it in [LINUX-SETUP.md](LINUX-SETUP.md).
 10. **Judging quality.** Keep a short list of queries with the locations they should find, per
     project, to compare tools and models.
-11. **Line budget.** `init.lua` is at 1158 of its 1200 lines.
 
 ### For live review sessions
 
-12. **Indexing ahead of time.** Update on save or with a key before the meeting, never on the query
+11. **Indexing ahead of time.** Update on save or with a key before the meeting, never on the query
     path.
-13. **Readable results.** At a large font the picker must show the construct's name and path on one
+12. **Readable results.** At a large font the picker must show the construct's name and path on one
     line, with the code in the preview.
-14. **Scope switch.** The whole project, or only the files changed on the branch.
-15. **Getting back.** `<C-o>` returns to where you were presenting, and `<leader>sr` reopens the last
+13. **Scope switch.** The whole project, or only the files changed on the branch.
+14. **Getting back.** `<C-o>` returns to where you were presenting, and `<leader>sr` reopens the last
     results.
 
 ## Sources

@@ -426,7 +426,7 @@ Tested as a prototype on WSL and Windows, loaded on top of this configuration:
 
 The cost:
 
-- **init.lua:** 9 lines more, which takes it from 1158 to 1167 of its 1200.
+- **init.lua:** 9 lines more.
 - **Documentation:** a KEYBINDINGS.md row, and a new cheatsheet version from
   `cheatsheet/keybindings.json`, as AGENTS.md requires.
 

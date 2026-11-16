@@ -88,6 +88,11 @@ vim.opt.pumheight = 10
 -- One statusline for the whole window instead of one per split: less chrome once splits are open.
 vim.opt.laststatus = 3
 
+-- Winbar: "[3] ~/src/app/main.py[+]" at the top of every window. The count is the listed buffers,
+-- as :ls and <leader><leader> list them; a long path is cut from the left, so the name stays.
+-- Floats (pickers, hover, zen mode) never use the global value, so they get no bar.
+vim.o.winbar = '[%{len(filter(range(1, bufnr("$")), "buflisted(v:val)"))}] %<%F%m%r'
+
 -- Share the system clipboard with the unnamed register, so y and p work across applications
 -- (under WSL that is the Windows clipboard, through wl-clipboard).
 -- Trade-off: d and x overwrite it too. Use "0p to paste the last *yank* specifically.
@@ -664,6 +669,8 @@ require('mini.ai').setup({
 require('mini.surround').setup()
 -- Minimal statusline
 require('mini.statusline').setup({ use_icons = false })
+-- The path is in the winbar (see laststatus above), so the statusline leaves it out.
+MiniStatusline.section_filename = function() return '' end
 
 -- Auto-close brackets and quotes, and make <BS> delete both halves of an empty pair.
 require('mini.pairs').setup()
