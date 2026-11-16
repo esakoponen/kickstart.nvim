@@ -25,11 +25,11 @@ from PIL import ImageFont
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 W, H = 3840, 2400
-MX = 150        # side margin
-TOP = 90        # first panel row
+MX = 40         # side margin
+TOP = 40        # first panel row
 BOTTOM = 2235   # keep clear of the taskbar
-GUT = 40        # gutter between columns / panels
-NCOL = 4
+GUT = 20        # gutter between columns / panels
+NCOL = 5
 COLW = (W - 2 * MX - (NCOL - 1) * GUT) / NCOL
 # In keycaps, what is not a typed character: a modifier (C- Ctrl, S- Shift, A- or M- Alt) or a
 # named key. Drawn in the leader's colour, so C-c (Ctrl+c) never reads as C (Shift+c) and c.
@@ -151,7 +151,7 @@ class Metrics:
         self.sub_fs, self.note_fs, self.cmd_fs, self.hint_fs = r(22), r(25), r(27), r(26)
         self.key_h, self.key_padx, self.key_gap = r(44), r(12), r(30)
         self.row_h, self.head_h, self.sub_h, self.note_h = r(58), r(74), r(48), r(42)
-        self.pad_top, self.pad_bottom, self.padx = r(12), r(20), 30
+        self.pad_top, self.pad_bottom, self.padx = r(12), r(20), 24
         self.mono = lambda size: truetype('CascadiaMono.ttf', size)
         self.sans = truetype('segoeui.ttf', self.desc_fs)
         self.note = truetype('segoeuii.ttf', self.note_fs)

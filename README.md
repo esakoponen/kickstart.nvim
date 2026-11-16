@@ -80,8 +80,9 @@ Three things decide the result, and the same three always give a byte-identical 
 | [`cheatsheet/generate.py`](cheatsheet/generate.py) | the page size, layout, colours and fonts |
 | the fonts Segoe UI and Cascadia Mono, from Windows | the text widths, and so the scale and every position |
 
-The script places the panels in the four columns itself, keeping their order from the JSON, and
-shrinks every size by one factor until all panels fit above the taskbar.
+The script places the panels in the five columns itself, keeping their order from the JSON, and
+shrinks every size by one factor until all panels fit above the taskbar and no text runs past the
+edge of its panel.
 
 **Changing a key:** update [KEYBINDINGS.md](KEYBINDINGS.md), make `keybindings.json` match,
 generate the next version, and commit the JSON and the new SVG together. Earlier versions stay as

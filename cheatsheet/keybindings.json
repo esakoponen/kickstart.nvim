@@ -6,7 +6,6 @@
         {"keys": "<leader>", "desc": "leader is Space; pause for the menu"},
         {"keys": "<leader>sk / <leader>?", "desc": "search all keys / this buffer's"},
         {"keys": "ö / ä", "desc": "bracket prefix: press, wait, browse"},
-        {"keys": "öb / äb", "desc": "previous / next buffer"},
         {"keys": "öq / äq", "desc": "quickfix entries"},
         {"keys": "öl / äl", "desc": "location-list entries"},
         {"keys": "ö<Space> / ä<Space>", "desc": "blank line above / below"},
@@ -19,13 +18,21 @@
       "rows": [
         {"keys": "<leader>sf / <leader>s.", "desc": "find files / recent files"},
         {"keys": "<leader>sg / <leader>sw", "desc": "grep project / word under cursor"},
-        {"keys": "<leader><leader>", "desc": "switch buffer"},
         {"keys": "<leader>ss / <leader>sS", "desc": "symbols: this file / project"},
         {"keys": "<leader>st", "desc": "treesitter symbols", "note": "no LSP"},
         {"keys": "<leader>sh / <leader>sd", "desc": "help / diagnostics"},
         {"keys": "<leader>sr / <leader>sp", "desc": "resume picker / all pickers"},
-        {"keys": "<leader>xq", "desc": "quickfix list on / off"},
-        {"section": "Buffers"},
+        {"keys": "<leader>xq", "desc": "quickfix list on / off"}
+      ]
+    },
+    {
+      "title": "Buffers", "hint": "<leader>b", "accent": "sky",
+      "rows": [
+        {"keys": "<leader><leader>", "desc": "list and switch", "note": "C-x closes"},
+        {"keys": "öb / äb", "desc": "previous / next", "note": "öB äB ends"},
+        {"keys": ":b#", "desc": "the one before, and back again"},
+        {"keys": ":b name", "desc": "by name, Tab completes"},
+        {"keys": ":ls / :b 3", "desc": "list with numbers / go to 3"},
         {"keys": "<leader>w", "desc": "write buffer"},
         {"keys": "<leader>bd / <leader>bD", "desc": "close buffer / discard changes"}
       ]
@@ -33,7 +40,7 @@
     {
       "title": "Files", "hint": "oil", "accent": "cyan",
       "rows": [
-        {"keys": "- / C-c", "desc": "open the directory / back to the file"},
+        {"keys": "- / C-c", "desc": "open directory / back to the file"},
         {"keys": "Enter", "desc": "open a file / enter a directory"},
         {"keys": "o", "desc": "create: type a name", "note": "name/ = directory"},
         {"keys": "cw", "desc": "rename: edit the name"},
@@ -108,8 +115,7 @@
         {"keys": "F11 / <leader>Di", "desc": "step into"},
         {"keys": "F12 / <leader>Do", "desc": "step out"},
         {"keys": "<leader>Dl / <leader>Dt", "desc": "run last / terminate"},
-        {"keys": "<leader>Dr / <leader>Dv", "desc": "REPL / debug panel"},
-        {"comment": "Windows Terminal takes F11 for fullscreen: use the right-hand key"}
+        {"keys": "<leader>Dr / <leader>Dv", "desc": "REPL / debug panel"}
       ]
     },
     {
@@ -124,7 +130,6 @@
         {"keys": "dd", "desc": "on the marker lines: keep both"},
         {"keys": ":diffupdate", "desc": "refresh after hand edits"},
         {"keys": "<leader>gb", "desc": "commit behind this line", "note": "side panes"},
-        {"comment": "Side panes: 8-char hash + author on differing lines"},
         {"section": "Finish a file"},
         {"keys": "/<<<<<<<", "desc": "markers left? git does not check"},
         {"keys": ":xa", "desc": "save + close: git adds it, next file"},
