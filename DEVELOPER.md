@@ -20,15 +20,15 @@ through.
 
 ### How it is filled
 
-| Source | How | In the backend |
-|---|---|---|
-| The language server's references | `grr` on a name | on `create_app` in `app/main.py`: 9 places, from its definition to the test fixtures |
-| A search | `:grep -w "async def" app` | 520 matches |
-| Any fzf-lua list | select lines with `Tab`, or all of them with `alt-a`, then `alt-q` | `<leader>sg`, type, `alt-a`, `alt-q` |
-| A linter or type checker | `:compiler <tool>`, then `:make` | ruff and mypy, below |
-| Diagnostics | `:lua vim.diagnostic.setqflist()` | every diagnostic in the open buffers |
-| Uncommitted changes | `:Gitsigns setqflist all` | one entry per changed hunk, in every changed file |
-| Any command's output | `:cgetexpr systemlist('<command>')` | the files a branch changed, below |
+| Source                           | How                                                                | In the backend                                                                       |
+| -------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| The language server's references | `grr` on a name                                                    | on `create_app` in `app/main.py`: 9 places, from its definition to the test fixtures |
+| A search                         | `:grep -w "async def" app`                                         | 520 matches                                                                          |
+| Any fzf-lua list                 | select lines with `Tab`, or all of them with `alt-a`, then `alt-q` | `<leader>sg`, type, `alt-a`, `alt-q`                                                 |
+| A linter or type checker         | `:compiler <tool>`, then `:make`                                   | ruff and mypy, below                                                                 |
+| Diagnostics                      | `:lua vim.diagnostic.setqflist()`                                  | every diagnostic in the open buffers                                                 |
+| Uncommitted changes              | `:Gitsigns setqflist all`                                          | one entry per changed hunk, in every changed file                                    |
+| Any command's output             | `:cgetexpr systemlist('<command>')`                                | the files a branch changed, below                                                    |
 
 Without a selection, `alt-q` sends only the line under the cursor. `alt-Q` sends to the location
 list instead.
@@ -59,18 +59,18 @@ no issues found in 194 source files").
 
 ### Working through it
 
-| Key | Does |
-|---|---|
-| `<leader>xq` | show or hide the quickfix window |
-| `äq` / `öq` | next / previous entry; opens the file at that place, whether the window is open or not |
-| `äQ` / `öQ` | last / first entry |
-| `j` / `k`, `Enter` | in the window: move, and open the entry in the window you came from; the list stays open |
-| `:cc 5` | entry 5 |
-| `:colder` / `:cnewer` | the previous / next of the last ten lists; `:chistory` lists them |
-| `:FzfLua quickfix` | search the entries by typing |
-| `:packadd cfilter`, then `:Cfilter /text/` | keep only the entries whose file or text matches; `:Cfilter! /tests/` drops them instead |
-| `:cdo s/old/new/g \| update` | run a command at every entry, and save |
-| `:cfdo <command>` | run a command once in every file of the list |
+| Key                          | Does                                                                                                                                    |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `<leader>xq`                 | show or hide the quickfix window                                                                                                        |
+| `äq` / `öq`                  | next / previous entry; opens the file at that place, whether the window is open or not                                                  |
+| `äQ` / `öQ`                  | last / first entry                                                                                                                      |
+| `j` / `k`, `Enter`           | in the window: move, and open the entry in the window you came from; the list stays open                                                |
+| `:cc 5`                      | entry 5                                                                                                                                 |
+| `:colder` / `:cnewer`        | the previous / next of the last ten lists; `:chistory` lists them                                                                       |
+| `:FzfLua quickfix`           | search the entries by typing                                                                                                            |
+| `:Cfilter /text/`            | keep only the entries whose file or text matches; `:Cfilter! /tests/` drops them instead; `:Lfilter` does the same to the location list |
+| `:cdo s/old/new/g \| update` | run a command at every entry, and save                                                                                                  |
+| `:cfdo <command>`            | run a command once in every file of the list                                                                                            |
 
 Habits that make it pay off:
 
@@ -86,11 +86,11 @@ Habits that make it pay off:
 
 Three tools check Python, at three different moments:
 
-| Tool | Checks | When the result appears |
-|---|---|---|
-| pyright (language server) | types, names, imports | when you leave insert mode, after every change |
-| ruff (through nvim-lint) | the lint rules in `pyproject.toml` | when you save |
-| mypy | types, with the project's settings | only when you run it: `:make` as above |
+| Tool                      | Checks                             | When the result appears                        |
+| ------------------------- | ---------------------------------- | ---------------------------------------------- |
+| pyright (language server) | types, names, imports              | when you leave insert mode, after every change |
+| ruff (through nvim-lint)  | the lint rules in `pyproject.toml` | when you save                                  |
+| mypy                      | types, with the project's settings | only when you run it: `:make` as above         |
 
 Pyright analyses the file as you type, but Neovim shows the new results when you leave insert mode
 (`update_in_insert` is off), so a half-typed line does not flash red.
@@ -131,8 +131,6 @@ Or, in a Neovim that is already open:
 - **Ruff as you type**: ruff's own language server would show lint results after each change
   instead of after each save. It would replace the nvim-lint entry for Python, so ruff does not
   report everything twice.
-- **Diagnostics in insert mode** (`update_in_insert`): fails the focus test in
-  [PRINCIPLES.md](PRINCIPLES.md), because messages would appear and vanish mid-word.
 
 ## The files a branch changed
 
@@ -172,15 +170,15 @@ Use the picker to read what changed, and the quickfix list to visit each file in
 
 ## The commit behind a line or a file
 
-| Want | Key or command | Shows |
-|---|---|---|
-| The commit behind the cursor's line | `<leader>gb` | a floating window: hash, author, date and the full message |
-| The author of each line as you move | `<leader>ub` | at the end of the cursor's line: author, how long ago, the summary (no hash) |
-| The whole file, line by line | `:Gitsigns blame` | a split beside the file, scrolling with it: hash, author and date for each line. In it, `s` shows the line's commit and `r` blames again as of that commit; `Enter` lists these keys |
-| The same, as a list to search | `:FzfLua git_blame` | `Enter` jumps to the line, `ctrl-y` copies the hash; the preview shows the commit |
-| The file's history | `<leader>gL` | the commits that changed the file, newest first, with each change in the preview. `ctrl-y` copies the hash; `Enter` opens the file as it was in that commit |
-| The repository's history | `<leader>gl` | every commit. `ctrl-y` copies the hash and `ctrl-d` lists its files. `Enter` checks the commit out after asking, so answer No unless you mean it |
-| The commit behind a conflicting line | `<leader>gb` in the side panes of `git mergetool` | the full commit, in a floating window |
+| Want                                 | Key or command                                    | Shows                                                                                                                                                                                |
+| ------------------------------------ | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| The commit behind the cursor's line  | `<leader>gb`                                      | a floating window: hash, author, date and the full message                                                                                                                           |
+| The author of each line as you move  | `<leader>ub`                                      | at the end of the cursor's line: author, how long ago, the summary (no hash)                                                                                                         |
+| The whole file, line by line         | `:Gitsigns blame`                                 | a split beside the file, scrolling with it: hash, author and date for each line. In it, `s` shows the line's commit and `r` blames again as of that commit; `Enter` lists these keys |
+| The same, as a list to search        | `:FzfLua git_blame`                               | `Enter` jumps to the line, `ctrl-y` copies the hash; the preview shows the commit                                                                                                    |
+| The file's history                   | `<leader>gL`                                      | the commits that changed the file, newest first, with each change in the preview. `ctrl-y` copies the hash; `Enter` opens the file as it was in that commit                          |
+| The repository's history             | `<leader>gl`                                      | every commit. `ctrl-y` copies the hash and `ctrl-d` lists its files. `Enter` checks the commit out after asking, so answer No unless you mean it                                     |
+| The commit behind a conflicting line | `<leader>gb` in the side panes of `git mergetool` | the full commit, in a floating window                                                                                                                                                |
 
 `:!git log -1 --oneline -- %` prints the hash and summary of the last commit that changed the
 current file.

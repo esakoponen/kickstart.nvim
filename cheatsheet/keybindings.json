@@ -50,8 +50,7 @@
         {"section": "Work through it"},
         {"command": ":colder / :cnewer", "note": "previous / next list"},
         {"command": ":cdo s/old/new/ | update", "note": "at every entry"},
-        {"command": ":packadd cfilter", "note": "once, then"},
-        {"command": ":Cfilter /text/", "note": "keep matches, ! drops"}
+        {"command": ":Cfilter /text/", "note": "keep matches, ! drops, :Lfilter loc list"}
       ]
     },
     {

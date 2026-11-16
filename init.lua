@@ -182,6 +182,9 @@ vim.keymap.set('n', '<leader>xq', function()
   vim.cmd(vim.fn.getqflist({ winid = 0 }).winid ~= 0 and 'cclose' or 'copen')
 end, { desc = '[Q]uickfix list (toggle)' })
 
+-- Neovim's cfilter (an opt-in package): :Cfilter /pat/ keeps the quickfix entries whose file or text
+-- matches, :Cfilter! drops them, :Lfilter does the same to the location list. :colder undoes it.
+vim.cmd.packadd('cfilter')
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
