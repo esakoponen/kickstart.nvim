@@ -6,8 +6,6 @@
         {"keys": "<leader>", "desc": "leader is Space; pause for the menu"},
         {"keys": "<leader>sk / <leader>?", "desc": "search all keys / this buffer's"},
         {"keys": "ö / ä", "desc": "bracket prefix: press, wait, browse"},
-        {"keys": "öq / äq", "desc": "quickfix entries"},
-        {"keys": "öl / äl", "desc": "location-list entries"},
         {"keys": "ö<Space> / ä<Space>", "desc": "blank line above / below"},
         {"keys": "Q", "desc": "replay the last recorded macro"},
         {"comment": "Uppercase jumps to first / last: öD äH öM"}
@@ -21,8 +19,7 @@
         {"keys": "<leader>ss / <leader>sS", "desc": "symbols: this file / project"},
         {"keys": "<leader>st", "desc": "treesitter symbols", "note": "no LSP"},
         {"keys": "<leader>sh / <leader>sd", "desc": "help / diagnostics"},
-        {"keys": "<leader>sr / <leader>sp", "desc": "resume picker / all pickers"},
-        {"keys": "<leader>xq", "desc": "quickfix list on / off"}
+        {"keys": "<leader>sr / <leader>sp", "desc": "resume picker / all pickers"}
       ]
     },
     {
@@ -35,6 +32,26 @@
         {"keys": ":ls / :b 3", "desc": "list with numbers / go to 3"},
         {"keys": "<leader>w", "desc": "write buffer"},
         {"keys": "<leader>bd / <leader>bD", "desc": "close buffer / discard changes"}
+      ]
+    },
+    {
+      "title": "Quickfix", "hint": "<leader>x", "accent": "rose",
+      "rows": [
+        {"keys": "<leader>xq", "desc": "show / hide the list"},
+        {"keys": "öq / äq", "desc": "previous / next entry", "note": "öQ äQ ends"},
+        {"keys": "Enter", "desc": "in the list: open, list stays"},
+        {"keys": "öl / äl", "desc": "location list entries", "note": "öL äL ends"},
+        {"section": "Fill it"},
+        {"keys": "grr", "desc": "references"},
+        {"keys": "Tab / A-a", "desc": "in a picker: select / all"},
+        {"keys": "A-q", "desc": "picker selection to the list"},
+        {"command": ":grep -w word dir", "note": "ripgrep"},
+        {"command": ":compiler ruff | make", "note": "or mypy"},
+        {"section": "Work through it"},
+        {"command": ":colder / :cnewer", "note": "previous / next list"},
+        {"command": ":cdo s/old/new/ | update", "note": "at every entry"},
+        {"command": ":packadd cfilter", "note": "once, then"},
+        {"command": ":Cfilter /text/", "note": "keep matches, ! drops"}
       ]
     },
     {

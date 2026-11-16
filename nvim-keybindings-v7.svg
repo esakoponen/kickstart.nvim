@@ -1,0 +1,872 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3840" height="2400" viewBox="0 0 3840 2400">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#0c1426"/><stop offset="1" stop-color="#070c18"/>
+  </linearGradient>
+  <radialGradient id="glowA" cx="0.12" cy="0.05" r="0.6">
+    <stop offset="0" stop-color="#1f4f9a" stop-opacity="0.42"/><stop offset="1" stop-color="#1f4f9a" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glowB" cx="0.92" cy="0.95" r="0.55">
+    <stop offset="0" stop-color="#3a2f7a" stop-opacity="0.38"/><stop offset="1" stop-color="#3a2f7a" stop-opacity="0"/>
+  </radialGradient>
+  <pattern id="dots" width="48" height="48" patternUnits="userSpaceOnUse">
+    <circle cx="2" cy="2" r="1.6" fill="#8fb4ff" fill-opacity="0.07"/>
+  </pattern>
+  <style>
+    .key  { font-family: 'Cascadia Mono', Consolas, monospace; font-size: 25.5px; fill: #e0e8ff; }
+    .mod  { fill: #7dcfff; }
+    .desc { font-family: 'Segoe UI', sans-serif; font-size: 26.3px; fill: #aab4d8; }
+    .note { font-family: 'Segoe UI', sans-serif; font-style: italic; font-size: 21.2px; fill: #66739a; }
+    .sep  { font-family: 'Segoe UI', sans-serif; font-size: 22.2px; fill: #66739a; }
+    .head { font-family: 'Segoe UI Variable Display', 'Segoe UI', sans-serif; font-weight: 600; font-size: 32.3px; fill: #d5ddff; }
+    .sub  { font-family: 'Segoe UI', sans-serif; font-weight: 600; font-size: 18.7px; letter-spacing: 3px; }
+    .cap  { fill: #16233f; stroke: #2f4778; stroke-width: 1.5; }
+  </style>
+</defs>
+<rect width="3840" height="2400" fill="url(#bg)"/>
+<rect width="3840" height="2400" fill="url(#glowA)"/>
+<rect width="3840" height="2400" fill="url(#glowB)"/>
+<rect width="3840" height="2400" fill="url(#dots)"/>
+<rect x="40.0" y="40.0" width="736.0" height="372.3" rx="20" fill="#0e182d" fill-opacity="0.82" stroke="#1f3056" stroke-width="2"/>
+<rect x="40.0" y="60.8" width="6" height="27.7" rx="3" fill="#7dcfff"/>
+<text class="head" x="68.0" y="84.7">Basics</text>
+<text class="key" x="583.0" y="83.4" style="font-size:22.1px;fill:#7dcfff" xml:space="preserve">ö = [   ä = ]</text>
+<line x1="64.0" y1="102.9" x2="752.0" y2="102.9" stroke="#1a2847" stroke-width="2"/>
+<rect class="cap" x="64.0" y="119.0" width="38.4" height="37.4" rx="9"/>
+<path d="M77.1,137.1 V146.8 H89.3 V137.1" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="desc" x="241.3" y="146.5">leader is Space; pause for the menu</text>
+<rect class="cap" x="64.0" y="168.4" width="68.4" height="37.4" rx="9"/>
+<path d="M77.1,186.4 V196.1 H89.3 V186.4" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="92.2" y="195.6" style="font-size:25.5px" xml:space="preserve">sk</text>
+<text class="sep" x="145.2" y="194.7" text-anchor="middle">/</text>
+<rect class="cap" x="157.9" y="168.4" width="53.4" height="37.4" rx="9"/>
+<path d="M171.0,186.4 V196.1 H183.2 V186.4" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="186.1" y="195.6" style="font-size:25.5px" xml:space="preserve">?</text>
+<text class="desc" x="241.3" y="195.8">search all keys / this buffer's</text>
+<rect class="cap" x="64.0" y="217.7" width="35.4" height="37.4" rx="9"/>
+<text class="key" x="74.2" y="244.8" style="font-size:25.5px" xml:space="preserve">ö</text>
+<text class="sep" x="112.2" y="244.0" text-anchor="middle">/</text>
+<rect class="cap" x="124.9" y="217.7" width="35.4" height="37.4" rx="9"/>
+<text class="key" x="135.1" y="244.8" style="font-size:25.5px" xml:space="preserve">ä</text>
+<text class="desc" x="241.3" y="245.1">bracket prefix: press, wait, browse</text>
+<rect class="cap" x="64.0" y="266.9" width="53.4" height="37.4" rx="9"/>
+<text class="key" x="74.2" y="294.1" style="font-size:25.5px" xml:space="preserve">ö</text>
+<path d="M92.1,285.0 V294.7 H104.3 V285.0" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="sep" x="130.2" y="293.3" text-anchor="middle">/</text>
+<rect class="cap" x="142.9" y="266.9" width="53.4" height="37.4" rx="9"/>
+<text class="key" x="153.1" y="294.1" style="font-size:25.5px" xml:space="preserve">ä</text>
+<path d="M171.0,285.0 V294.7 H183.2 V285.0" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="desc" x="241.3" y="294.4">blank line above / below</text>
+<rect class="cap" x="64.0" y="316.2" width="35.4" height="37.4" rx="9"/>
+<text class="key" x="74.2" y="343.4" style="font-size:25.5px" xml:space="preserve">Q</text>
+<text class="desc" x="241.3" y="343.7">replay the last recorded macro</text>
+<text class="note" x="64.0" y="384.6">Uppercase jumps to first / last: öD äH öM</text>
+<rect x="40.0" y="432.3" width="736.0" height="385.9" rx="20" fill="#0e182d" fill-opacity="0.82" stroke="#1f3056" stroke-width="2"/>
+<rect x="40.0" y="453.1" width="6" height="27.7" rx="3" fill="#7aa2f7"/>
+<text class="head" x="68.0" y="477.0">Find</text>
+<path d="M725.9,467.7 V476.1 H736.5 V467.7" fill="none" stroke="#7dcfff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="739.0" y="475.7" style="font-size:22.1px;fill:#7aa2f7" xml:space="preserve">s</text>
+<line x1="64.0" y1="495.2" x2="752.0" y2="495.2" stroke="#1a2847" stroke-width="2"/>
+<rect class="cap" x="64.0" y="511.3" width="68.4" height="37.4" rx="9"/>
+<path d="M77.1,529.4 V539.1 H89.3 V529.4" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="92.2" y="538.5" style="font-size:25.5px" xml:space="preserve">sf</text>
+<text class="sep" x="145.2" y="537.7" text-anchor="middle">/</text>
+<rect class="cap" x="157.9" y="511.3" width="68.4" height="37.4" rx="9"/>
+<path d="M171.0,529.4 V539.1 H183.2 V529.4" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="186.1" y="538.5" style="font-size:25.5px" xml:space="preserve">s.</text>
+<text class="desc" x="256.3" y="538.8">find files / recent files</text>
+<rect class="cap" x="64.0" y="560.6" width="68.4" height="37.4" rx="9"/>
+<path d="M77.1,578.7 V588.4 H89.3 V578.7" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="92.2" y="587.8" style="font-size:25.5px" xml:space="preserve">sg</text>
+<text class="sep" x="145.2" y="587.0" text-anchor="middle">/</text>
+<rect class="cap" x="157.9" y="560.6" width="68.4" height="37.4" rx="9"/>
+<path d="M171.0,578.7 V588.4 H183.2 V578.7" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="186.1" y="587.8" style="font-size:25.5px" xml:space="preserve">sw</text>
+<text class="desc" x="256.3" y="588.1">grep project / word under cursor</text>
+<rect class="cap" x="64.0" y="609.9" width="68.4" height="37.4" rx="9"/>
+<path d="M77.1,628.0 V637.7 H89.3 V628.0" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="92.2" y="637.1" style="font-size:25.5px" xml:space="preserve">ss</text>
+<text class="sep" x="145.2" y="636.3" text-anchor="middle">/</text>
+<rect class="cap" x="157.9" y="609.9" width="68.4" height="37.4" rx="9"/>
+<path d="M171.0,628.0 V637.7 H183.2 V628.0" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="186.1" y="637.1" style="font-size:25.5px" xml:space="preserve">sS</text>
+<text class="desc" x="256.3" y="637.4">symbols: this file / project</text>
+<rect class="cap" x="64.0" y="659.2" width="68.4" height="37.4" rx="9"/>
+<path d="M77.1,677.3 V687.0 H89.3 V677.3" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="92.2" y="686.4" style="font-size:25.5px" xml:space="preserve">st</text>
+<text class="desc" x="256.3" y="686.7">treesitter symbols<tspan class="note" dx="14">no LSP</tspan></text>
+<rect class="cap" x="64.0" y="708.5" width="68.4" height="37.4" rx="9"/>
+<path d="M77.1,726.6 V736.3 H89.3 V726.6" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="92.2" y="735.7" style="font-size:25.5px" xml:space="preserve">sh</text>
+<text class="sep" x="145.2" y="734.9" text-anchor="middle">/</text>
+<rect class="cap" x="157.9" y="708.5" width="68.4" height="37.4" rx="9"/>
+<path d="M171.0,726.6 V736.3 H183.2 V726.6" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="186.1" y="735.7" style="font-size:25.5px" xml:space="preserve">sd</text>
+<text class="desc" x="256.3" y="736.0">help / diagnostics</text>
+<rect class="cap" x="64.0" y="757.8" width="68.4" height="37.4" rx="9"/>
+<path d="M77.1,775.9 V785.6 H89.3 V775.9" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="92.2" y="785.0" style="font-size:25.5px" xml:space="preserve">sr</text>
+<text class="sep" x="145.2" y="784.2" text-anchor="middle">/</text>
+<rect class="cap" x="157.9" y="757.8" width="68.4" height="37.4" rx="9"/>
+<path d="M171.0,775.9 V785.6 H183.2 V775.9" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="186.1" y="785.0" style="font-size:25.5px" xml:space="preserve">sp</text>
+<text class="desc" x="256.3" y="785.3">resume picker / all pickers</text>
+<rect x="40.0" y="838.2" width="736.0" height="336.6" rx="20" fill="#0e182d" fill-opacity="0.82" stroke="#1f3056" stroke-width="2"/>
+<rect x="40.0" y="859.0" width="6" height="27.7" rx="3" fill="#a99cf5"/>
+<text class="head" x="68.0" y="882.9">Config</text>
+<path d="M725.9,873.6 V882.0 H736.5 V873.6" fill="none" stroke="#7dcfff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="739.0" y="881.6" style="font-size:22.1px;fill:#a99cf5" xml:space="preserve">r</text>
+<line x1="64.0" y1="901.1" x2="752.0" y2="901.1" stroke="#1a2847" stroke-width="2"/>
+<rect class="cap" x="64.0" y="917.2" width="68.4" height="37.4" rx="9"/>
+<path d="M77.1,935.3 V945.0 H89.3 V935.3" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="92.2" y="944.5" style="font-size:25.5px" xml:space="preserve">rc</text>
+<text class="sep" x="145.2" y="943.6" text-anchor="middle">/</text>
+<rect class="cap" x="157.9" y="917.2" width="68.4" height="37.4" rx="9"/>
+<path d="M171.0,935.3 V945.0 H183.2 V935.3" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="186.1" y="944.5" style="font-size:25.5px" xml:space="preserve">rv</text>
+<text class="desc" x="256.3" y="944.7">edit init.lua / in a split</text>
+<rect class="cap" x="64.0" y="966.5" width="68.4" height="37.4" rx="9"/>
+<path d="M77.1,984.6 V994.3 H89.3 V984.6" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="92.2" y="993.8" style="font-size:25.5px" xml:space="preserve">rr</text>
+<text class="desc" x="256.3" y="994.0">save and source this file</text>
+<rect class="cap" x="64.0" y="1015.8" width="68.4" height="37.4" rx="9"/>
+<path d="M77.1,1033.9 V1043.6 H89.3 V1033.9" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="92.2" y="1043.0" style="font-size:25.5px" xml:space="preserve">rd</text>
+<text class="desc" x="256.3" y="1043.3">config directory in oil</text>
+<rect class="cap" x="64.0" y="1065.2" width="68.4" height="37.4" rx="9"/>
+<path d="M77.1,1083.2 V1092.9 H89.3 V1083.2" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="92.2" y="1092.4" style="font-size:25.5px" xml:space="preserve">rp</text>
+<text class="sep" x="145.2" y="1091.5" text-anchor="middle">/</text>
+<rect class="cap" x="157.9" y="1065.2" width="68.4" height="37.4" rx="9"/>
+<path d="M171.0,1083.2 V1092.9 H183.2 V1083.2" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="186.1" y="1092.4" style="font-size:25.5px" xml:space="preserve">rm</text>
+<text class="desc" x="256.3" y="1092.6">update plugins / Mason</text>
+<rect class="cap" x="64.0" y="1114.5" width="68.4" height="37.4" rx="9"/>
+<path d="M77.1,1132.5 V1142.2 H89.3 V1132.5" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="92.2" y="1141.7" style="font-size:25.5px" xml:space="preserve">rh</text>
+<text class="desc" x="256.3" y="1141.9">checkhealth</text>
+<rect x="40.0" y="1194.8" width="736.0" height="673.2" rx="20" fill="#0e182d" fill-opacity="0.82" stroke="#1f3056" stroke-width="2"/>
+<rect x="40.0" y="1215.6" width="6" height="27.7" rx="3" fill="#7aa2f7"/>
+<text class="head" x="68.0" y="1239.5">LSP</text>
+<text class="key" x="726.0" y="1238.2" style="font-size:22.1px;fill:#7aa2f7" xml:space="preserve">gr</text>
+<line x1="64.0" y1="1257.7" x2="752.0" y2="1257.7" stroke="#1a2847" stroke-width="2"/>
+<rect class="cap" x="64.0" y="1273.9" width="35.4" height="37.4" rx="9"/>
+<text class="key" x="74.2" y="1301.1" style="font-size:25.5px" xml:space="preserve">K</text>
+<text class="sep" x="112.2" y="1300.2" text-anchor="middle">/</text>
+<rect class="cap" x="124.9" y="1273.9" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="135.1" y="1301.1" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">C-</tspan>s</text>
+<text class="desc" x="256.3" y="1301.3">hover / signature help<tspan class="note" dx="14">insert</tspan></text>
+<rect class="cap" x="64.0" y="1323.2" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="74.2" y="1350.4" style="font-size:25.5px" xml:space="preserve">grd</text>
+<text class="sep" x="142.2" y="1349.5" text-anchor="middle">/</text>
+<rect class="cap" x="154.9" y="1323.2" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="165.1" y="1350.4" style="font-size:25.5px" xml:space="preserve">gri</text>
+<text class="desc" x="256.3" y="1350.6">definition / implementation</text>
+<rect class="cap" x="64.0" y="1372.5" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="74.2" y="1399.7" style="font-size:25.5px" xml:space="preserve">grr</text>
+<text class="sep" x="142.2" y="1398.8" text-anchor="middle">/</text>
+<rect class="cap" x="154.9" y="1372.5" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="165.1" y="1399.7" style="font-size:25.5px" xml:space="preserve">grt</text>
+<text class="desc" x="256.3" y="1399.9">references / type definition</text>
+<rect class="cap" x="64.0" y="1421.8" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="74.2" y="1449.0" style="font-size:25.5px" xml:space="preserve">grn</text>
+<text class="sep" x="142.2" y="1448.1" text-anchor="middle">/</text>
+<rect class="cap" x="154.9" y="1421.8" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="165.1" y="1449.0" style="font-size:25.5px" xml:space="preserve">gra</text>
+<text class="desc" x="256.3" y="1449.2">rename / code action</text>
+<rect class="cap" x="64.0" y="1471.1" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="74.2" y="1498.3" style="font-size:25.5px" xml:space="preserve">grx</text>
+<text class="sep" x="142.2" y="1497.4" text-anchor="middle">/</text>
+<rect class="cap" x="154.9" y="1471.1" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="165.1" y="1498.3" style="font-size:25.5px" xml:space="preserve">gO</text>
+<text class="desc" x="256.3" y="1498.5">run codelens / doc symbols</text>
+<rect class="cap" x="64.0" y="1520.4" width="68.4" height="37.4" rx="9"/>
+<path d="M77.1,1538.4 V1548.1 H89.3 V1538.4" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="92.2" y="1547.6" style="font-size:25.5px" xml:space="preserve">cr</text>
+<text class="desc" x="256.3" y="1547.8">references in a picker</text>
+<rect class="cap" x="64.0" y="1569.7" width="68.4" height="37.4" rx="9"/>
+<path d="M77.1,1587.7 V1597.4 H89.3 V1587.7" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="92.2" y="1596.9" style="font-size:25.5px" xml:space="preserve">ci</text>
+<text class="sep" x="145.2" y="1596.0" text-anchor="middle">/</text>
+<rect class="cap" x="157.9" y="1569.7" width="68.4" height="37.4" rx="9"/>
+<path d="M171.0,1587.7 V1597.4 H183.2 V1587.7" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="186.1" y="1596.9" style="font-size:25.5px" xml:space="preserve">co</text>
+<text class="desc" x="256.3" y="1597.1">incoming / outgoing calls</text>
+<rect class="cap" x="64.0" y="1619.0" width="68.4" height="37.4" rx="9"/>
+<path d="M77.1,1637.0 V1646.7 H89.3 V1637.0" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="92.2" y="1646.2" style="font-size:25.5px" xml:space="preserve">ca</text>
+<text class="sep" x="145.2" y="1645.3" text-anchor="middle">/</text>
+<rect class="cap" x="157.9" y="1619.0" width="68.4" height="37.4" rx="9"/>
+<path d="M171.0,1637.0 V1646.7 H183.2 V1637.0" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="186.1" y="1646.2" style="font-size:25.5px" xml:space="preserve">cA</text>
+<text class="desc" x="256.3" y="1646.4">swap argument next / prev</text>
+<rect class="cap" x="64.0" y="1668.2" width="53.4" height="37.4" rx="9"/>
+<path d="M77.1,1686.3 V1696.0 H89.3 V1686.3" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="92.2" y="1695.5" style="font-size:25.5px" xml:space="preserve">f</text>
+<text class="desc" x="256.3" y="1695.7">format buffer or selection</text>
+<text class="sub" x="64.0" y="1740.2" fill="#7aa2f7" fill-opacity="0.8">DIAGNOSTICS</text>
+<line x1="242.0" y1="1734.5" x2="752.0" y2="1734.5" stroke="#1a2847" stroke-width="1.5"/>
+<rect class="cap" x="64.0" y="1758.3" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="74.2" y="1785.5" style="font-size:25.5px" xml:space="preserve">öd</text>
+<text class="sep" x="127.2" y="1784.7" text-anchor="middle">/</text>
+<rect class="cap" x="139.9" y="1758.3" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="150.1" y="1785.5" style="font-size:25.5px" xml:space="preserve">äd</text>
+<text class="desc" x="256.3" y="1785.8">previous / next<tspan class="note" dx="14">öD äD ends</tspan></text>
+<rect class="cap" x="64.0" y="1807.6" width="53.4" height="37.4" rx="9"/>
+<path d="M77.1,1825.7 V1835.4 H89.3 V1825.7" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="92.2" y="1834.8" style="font-size:25.5px" xml:space="preserve">e</text>
+<text class="sep" x="130.2" y="1834.0" text-anchor="middle">/</text>
+<rect class="cap" x="142.9" y="1807.6" width="53.4" height="37.4" rx="9"/>
+<path d="M156.0,1825.7 V1835.4 H168.2 V1825.7" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="171.1" y="1834.8" style="font-size:25.5px" xml:space="preserve">q</text>
+<text class="desc" x="256.3" y="1835.1">float / to location list</text>
+<rect x="796.0" y="40.0" width="736.0" height="238.0" rx="20" fill="#0e182d" fill-opacity="0.82" stroke="#1f3056" stroke-width="2"/>
+<rect x="796.0" y="60.8" width="6" height="27.7" rx="3" fill="#5fd7c8"/>
+<text class="head" x="824.0" y="84.7">Tests</text>
+<path d="M1481.9,75.4 V83.8 H1492.5 V75.4" fill="none" stroke="#7dcfff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="1495.0" y="83.4" style="font-size:22.1px;fill:#5fd7c8" xml:space="preserve">T</text>
+<line x1="820.0" y1="102.9" x2="1508.0" y2="102.9" stroke="#1a2847" stroke-width="2"/>
+<rect class="cap" x="820.0" y="119.0" width="68.4" height="37.4" rx="9"/>
+<path d="M833.1,137.1 V146.8 H845.3 V137.1" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="848.2" y="146.2" style="font-size:25.5px" xml:space="preserve">Tn</text>
+<text class="sep" x="901.1" y="145.4" text-anchor="middle">/</text>
+<rect class="cap" x="913.9" y="119.0" width="68.4" height="37.4" rx="9"/>
+<path d="M927.0,137.1 V146.8 H939.2 V137.1" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="942.1" y="146.2" style="font-size:25.5px" xml:space="preserve">Tf</text>
+<text class="desc" x="1012.3" y="146.5">nearest test / this file</text>
+<rect class="cap" x="820.0" y="168.4" width="68.4" height="37.4" rx="9"/>
+<path d="M833.1,186.4 V196.1 H845.3 V186.4" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="848.2" y="195.6" style="font-size:25.5px" xml:space="preserve">Ta</text>
+<text class="sep" x="901.1" y="194.7" text-anchor="middle">/</text>
+<rect class="cap" x="913.9" y="168.4" width="68.4" height="37.4" rx="9"/>
+<path d="M927.0,186.4 V196.1 H939.2 V186.4" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="942.1" y="195.6" style="font-size:25.5px" xml:space="preserve">Tl</text>
+<text class="desc" x="1012.3" y="195.8">whole suite / last run again</text>
+<rect class="cap" x="820.0" y="217.7" width="68.4" height="37.4" rx="9"/>
+<path d="M833.1,235.7 V245.4 H845.3 V235.7" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="848.2" y="244.8" style="font-size:25.5px" xml:space="preserve">Tv</text>
+<text class="desc" x="1012.3" y="245.1">back to the last test file</text>
+<rect x="796.0" y="298.0" width="736.0" height="1212.1" rx="20" fill="#0e182d" fill-opacity="0.82" stroke="#1f3056" stroke-width="2"/>
+<rect x="796.0" y="318.8" width="6" height="27.7" rx="3" fill="#c49cf0"/>
+<text class="head" x="824.0" y="342.7">Merge conflicts</text>
+<text class="key" x="1339.0" y="341.4" style="font-size:22.1px;fill:#c49cf0" xml:space="preserve">git mergetool</text>
+<line x1="820.0" y1="360.9" x2="1508.0" y2="360.9" stroke="#1a2847" stroke-width="2"/>
+<text class="note" x="820.0" y="396.1">LOCAL  |  MERGED (you edit)  |  REMOTE</text>
+<text class="note" x="820.0" y="431.8">Rebase: LOCAL = branch onto, REMOTE = your commit</text>
+<rect class="cap" x="820.0" y="448.4" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="830.2" y="475.6" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">C-</tspan>h</text>
+<text class="sep" x="898.1" y="474.8" text-anchor="middle">/</text>
+<rect class="cap" x="910.9" y="448.4" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="921.1" y="475.6" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">C-</tspan>l</text>
+<text class="desc" x="1095.4" y="475.9">move between panes</text>
+<rect class="cap" x="820.0" y="497.7" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="830.2" y="524.9" style="font-size:25.5px" xml:space="preserve">äc</text>
+<text class="sep" x="883.1" y="524.1" text-anchor="middle">/</text>
+<rect class="cap" x="895.9" y="497.7" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="906.1" y="524.9" style="font-size:25.5px" xml:space="preserve">öc</text>
+<text class="desc" x="1095.4" y="525.2">next / previous conflict</text>
+<rect class="cap" x="820.0" y="547.0" width="230.4" height="37.4" rx="9"/>
+<text class="key" x="830.2" y="574.2" style="font-size:25.5px" xml:space="preserve">:diffget LOCAL</text>
+<text class="desc" x="1095.4" y="574.5">take the LOCAL side</text>
+<rect class="cap" x="820.0" y="596.3" width="245.4" height="37.4" rx="9"/>
+<text class="key" x="830.2" y="623.5" style="font-size:25.5px" xml:space="preserve">:diffget REMOTE</text>
+<text class="desc" x="1095.4" y="623.8">take the REMOTE side</text>
+<rect class="cap" x="820.0" y="645.6" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="830.2" y="672.8" style="font-size:25.5px" xml:space="preserve">dd</text>
+<text class="desc" x="1095.4" y="673.1">on the marker lines: keep both</text>
+<rect class="cap" x="820.0" y="694.9" width="185.4" height="37.4" rx="9"/>
+<text class="key" x="830.2" y="722.1" style="font-size:25.5px" xml:space="preserve">:diffupdate</text>
+<text class="desc" x="1095.4" y="722.4">refresh after hand edits</text>
+<rect class="cap" x="820.0" y="744.2" width="68.4" height="37.4" rx="9"/>
+<path d="M833.1,762.3 V772.0 H845.3 V762.3" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="848.2" y="771.4" style="font-size:25.5px" xml:space="preserve">gb</text>
+<text class="desc" x="1095.4" y="771.7">commit behind this line<tspan class="note" dx="14">side panes</tspan></text>
+<text class="sub" x="820.0" y="816.2" fill="#c49cf0" fill-opacity="0.8">FINISH A FILE</text>
+<line x1="1000.0" y1="810.5" x2="1508.0" y2="810.5" stroke="#1a2847" stroke-width="1.5"/>
+<rect class="cap" x="820.0" y="834.3" width="140.4" height="37.4" rx="9"/>
+<text class="key" x="830.2" y="861.5" style="font-size:25.5px" xml:space="preserve">/&lt;&lt;&lt;&lt;&lt;&lt;&lt;</text>
+<text class="desc" x="1095.4" y="861.8">markers left? git does not check</text>
+<rect class="cap" x="820.0" y="883.6" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="830.2" y="910.8" style="font-size:25.5px" xml:space="preserve">:xa</text>
+<text class="desc" x="1095.4" y="911.1">save + close: git adds it, next file</text>
+<rect class="cap" x="820.0" y="932.9" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="830.2" y="960.1" style="font-size:25.5px" xml:space="preserve">:cq</text>
+<text class="desc" x="1095.4" y="960.4">give up: drops your edits to it</text>
+<text class="sub" x="820.0" y="1004.9" fill="#c49cf0" fill-opacity="0.8">COMMIT MESSAGE EDITOR</text>
+<line x1="1143.0" y1="999.2" x2="1508.0" y2="999.2" stroke="#1a2847" stroke-width="1.5"/>
+<rect class="cap" x="820.0" y="1023.0" width="53.4" height="37.4" rx="9"/>
+<path d="M833.1,1041.1 V1050.8 H845.3 V1041.1" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="848.2" y="1050.2" style="font-size:25.5px" xml:space="preserve">f</text>
+<text class="desc" x="1095.4" y="1050.5">wrap the body at 72 columns</text>
+<rect class="cap" x="820.0" y="1072.3" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="830.2" y="1099.5" style="font-size:25.5px" xml:space="preserve">:wq</text>
+<text class="sep" x="898.1" y="1098.7" text-anchor="middle">/</text>
+<rect class="cap" x="910.9" y="1072.3" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="921.1" y="1099.5" style="font-size:25.5px" xml:space="preserve">:cq</text>
+<text class="desc" x="1095.4" y="1099.8">accept, rebase goes on / pause</text>
+<text class="sub" x="820.0" y="1144.3" fill="#c49cf0" fill-opacity="0.8">SHELL</text>
+<line x1="909.0" y1="1138.6" x2="1508.0" y2="1138.6" stroke="#1a2847" stroke-width="1.5"/>
+<text class="key" x="820.0" y="1188.8" style="font-size:22.9px;fill:#66739a">$</text>
+<text class="key" x="846.0" y="1188.8" style="font-size:22.9px;fill:#b4c6f5" xml:space="preserve">git mergetool</text>
+<text class="note" x="1039.0" y="1188.8">one file at a time</text>
+<text class="key" x="820.0" y="1238.1" style="font-size:22.9px;fill:#66739a">$</text>
+<text class="key" x="846.0" y="1238.1" style="font-size:22.9px;fill:#b4c6f5" xml:space="preserve">git mergetool -t nvimdiff</text>
+<text class="note" x="1195.0" y="1238.1">adds BASE</text>
+<text class="key" x="820.0" y="1287.4" style="font-size:22.9px;fill:#66739a">$</text>
+<text class="key" x="846.0" y="1287.4" style="font-size:22.9px;fill:#b4c6f5" xml:space="preserve">git checkout -m -- &lt;file&gt;</text>
+<text class="note" x="1195.0" y="1287.4">redo a file</text>
+<text class="key" x="820.0" y="1336.7" style="font-size:22.9px;fill:#66739a">$</text>
+<text class="key" x="846.0" y="1336.7" style="font-size:22.9px;fill:#b4c6f5" xml:space="preserve">git stash --keep-index</text>
+<text class="note" x="1156.0" y="1336.7">park unstaged leftovers</text>
+<text class="sub" x="820.0" y="1382.3" fill="#c49cf0" fill-opacity="0.8">WITHOUT MERGETOOL</text>
+<line x1="1093.0" y1="1376.6" x2="1508.0" y2="1376.6" stroke="#1a2847" stroke-width="1.5"/>
+<text class="key" x="820.0" y="1426.8" style="font-size:22.9px;fill:#b4c6f5" xml:space="preserve">:!git add %</text>
+<text class="note" x="987.0" y="1426.8">stage the current file</text>
+<text class="key" x="820.0" y="1476.1" style="font-size:22.9px;fill:#b4c6f5" xml:space="preserve">:!git -c core.editor=true rebase --continue</text>
+<rect x="796.0" y="1530.1" width="736.0" height="336.6" rx="20" fill="#0e182d" fill-opacity="0.82" stroke="#1f3056" stroke-width="2"/>
+<rect x="796.0" y="1550.9" width="6" height="27.7" rx="3" fill="#a99cf5"/>
+<text class="head" x="824.0" y="1574.8">Completion</text>
+<text class="key" x="1430.0" y="1573.5" style="font-size:22.1px;fill:#a99cf5" xml:space="preserve">insert</text>
+<line x1="820.0" y1="1593.0" x2="1508.0" y2="1593.0" stroke="#1a2847" stroke-width="2"/>
+<rect class="cap" x="820.0" y="1609.1" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="830.2" y="1636.3" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">C-</tspan>y</text>
+<text class="sep" x="898.1" y="1635.5" text-anchor="middle">/</text>
+<rect class="cap" x="910.9" y="1609.1" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="921.1" y="1636.3" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">C-</tspan>e</text>
+<text class="desc" x="1036.3" y="1636.6">accept / cancel</text>
+<rect class="cap" x="820.0" y="1658.4" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="830.2" y="1685.6" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">C-</tspan>n</text>
+<text class="sep" x="898.1" y="1684.8" text-anchor="middle">/</text>
+<rect class="cap" x="910.9" y="1658.4" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="921.1" y="1685.6" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">C-</tspan>p</text>
+<text class="desc" x="1036.3" y="1685.9">next / previous item</text>
+<rect class="cap" x="820.0" y="1707.7" width="125.4" height="37.4" rx="9"/>
+<text class="key" x="830.2" y="1734.9" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">C-Space</tspan></text>
+<text class="desc" x="1036.3" y="1735.2">menu, then documentation</text>
+<rect class="cap" x="820.0" y="1757.0" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="830.2" y="1784.2" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">C-</tspan>k</text>
+<text class="desc" x="1036.3" y="1784.5">signature help</text>
+<rect class="cap" x="820.0" y="1806.3" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="830.2" y="1833.5" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">Tab</tspan></text>
+<text class="sep" x="898.1" y="1832.7" text-anchor="middle">/</text>
+<rect class="cap" x="910.9" y="1806.3" width="95.4" height="37.4" rx="9"/>
+<text class="key" x="921.1" y="1833.5" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">S-Tab</tspan></text>
+<text class="desc" x="1036.3" y="1833.8">snippet placeholders</text>
+<rect x="1552.0" y="40.0" width="736.0" height="812.6" rx="20" fill="#0e182d" fill-opacity="0.82" stroke="#1f3056" stroke-width="2"/>
+<rect x="1552.0" y="60.8" width="6" height="27.7" rx="3" fill="#c49cf0"/>
+<text class="head" x="1580.0" y="84.7">Quickfix</text>
+<path d="M2237.9,75.4 V83.8 H2248.5 V75.4" fill="none" stroke="#7dcfff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="2251.0" y="83.4" style="font-size:22.1px;fill:#c49cf0" xml:space="preserve">x</text>
+<line x1="1576.0" y1="102.9" x2="2264.0" y2="102.9" stroke="#1a2847" stroke-width="2"/>
+<rect class="cap" x="1576.0" y="119.0" width="68.4" height="37.4" rx="9"/>
+<path d="M1589.1,137.1 V146.8 H1601.3 V137.1" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="1604.2" y="146.2" style="font-size:25.5px" xml:space="preserve">xq</text>
+<text class="desc" x="1762.3" y="146.5">show / hide the list</text>
+<rect class="cap" x="1576.0" y="168.4" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="1586.2" y="195.6" style="font-size:25.5px" xml:space="preserve">öq</text>
+<text class="sep" x="1639.2" y="194.7" text-anchor="middle">/</text>
+<rect class="cap" x="1651.9" y="168.4" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="1662.1" y="195.6" style="font-size:25.5px" xml:space="preserve">äq</text>
+<text class="desc" x="1762.3" y="195.8">previous / next entry<tspan class="note" dx="14">öQ äQ ends</tspan></text>
+<rect class="cap" x="1576.0" y="217.7" width="95.4" height="37.4" rx="9"/>
+<text class="key" x="1586.2" y="244.8" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">Enter</tspan></text>
+<text class="desc" x="1762.3" y="245.1">in the list: open, list stays</text>
+<rect class="cap" x="1576.0" y="266.9" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="1586.2" y="294.1" style="font-size:25.5px" xml:space="preserve">öl</text>
+<text class="sep" x="1639.2" y="293.3" text-anchor="middle">/</text>
+<rect class="cap" x="1651.9" y="266.9" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="1662.1" y="294.1" style="font-size:25.5px" xml:space="preserve">äl</text>
+<text class="desc" x="1762.3" y="294.4">location list entries<tspan class="note" dx="14">öL äL ends</tspan></text>
+<text class="sub" x="1576.0" y="338.9" fill="#c49cf0" fill-opacity="0.8">FILL IT</text>
+<line x1="1674.0" y1="333.2" x2="2264.0" y2="333.2" stroke="#1a2847" stroke-width="1.5"/>
+<rect class="cap" x="1576.0" y="357.1" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="1586.2" y="384.2" style="font-size:25.5px" xml:space="preserve">grr</text>
+<text class="desc" x="1762.3" y="384.5">references</text>
+<rect class="cap" x="1576.0" y="406.4" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="1586.2" y="433.6" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">Tab</tspan></text>
+<text class="sep" x="1654.2" y="432.7" text-anchor="middle">/</text>
+<rect class="cap" x="1666.9" y="406.4" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="1677.1" y="433.6" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">A-</tspan>a</text>
+<text class="desc" x="1762.3" y="433.8">in a picker: select / all</text>
+<rect class="cap" x="1576.0" y="455.7" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="1586.2" y="482.9" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">A-</tspan>q</text>
+<text class="desc" x="1762.3" y="483.1">picker selection to the list</text>
+<text class="key" x="1576.0" y="531.3" style="font-size:22.9px;fill:#b4c6f5" xml:space="preserve">:grep -w word dir</text>
+<text class="note" x="1821.0" y="531.3">ripgrep</text>
+<text class="key" x="1576.0" y="580.6" style="font-size:22.9px;fill:#b4c6f5" xml:space="preserve">:compiler ruff | make</text>
+<text class="note" x="1873.0" y="580.6">or mypy</text>
+<text class="sub" x="1576.0" y="626.2" fill="#c49cf0" fill-opacity="0.8">WORK THROUGH IT</text>
+<line x1="1815.0" y1="620.5" x2="2264.0" y2="620.5" stroke="#1a2847" stroke-width="1.5"/>
+<text class="key" x="1576.0" y="670.7" style="font-size:22.9px;fill:#b4c6f5" xml:space="preserve">:colder / :cnewer</text>
+<text class="note" x="1821.0" y="670.7">previous / next list</text>
+<text class="key" x="1576.0" y="720.0" style="font-size:22.9px;fill:#b4c6f5" xml:space="preserve">:cdo s/old/new/ | update</text>
+<text class="note" x="1912.0" y="720.0">at every entry</text>
+<text class="key" x="1576.0" y="769.3" style="font-size:22.9px;fill:#b4c6f5" xml:space="preserve">:packadd cfilter</text>
+<text class="note" x="1808.0" y="769.3">once, then</text>
+<text class="key" x="1576.0" y="818.6" style="font-size:22.9px;fill:#b4c6f5" xml:space="preserve">:Cfilter /text/</text>
+<text class="note" x="1795.0" y="818.6">keep matches, ! drops</text>
+<rect x="1552.0" y="872.6" width="736.0" height="623.9" rx="20" fill="#0e182d" fill-opacity="0.82" stroke="#1f3056" stroke-width="2"/>
+<rect x="1552.0" y="893.4" width="6" height="27.7" rx="3" fill="#5fd7c8"/>
+<text class="head" x="1580.0" y="917.3">Git</text>
+<path d="M2237.9,908.0 V916.4 H2248.5 V908.0" fill="none" stroke="#7dcfff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="2251.0" y="916.0" style="font-size:22.1px;fill:#5fd7c8" xml:space="preserve">g</text>
+<line x1="1576.0" y1="935.5" x2="2264.0" y2="935.5" stroke="#1a2847" stroke-width="2"/>
+<rect class="cap" x="1576.0" y="951.6" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="1586.2" y="978.8" style="font-size:25.5px" xml:space="preserve">äh</text>
+<text class="sep" x="1639.2" y="978.0" text-anchor="middle">/</text>
+<rect class="cap" x="1651.9" y="951.6" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="1662.1" y="978.8" style="font-size:25.5px" xml:space="preserve">öh</text>
+<text class="desc" x="1768.3" y="979.1">next / previous hunk<tspan class="note" dx="14">äH öH ends</tspan></text>
+<rect class="cap" x="1576.0" y="1000.9" width="68.4" height="37.4" rx="9"/>
+<path d="M1589.1,1019.0 V1028.7 H1601.3 V1019.0" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="1604.2" y="1028.1" style="font-size:25.5px" xml:space="preserve">gp</text>
+<text class="desc" x="1768.3" y="1028.4">preview hunk inline</text>
+<rect class="cap" x="1576.0" y="1050.2" width="68.4" height="37.4" rx="9"/>
+<path d="M1589.1,1068.3 V1078.0 H1601.3 V1068.3" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="1604.2" y="1077.4" style="font-size:25.5px" xml:space="preserve">gs</text>
+<text class="sep" x="1657.2" y="1076.6" text-anchor="middle">/</text>
+<rect class="cap" x="1669.9" y="1050.2" width="68.4" height="37.4" rx="9"/>
+<path d="M1683.0,1068.3 V1078.0 H1695.2 V1068.3" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="1698.1" y="1077.4" style="font-size:25.5px" xml:space="preserve">gr</text>
+<text class="desc" x="1768.3" y="1077.7">stage / reset hunk<tspan class="note" dx="14">visual: lines</tspan></text>
+<rect class="cap" x="1576.0" y="1099.5" width="68.4" height="37.4" rx="9"/>
+<path d="M1589.1,1117.6 V1127.3 H1601.3 V1117.6" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="1604.2" y="1126.7" style="font-size:25.5px" xml:space="preserve">gS</text>
+<text class="sep" x="1657.2" y="1125.9" text-anchor="middle">/</text>
+<rect class="cap" x="1669.9" y="1099.5" width="68.4" height="37.4" rx="9"/>
+<path d="M1683.0,1117.6 V1127.3 H1695.2 V1117.6" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="1698.1" y="1126.7" style="font-size:25.5px" xml:space="preserve">gR</text>
+<text class="desc" x="1768.3" y="1127.0">stage / reset whole buffer</text>
+<rect class="cap" x="1576.0" y="1148.8" width="68.4" height="37.4" rx="9"/>
+<path d="M1589.1,1166.9 V1176.6 H1601.3 V1166.9" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="1604.2" y="1176.0" style="font-size:25.5px" xml:space="preserve">gb</text>
+<text class="sep" x="1657.2" y="1175.2" text-anchor="middle">/</text>
+<rect class="cap" x="1669.9" y="1148.8" width="68.4" height="37.4" rx="9"/>
+<path d="M1683.0,1166.9 V1176.6 H1695.2 V1166.9" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="1698.1" y="1176.0" style="font-size:25.5px" xml:space="preserve">ub</text>
+<text class="desc" x="1768.3" y="1176.3">blame line / inline blame</text>
+<rect class="cap" x="1576.0" y="1198.1" width="68.4" height="37.4" rx="9"/>
+<path d="M1589.1,1216.2 V1225.9 H1601.3 V1216.2" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="1604.2" y="1225.3" style="font-size:25.5px" xml:space="preserve">gd</text>
+<text class="desc" x="1768.3" y="1225.6">diff vs index<tspan class="note" dx="14">äc öc  do dp</tspan></text>
+<rect class="cap" x="1576.0" y="1247.4" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="1586.2" y="1274.6" style="font-size:25.5px" xml:space="preserve">ih</text>
+<text class="desc" x="1768.3" y="1274.9">hunk textobject<tspan class="note" dx="14">dih discards</tspan></text>
+<text class="sub" x="1576.0" y="1319.4" fill="#5fd7c8" fill-opacity="0.8">REPOSITORY</text>
+<line x1="1738.0" y1="1313.7" x2="2264.0" y2="1313.7" stroke="#1a2847" stroke-width="1.5"/>
+<rect class="cap" x="1576.0" y="1337.5" width="68.4" height="37.4" rx="9"/>
+<path d="M1589.1,1355.6 V1365.3 H1601.3 V1355.6" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="1604.2" y="1364.7" style="font-size:25.5px" xml:space="preserve">gg</text>
+<text class="desc" x="1768.3" y="1365.0">changed files<tspan class="note" dx="14">← stage  → unstage</tspan></text>
+<rect class="cap" x="1576.0" y="1386.8" width="68.4" height="37.4" rx="9"/>
+<path d="M1589.1,1404.9 V1414.6 H1601.3 V1404.9" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="1604.2" y="1414.0" style="font-size:25.5px" xml:space="preserve">gl</text>
+<text class="sep" x="1657.2" y="1413.2" text-anchor="middle">/</text>
+<rect class="cap" x="1669.9" y="1386.8" width="68.4" height="37.4" rx="9"/>
+<path d="M1683.0,1404.9 V1414.6 H1695.2 V1404.9" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="1698.1" y="1414.0" style="font-size:25.5px" xml:space="preserve">gL</text>
+<text class="desc" x="1768.3" y="1414.3">log: repo / this file</text>
+<rect class="cap" x="1576.0" y="1436.1" width="68.4" height="37.4" rx="9"/>
+<path d="M1589.1,1454.2 V1463.9 H1601.3 V1454.2" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="1604.2" y="1463.3" style="font-size:25.5px" xml:space="preserve">gB</text>
+<text class="desc" x="1768.3" y="1463.6">branches</text>
+<rect x="1552.0" y="1516.5" width="736.0" height="336.6" rx="20" fill="#0e182d" fill-opacity="0.82" stroke="#1f3056" stroke-width="2"/>
+<rect x="1552.0" y="1537.3" width="6" height="27.7" rx="3" fill="#7dcfff"/>
+<text class="head" x="1580.0" y="1561.2">Visual</text>
+<line x1="1576.0" y1="1579.4" x2="2264.0" y2="1579.4" stroke="#1a2847" stroke-width="2"/>
+<rect class="cap" x="1576.0" y="1595.5" width="35.4" height="37.4" rx="9"/>
+<text class="key" x="1586.2" y="1622.8" style="font-size:25.5px" xml:space="preserve">v</text>
+<text class="sep" x="1624.2" y="1621.9" text-anchor="middle">/</text>
+<rect class="cap" x="1636.9" y="1595.5" width="35.4" height="37.4" rx="9"/>
+<text class="key" x="1647.1" y="1622.8" style="font-size:25.5px" xml:space="preserve">V</text>
+<text class="sep" x="1685.1" y="1621.9" text-anchor="middle">/</text>
+<rect class="cap" x="1697.8" y="1595.5" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="1708.0" y="1622.8" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">C-</tspan>q</text>
+<text class="desc" x="1793.2" y="1623.0">char / line / block</text>
+<rect class="cap" x="1576.0" y="1644.8" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="1586.2" y="1672.0" style="font-size:25.5px" xml:space="preserve">gv</text>
+<text class="sep" x="1639.2" y="1671.2" text-anchor="middle">/</text>
+<rect class="cap" x="1651.9" y="1644.8" width="35.4" height="37.4" rx="9"/>
+<text class="key" x="1662.1" y="1672.0" style="font-size:25.5px" xml:space="preserve">o</text>
+<text class="desc" x="1793.2" y="1672.3">reselect / other end</text>
+<rect class="cap" x="1576.0" y="1694.1" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="1586.2" y="1721.3" style="font-size:25.5px" xml:space="preserve">än</text>
+<text class="sep" x="1639.2" y="1720.5" text-anchor="middle">/</text>
+<rect class="cap" x="1651.9" y="1694.1" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="1662.1" y="1721.3" style="font-size:25.5px" xml:space="preserve">ön</text>
+<text class="desc" x="1793.2" y="1721.6">next / prev syntax node</text>
+<rect class="cap" x="1576.0" y="1743.4" width="35.4" height="37.4" rx="9"/>
+<text class="key" x="1586.2" y="1770.6" style="font-size:25.5px" xml:space="preserve">I</text>
+<text class="sep" x="1624.2" y="1769.8" text-anchor="middle">/</text>
+<rect class="cap" x="1636.9" y="1743.4" width="35.4" height="37.4" rx="9"/>
+<text class="key" x="1647.1" y="1770.6" style="font-size:25.5px" xml:space="preserve">A</text>
+<text class="desc" x="1793.2" y="1770.9">insert / append on every line<tspan class="note" dx="14">block</tspan></text>
+<rect class="cap" x="1576.0" y="1792.7" width="95.4" height="37.4" rx="9"/>
+<text class="key" x="1586.2" y="1819.9" style="font-size:25.5px" xml:space="preserve">g <tspan class="mod">C-</tspan>a</text>
+<text class="desc" x="1793.2" y="1820.2">number a column 1, 2, 3 …</text>
+<rect x="2308.0" y="40.0" width="736.0" height="681.7" rx="20" fill="#0e182d" fill-opacity="0.82" stroke="#1f3056" stroke-width="2"/>
+<rect x="2308.0" y="60.8" width="6" height="27.7" rx="3" fill="#7dcfff"/>
+<text class="head" x="2336.0" y="84.7">Files</text>
+<text class="key" x="2981.0" y="83.4" style="font-size:22.1px;fill:#7dcfff" xml:space="preserve">oil</text>
+<line x1="2332.0" y1="102.9" x2="3020.0" y2="102.9" stroke="#1a2847" stroke-width="2"/>
+<rect class="cap" x="2332.0" y="119.0" width="35.4" height="37.4" rx="9"/>
+<text class="key" x="2342.2" y="146.2" style="font-size:25.5px" xml:space="preserve">-</text>
+<text class="sep" x="2380.2" y="145.4" text-anchor="middle">/</text>
+<rect class="cap" x="2392.9" y="119.0" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="2403.1" y="146.2" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">C-</tspan>c</text>
+<text class="desc" x="2609.2" y="146.5">open directory / back to the file</text>
+<rect class="cap" x="2332.0" y="168.4" width="95.4" height="37.4" rx="9"/>
+<text class="key" x="2342.2" y="195.6" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">Enter</tspan></text>
+<text class="desc" x="2609.2" y="195.8">open a file / enter a directory</text>
+<rect class="cap" x="2332.0" y="217.7" width="35.4" height="37.4" rx="9"/>
+<text class="key" x="2342.2" y="244.8" style="font-size:25.5px" xml:space="preserve">o</text>
+<text class="desc" x="2609.2" y="245.1">create: type a name<tspan class="note" dx="14">name/ = directory</tspan></text>
+<rect class="cap" x="2332.0" y="266.9" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="2342.2" y="294.1" style="font-size:25.5px" xml:space="preserve">cw</text>
+<text class="desc" x="2609.2" y="294.4">rename: edit the name</text>
+<rect class="cap" x="2332.0" y="316.2" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="2342.2" y="343.4" style="font-size:25.5px" xml:space="preserve">dd</text>
+<text class="desc" x="2609.2" y="343.7">delete<tspan class="note" dx="14">permanent</tspan></text>
+<rect class="cap" x="2332.0" y="365.6" width="110.4" height="37.4" rx="9"/>
+<text class="key" x="2342.2" y="392.8" style="font-size:25.5px" xml:space="preserve">dd … p</text>
+<text class="desc" x="2609.2" y="393.0">move: paste in another directory</text>
+<rect class="cap" x="2332.0" y="414.9" width="110.4" height="37.4" rx="9"/>
+<text class="key" x="2342.2" y="442.1" style="font-size:25.5px" xml:space="preserve">yy … p</text>
+<text class="desc" x="2609.2" y="442.3">copy</text>
+<rect class="cap" x="2332.0" y="464.2" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="2342.2" y="491.4" style="font-size:25.5px" xml:space="preserve">:w</text>
+<text class="desc" x="2609.2" y="491.6">apply: lists the changes, asks first</text>
+<rect class="cap" x="2332.0" y="513.5" width="35.4" height="37.4" rx="9"/>
+<text class="key" x="2342.2" y="540.7" style="font-size:25.5px" xml:space="preserve">u</text>
+<text class="sep" x="2380.2" y="539.8" text-anchor="middle">/</text>
+<rect class="cap" x="2392.9" y="513.5" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="2403.1" y="540.7" style="font-size:25.5px" xml:space="preserve">:e!</text>
+<text class="desc" x="2609.2" y="540.9">undo / discard unsaved changes</text>
+<rect class="cap" x="2332.0" y="562.8" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="2342.2" y="590.0" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">C-</tspan>p</text>
+<text class="sep" x="2410.2" y="589.1" text-anchor="middle">/</text>
+<rect class="cap" x="2422.9" y="562.8" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="2433.1" y="590.0" style="font-size:25.5px" xml:space="preserve">gx</text>
+<text class="desc" x="2609.2" y="590.2">preview / open in the system app</text>
+<rect class="cap" x="2332.0" y="612.0" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="2342.2" y="639.2" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">C-</tspan>s</text>
+<text class="sep" x="2410.2" y="638.4" text-anchor="middle">/</text>
+<rect class="cap" x="2422.9" y="612.0" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="2433.1" y="639.2" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">C-</tspan>h</text>
+<text class="sep" x="2501.1" y="638.4" text-anchor="middle">/</text>
+<rect class="cap" x="2513.8" y="612.0" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="2524.0" y="639.2" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">C-</tspan>t</text>
+<text class="desc" x="2609.2" y="639.5">open in vsplit / split / tab</text>
+<rect class="cap" x="2332.0" y="661.3" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="2342.2" y="688.5" style="font-size:25.5px" xml:space="preserve">g.</text>
+<text class="sep" x="2395.2" y="687.7" text-anchor="middle">/</text>
+<rect class="cap" x="2407.9" y="661.3" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="2418.1" y="688.5" style="font-size:25.5px" xml:space="preserve">g?</text>
+<text class="desc" x="2609.2" y="688.8">hidden files / all oil keys</text>
+<rect x="2308.0" y="741.7" width="736.0" height="574.6" rx="20" fill="#0e182d" fill-opacity="0.82" stroke="#1f3056" stroke-width="2"/>
+<rect x="2308.0" y="762.5" width="6" height="27.7" rx="3" fill="#7dcfff"/>
+<text class="head" x="2336.0" y="786.4">Move</text>
+<line x1="2332.0" y1="804.6" x2="3020.0" y2="804.6" stroke="#1a2847" stroke-width="2"/>
+<rect class="cap" x="2332.0" y="820.7" width="155.4" height="37.4" rx="9"/>
+<text class="key" x="2342.2" y="847.9" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">C-</tspan>h/j/k/l</text>
+<text class="desc" x="2564.2" y="848.2">window left / down / up / right</text>
+<rect class="cap" x="2332.0" y="870.0" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="2342.2" y="897.2" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">C-</tspan>d</text>
+<text class="sep" x="2410.2" y="896.4" text-anchor="middle">/</text>
+<rect class="cap" x="2422.9" y="870.0" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="2433.1" y="897.2" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">C-</tspan>u</text>
+<text class="desc" x="2564.2" y="897.5">half page down / up, centred</text>
+<rect class="cap" x="2332.0" y="919.3" width="35.4" height="37.4" rx="9"/>
+<text class="key" x="2342.2" y="946.5" style="font-size:25.5px" xml:space="preserve">n</text>
+<text class="sep" x="2380.2" y="945.7" text-anchor="middle">/</text>
+<rect class="cap" x="2392.9" y="919.3" width="35.4" height="37.4" rx="9"/>
+<text class="key" x="2403.1" y="946.5" style="font-size:25.5px" xml:space="preserve">N</text>
+<text class="desc" x="2564.2" y="946.8">next / previous match, centred</text>
+<rect class="cap" x="2332.0" y="968.6" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="2342.2" y="995.8" style="font-size:25.5px" xml:space="preserve">äm</text>
+<text class="sep" x="2395.2" y="995.0" text-anchor="middle">/</text>
+<rect class="cap" x="2407.9" y="968.6" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="2418.1" y="995.8" style="font-size:25.5px" xml:space="preserve">öm</text>
+<text class="desc" x="2564.2" y="996.1">next / prev function<tspan class="note" dx="14">äM öM ends</tspan></text>
+<rect class="cap" x="2332.0" y="1017.9" width="35.4" height="37.4" rx="9"/>
+<text class="key" x="2342.2" y="1045.1" style="font-size:25.5px" xml:space="preserve">;</text>
+<text class="sep" x="2380.2" y="1044.3" text-anchor="middle">/</text>
+<rect class="cap" x="2392.9" y="1017.9" width="35.4" height="37.4" rx="9"/>
+<text class="key" x="2403.1" y="1045.1" style="font-size:25.5px" xml:space="preserve">,</text>
+<text class="desc" x="2564.2" y="1045.4">repeat last jump or f / t</text>
+<rect class="cap" x="2332.0" y="1067.2" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="2342.2" y="1094.4" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">Esc</tspan></text>
+<text class="desc" x="2564.2" y="1094.7">clear search highlight</text>
+<text class="sub" x="2332.0" y="1139.2" fill="#7dcfff" fill-opacity="0.8">FOLDS</text>
+<line x1="2426.0" y1="1133.5" x2="3020.0" y2="1133.5" stroke="#1a2847" stroke-width="1.5"/>
+<rect class="cap" x="2332.0" y="1157.3" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="2342.2" y="1184.5" style="font-size:25.5px" xml:space="preserve">za</text>
+<text class="sep" x="2395.2" y="1183.7" text-anchor="middle">/</text>
+<rect class="cap" x="2407.9" y="1157.3" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="2418.1" y="1184.5" style="font-size:25.5px" xml:space="preserve">zo</text>
+<text class="sep" x="2471.1" y="1183.7" text-anchor="middle">/</text>
+<rect class="cap" x="2483.8" y="1157.3" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="2494.0" y="1184.5" style="font-size:25.5px" xml:space="preserve">zc</text>
+<text class="desc" x="2564.2" y="1184.8">toggle / open / close fold</text>
+<rect class="cap" x="2332.0" y="1206.6" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="2342.2" y="1233.8" style="font-size:25.5px" xml:space="preserve">zR</text>
+<text class="sep" x="2395.2" y="1233.0" text-anchor="middle">/</text>
+<rect class="cap" x="2407.9" y="1206.6" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="2418.1" y="1233.8" style="font-size:25.5px" xml:space="preserve">zM</text>
+<text class="desc" x="2564.2" y="1234.1">open all / close all</text>
+<rect class="cap" x="2332.0" y="1255.9" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="2342.2" y="1283.1" style="font-size:25.5px" xml:space="preserve">zj</text>
+<text class="sep" x="2395.2" y="1282.3" text-anchor="middle">/</text>
+<rect class="cap" x="2407.9" y="1255.9" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="2418.1" y="1283.1" style="font-size:25.5px" xml:space="preserve">zk</text>
+<text class="desc" x="2564.2" y="1283.4">next / previous fold</text>
+<rect x="2308.0" y="1336.3" width="736.0" height="525.3" rx="20" fill="#0e182d" fill-opacity="0.82" stroke="#1f3056" stroke-width="2"/>
+<rect x="2308.0" y="1357.1" width="6" height="27.7" rx="3" fill="#7aa2f7"/>
+<text class="head" x="2336.0" y="1381.0">Toggles</text>
+<path d="M2993.9,1371.7 V1380.1 H3004.5 V1371.7" fill="none" stroke="#7dcfff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="3007.0" y="1379.7" style="font-size:22.1px;fill:#7aa2f7" xml:space="preserve">u</text>
+<line x1="2332.0" y1="1399.2" x2="3020.0" y2="1399.2" stroke="#1a2847" stroke-width="2"/>
+<rect class="cap" x="2332.0" y="1415.4" width="53.4" height="37.4" rx="9"/>
+<path d="M2345.1,1433.4 V1443.1 H2357.3 V1433.4" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="2360.2" y="1442.6" style="font-size:25.5px" xml:space="preserve">t</text>
+<text class="sep" x="2398.2" y="1441.7" text-anchor="middle">/</text>
+<rect class="cap" x="2410.9" y="1415.4" width="125.4" height="37.4" rx="9"/>
+<text class="key" x="2421.1" y="1442.6" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">Esc</tspan> <tspan class="mod">Esc</tspan></text>
+<text class="desc" x="2566.3" y="1442.8">terminal / leave terminal mode</text>
+<rect class="cap" x="2332.0" y="1464.7" width="68.4" height="37.4" rx="9"/>
+<path d="M2345.1,1482.7 V1492.4 H2357.3 V1482.7" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="2360.2" y="1491.9" style="font-size:25.5px" xml:space="preserve">uc</text>
+<text class="sep" x="2413.2" y="1491.0" text-anchor="middle">/</text>
+<rect class="cap" x="2425.9" y="1464.7" width="68.4" height="37.4" rx="9"/>
+<path d="M2439.0,1482.7 V1492.4 H2451.2 V1482.7" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="2454.1" y="1491.9" style="font-size:25.5px" xml:space="preserve">uz</text>
+<text class="desc" x="2566.3" y="1492.1">colorscheme / zen mode</text>
+<rect class="cap" x="2332.0" y="1514.0" width="68.4" height="37.4" rx="9"/>
+<path d="M2345.1,1532.0 V1541.7 H2357.3 V1532.0" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="2360.2" y="1541.2" style="font-size:25.5px" xml:space="preserve">uw</text>
+<text class="sep" x="2413.2" y="1540.3" text-anchor="middle">/</text>
+<rect class="cap" x="2425.9" y="1514.0" width="68.4" height="37.4" rx="9"/>
+<path d="M2439.0,1532.0 V1541.7 H2451.2 V1532.0" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="2454.1" y="1541.2" style="font-size:25.5px" xml:space="preserve">ul</text>
+<text class="desc" x="2566.3" y="1541.4">whitespace / invisibles</text>
+<rect class="cap" x="2332.0" y="1563.2" width="68.4" height="37.4" rx="9"/>
+<path d="M2345.1,1581.3 V1591.0 H2357.3 V1581.3" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="2360.2" y="1590.5" style="font-size:25.5px" xml:space="preserve">uf</text>
+<text class="sep" x="2413.2" y="1589.6" text-anchor="middle">/</text>
+<rect class="cap" x="2425.9" y="1563.2" width="68.4" height="37.4" rx="9"/>
+<path d="M2439.0,1581.3 V1591.0 H2451.2 V1581.3" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="2454.1" y="1590.5" style="font-size:25.5px" xml:space="preserve">uh</text>
+<text class="desc" x="2566.3" y="1590.7">format on save / inlay hints</text>
+<rect class="cap" x="2332.0" y="1612.5" width="68.4" height="37.4" rx="9"/>
+<path d="M2345.1,1630.6 V1640.3 H2357.3 V1630.6" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="2360.2" y="1639.8" style="font-size:25.5px" xml:space="preserve">up</text>
+<text class="sep" x="2413.2" y="1638.9" text-anchor="middle">/</text>
+<rect class="cap" x="2425.9" y="1612.5" width="68.4" height="37.4" rx="9"/>
+<path d="M2439.0,1630.6 V1640.3 H2451.2 V1630.6" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="2454.1" y="1639.8" style="font-size:25.5px" xml:space="preserve">uP</text>
+<text class="desc" x="2566.3" y="1640.0">markdown preview on / off</text>
+<rect class="cap" x="2332.0" y="1661.8" width="68.4" height="37.4" rx="9"/>
+<path d="M2345.1,1679.9 V1689.6 H2357.3 V1679.9" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="2360.2" y="1689.0" style="font-size:25.5px" xml:space="preserve">uu</text>
+<text class="desc" x="2566.3" y="1689.3">undo tree</text>
+<text class="sub" x="2332.0" y="1733.8" fill="#7aa2f7" fill-opacity="0.8">SESSIONS</text>
+<path d="M2461.3,1726.4 V1734.2 H2471.1 V1726.4" fill="none" stroke="#7dcfff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="2473.4" y="1733.8" style="font-size:20.57px;fill:#7aa2f7" xml:space="preserve">S</text>
+<line x1="2507.4" y1="1728.1" x2="3020.0" y2="1728.1" stroke="#1a2847" stroke-width="1.5"/>
+<rect class="cap" x="2332.0" y="1751.9" width="68.4" height="37.4" rx="9"/>
+<path d="M2345.1,1770.0 V1779.7 H2357.3 V1770.0" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="2360.2" y="1779.1" style="font-size:25.5px" xml:space="preserve">Ss</text>
+<text class="sep" x="2413.2" y="1778.3" text-anchor="middle">/</text>
+<rect class="cap" x="2425.9" y="1751.9" width="68.4" height="37.4" rx="9"/>
+<path d="M2439.0,1770.0 V1779.7 H2451.2 V1770.0" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="2454.1" y="1779.1" style="font-size:25.5px" xml:space="preserve">Sl</text>
+<text class="desc" x="2566.3" y="1779.4">restore this dir / last</text>
+<rect class="cap" x="2332.0" y="1801.2" width="68.4" height="37.4" rx="9"/>
+<path d="M2345.1,1819.3 V1829.0 H2357.3 V1819.3" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="2360.2" y="1828.4" style="font-size:25.5px" xml:space="preserve">Sf</text>
+<text class="sep" x="2413.2" y="1827.6" text-anchor="middle">/</text>
+<rect class="cap" x="2425.9" y="1801.2" width="68.4" height="37.4" rx="9"/>
+<path d="M2439.0,1819.3 V1829.0 H2451.2 V1819.3" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="2454.1" y="1828.4" style="font-size:25.5px" xml:space="preserve">Sd</text>
+<text class="desc" x="2566.3" y="1828.7">pick / do not save on exit</text>
+<rect x="3064.0" y="40.0" width="736.0" height="435.2" rx="20" fill="#0e182d" fill-opacity="0.82" stroke="#1f3056" stroke-width="2"/>
+<rect x="3064.0" y="60.8" width="6" height="27.7" rx="3" fill="#89b4fa"/>
+<text class="head" x="3092.0" y="84.7">Buffers</text>
+<path d="M3749.9,75.4 V83.8 H3760.5 V75.4" fill="none" stroke="#7dcfff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="3763.0" y="83.4" style="font-size:22.1px;fill:#89b4fa" xml:space="preserve">b</text>
+<line x1="3088.0" y1="102.9" x2="3776.0" y2="102.9" stroke="#1a2847" stroke-width="2"/>
+<rect class="cap" x="3088.0" y="119.0" width="56.4" height="37.4" rx="9"/>
+<path d="M3101.1,137.1 V146.8 H3113.3 V137.1" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M3119.1,137.1 V146.8 H3131.3 V137.1" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="desc" x="3289.3" y="146.5">list and switch<tspan class="note" dx="14">C-x closes</tspan></text>
+<rect class="cap" x="3088.0" y="168.4" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="3098.2" y="195.6" style="font-size:25.5px" xml:space="preserve">öb</text>
+<text class="sep" x="3151.2" y="194.7" text-anchor="middle">/</text>
+<rect class="cap" x="3163.9" y="168.4" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="3174.1" y="195.6" style="font-size:25.5px" xml:space="preserve">äb</text>
+<text class="desc" x="3289.3" y="195.8">previous / next<tspan class="note" dx="14">öB äB ends</tspan></text>
+<rect class="cap" x="3088.0" y="217.7" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="3098.2" y="244.8" style="font-size:25.5px" xml:space="preserve">:b#</text>
+<text class="desc" x="3289.3" y="245.1">the one before, and back again</text>
+<rect class="cap" x="3088.0" y="266.9" width="125.4" height="37.4" rx="9"/>
+<text class="key" x="3098.2" y="294.1" style="font-size:25.5px" xml:space="preserve">:b name</text>
+<text class="desc" x="3289.3" y="294.4">by name, Tab completes</text>
+<rect class="cap" x="3088.0" y="316.2" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="3098.2" y="343.4" style="font-size:25.5px" xml:space="preserve">:ls</text>
+<text class="sep" x="3166.2" y="342.6" text-anchor="middle">/</text>
+<rect class="cap" x="3178.9" y="316.2" width="80.4" height="37.4" rx="9"/>
+<text class="key" x="3189.1" y="343.4" style="font-size:25.5px" xml:space="preserve">:b 3</text>
+<text class="desc" x="3289.3" y="343.7">list with numbers / go to 3</text>
+<rect class="cap" x="3088.0" y="365.6" width="53.4" height="37.4" rx="9"/>
+<path d="M3101.1,383.6 V393.3 H3113.3 V383.6" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="3116.2" y="392.8" style="font-size:25.5px" xml:space="preserve">w</text>
+<text class="desc" x="3289.3" y="393.0">write buffer</text>
+<rect class="cap" x="3088.0" y="414.9" width="68.4" height="37.4" rx="9"/>
+<path d="M3101.1,432.9 V442.6 H3113.3 V432.9" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="3116.2" y="442.1" style="font-size:25.5px" xml:space="preserve">bd</text>
+<text class="sep" x="3169.2" y="441.2" text-anchor="middle">/</text>
+<rect class="cap" x="3181.9" y="414.9" width="68.4" height="37.4" rx="9"/>
+<path d="M3195.0,432.9 V442.6 H3207.2 V432.9" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="3210.1" y="442.1" style="font-size:25.5px" xml:space="preserve">bD</text>
+<text class="desc" x="3289.3" y="442.3">close buffer / discard changes</text>
+<rect x="3064.0" y="495.2" width="736.0" height="484.5" rx="20" fill="#0e182d" fill-opacity="0.82" stroke="#1f3056" stroke-width="2"/>
+<rect x="3064.0" y="516.0" width="6" height="27.7" rx="3" fill="#a99cf5"/>
+<text class="head" x="3092.0" y="539.9">Debug</text>
+<text class="key" x="3643.4" y="538.6" style="font-size:22.1px;fill:#a99cf5" xml:space="preserve">F-keys  </text>
+<path d="M3749.9,530.6 V539.0 H3760.5 V530.6" fill="none" stroke="#7dcfff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="3763.0" y="538.6" style="font-size:22.1px;fill:#a99cf5" xml:space="preserve">D</text>
+<line x1="3088.0" y1="558.1" x2="3776.0" y2="558.1" stroke="#1a2847" stroke-width="2"/>
+<rect class="cap" x="3088.0" y="574.2" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="3098.2" y="601.5" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">F5</tspan></text>
+<text class="sep" x="3151.2" y="600.6" text-anchor="middle">/</text>
+<rect class="cap" x="3163.9" y="574.2" width="68.4" height="37.4" rx="9"/>
+<path d="M3177.0,592.3 V602.0 H3189.2 V592.3" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="3192.1" y="601.5" style="font-size:25.5px" xml:space="preserve">Dc</text>
+<text class="desc" x="3280.3" y="601.7">start / continue</text>
+<rect class="cap" x="3088.0" y="623.5" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="3098.2" y="650.8" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">F9</tspan></text>
+<text class="sep" x="3151.2" y="649.9" text-anchor="middle">/</text>
+<rect class="cap" x="3163.9" y="623.5" width="68.4" height="37.4" rx="9"/>
+<path d="M3177.0,641.6 V651.3 H3189.2 V641.6" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="3192.1" y="650.8" style="font-size:25.5px" xml:space="preserve">Db</text>
+<text class="desc" x="3280.3" y="651.0">toggle breakpoint</text>
+<rect class="cap" x="3088.0" y="672.8" width="68.4" height="37.4" rx="9"/>
+<path d="M3101.1,690.9 V700.6 H3113.3 V690.9" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="3116.2" y="700.0" style="font-size:25.5px" xml:space="preserve">DB</text>
+<text class="desc" x="3280.3" y="700.3">conditional breakpoint</text>
+<rect class="cap" x="3088.0" y="722.1" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="3098.2" y="749.3" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">F10</tspan></text>
+<text class="sep" x="3166.2" y="748.5" text-anchor="middle">/</text>
+<rect class="cap" x="3178.9" y="722.1" width="68.4" height="37.4" rx="9"/>
+<path d="M3192.0,740.2 V749.9 H3204.2 V740.2" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="3207.1" y="749.3" style="font-size:25.5px" xml:space="preserve">Dn</text>
+<text class="desc" x="3280.3" y="749.6">step over</text>
+<rect class="cap" x="3088.0" y="771.4" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="3098.2" y="798.6" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">F11</tspan></text>
+<text class="sep" x="3166.2" y="797.8" text-anchor="middle">/</text>
+<rect class="cap" x="3178.9" y="771.4" width="68.4" height="37.4" rx="9"/>
+<path d="M3192.0,789.5 V799.2 H3204.2 V789.5" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="3207.1" y="798.6" style="font-size:25.5px" xml:space="preserve">Di</text>
+<text class="desc" x="3280.3" y="798.9">step into</text>
+<rect class="cap" x="3088.0" y="820.7" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="3098.2" y="847.9" style="font-size:25.5px" xml:space="preserve"><tspan class="mod">F12</tspan></text>
+<text class="sep" x="3166.2" y="847.1" text-anchor="middle">/</text>
+<rect class="cap" x="3178.9" y="820.7" width="68.4" height="37.4" rx="9"/>
+<path d="M3192.0,838.8 V848.5 H3204.2 V838.8" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="3207.1" y="847.9" style="font-size:25.5px" xml:space="preserve">Do</text>
+<text class="desc" x="3280.3" y="848.2">step out</text>
+<rect class="cap" x="3088.0" y="870.0" width="68.4" height="37.4" rx="9"/>
+<path d="M3101.1,888.1 V897.8 H3113.3 V888.1" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="3116.2" y="897.2" style="font-size:25.5px" xml:space="preserve">Dl</text>
+<text class="sep" x="3169.2" y="896.4" text-anchor="middle">/</text>
+<rect class="cap" x="3181.9" y="870.0" width="68.4" height="37.4" rx="9"/>
+<path d="M3195.0,888.1 V897.8 H3207.2 V888.1" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="3210.1" y="897.2" style="font-size:25.5px" xml:space="preserve">Dt</text>
+<text class="desc" x="3280.3" y="897.5">run last / terminate</text>
+<rect class="cap" x="3088.0" y="919.3" width="68.4" height="37.4" rx="9"/>
+<path d="M3101.1,937.4 V947.1 H3113.3 V937.4" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="3116.2" y="946.5" style="font-size:25.5px" xml:space="preserve">Dr</text>
+<text class="sep" x="3169.2" y="945.7" text-anchor="middle">/</text>
+<rect class="cap" x="3181.9" y="919.3" width="68.4" height="37.4" rx="9"/>
+<path d="M3195.0,937.4 V947.1 H3207.2 V937.4" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="3210.1" y="946.5" style="font-size:25.5px" xml:space="preserve">Dv</text>
+<text class="desc" x="3280.3" y="946.8">REPL / debug panel</text>
+<rect x="3064.0" y="999.7" width="736.0" height="435.2" rx="20" fill="#0e182d" fill-opacity="0.82" stroke="#1f3056" stroke-width="2"/>
+<rect x="3064.0" y="1020.5" width="6" height="27.7" rx="3" fill="#89b4fa"/>
+<text class="head" x="3092.0" y="1044.4">Edit</text>
+<line x1="3088.0" y1="1062.6" x2="3776.0" y2="1062.6" stroke="#1a2847" stroke-width="2"/>
+<rect class="cap" x="3088.0" y="1078.8" width="35.4" height="37.4" rx="9"/>
+<text class="key" x="3098.2" y="1106.0" style="font-size:25.5px" xml:space="preserve">J</text>
+<text class="desc" x="3259.3" y="1106.2">join lines, cursor stays</text>
+<rect class="cap" x="3088.0" y="1128.1" width="35.4" height="37.4" rx="9"/>
+<text class="key" x="3098.2" y="1155.3" style="font-size:25.5px" xml:space="preserve">&lt;</text>
+<text class="sep" x="3136.2" y="1154.4" text-anchor="middle">/</text>
+<rect class="cap" x="3148.9" y="1128.1" width="35.4" height="37.4" rx="9"/>
+<text class="key" x="3159.1" y="1155.3" style="font-size:25.5px" xml:space="preserve">&gt;</text>
+<text class="desc" x="3259.3" y="1155.5">shift, keep selection<tspan class="note" dx="14">visual</tspan></text>
+<rect class="cap" x="3088.0" y="1177.4" width="53.4" height="37.4" rx="9"/>
+<path d="M3101.1,1195.4 V1205.1 H3113.3 V1195.4" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="3116.2" y="1204.6" style="font-size:25.5px" xml:space="preserve">p</text>
+<text class="desc" x="3259.3" y="1204.8">paste over, keep register<tspan class="note" dx="14">visual</tspan></text>
+<rect class="cap" x="3088.0" y="1226.7" width="53.4" height="37.4" rx="9"/>
+<path d="M3101.1,1244.7 V1254.4 H3113.3 V1244.7" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="3116.2" y="1253.9" style="font-size:25.5px" xml:space="preserve">d</text>
+<text class="desc" x="3259.3" y="1254.1">delete to black hole register</text>
+<rect class="cap" x="3088.0" y="1276.0" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="3098.2" y="1303.2" style="font-size:25.5px" xml:space="preserve">gcc</text>
+<text class="sep" x="3166.2" y="1302.3" text-anchor="middle">/</text>
+<rect class="cap" x="3178.9" y="1276.0" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="3189.1" y="1303.2" style="font-size:25.5px" xml:space="preserve">gc</text>
+<text class="desc" x="3259.3" y="1303.4">toggle comment</text>
+<rect class="cap" x="3088.0" y="1325.2" width="65.4" height="37.4" rx="9"/>
+<text class="key" x="3098.2" y="1352.5" style="font-size:25.5px" xml:space="preserve">"0p</text>
+<text class="desc" x="3259.3" y="1352.7">paste last yank, not delete</text>
+<rect class="cap" x="3088.0" y="1374.5" width="68.4" height="37.4" rx="9"/>
+<path d="M3101.1,1392.6 V1402.3 H3113.3 V1392.6" fill="none" stroke="#7dcfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="key" x="3116.2" y="1401.8" style="font-size:25.5px" xml:space="preserve">cw</text>
+<text class="desc" x="3259.3" y="1402.0">trim trailing whitespace</text>
+<rect x="3064.0" y="1454.9" width="736.0" height="385.9" rx="20" fill="#0e182d" fill-opacity="0.82" stroke="#1f3056" stroke-width="2"/>
+<rect x="3064.0" y="1475.7" width="6" height="27.7" rx="3" fill="#5fd7c8"/>
+<text class="head" x="3092.0" y="1499.6">Textobjects</text>
+<text class="key" x="3581.0" y="1498.3" style="font-size:22.1px;fill:#5fd7c8" xml:space="preserve">d c y v + a / i</text>
+<line x1="3088.0" y1="1517.8" x2="3776.0" y2="1517.8" stroke="#1a2847" stroke-width="2"/>
+<rect class="cap" x="3088.0" y="1534.0" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="3098.2" y="1561.2" style="font-size:25.5px" xml:space="preserve">aF</text>
+<text class="sep" x="3151.2" y="1560.3" text-anchor="middle">/</text>
+<rect class="cap" x="3163.9" y="1534.0" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="3174.1" y="1561.2" style="font-size:25.5px" xml:space="preserve">iF</text>
+<text class="desc" x="3320.2" y="1561.4">function / its body</text>
+<rect class="cap" x="3088.0" y="1583.3" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="3098.2" y="1610.5" style="font-size:25.5px" xml:space="preserve">aC</text>
+<text class="sep" x="3151.2" y="1609.6" text-anchor="middle">/</text>
+<rect class="cap" x="3163.9" y="1583.3" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="3174.1" y="1610.5" style="font-size:25.5px" xml:space="preserve">iC</text>
+<text class="desc" x="3320.2" y="1610.7">class, module, struct</text>
+<rect class="cap" x="3088.0" y="1632.6" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="3098.2" y="1659.8" style="font-size:25.5px" xml:space="preserve">ao</text>
+<text class="sep" x="3151.2" y="1658.9" text-anchor="middle">/</text>
+<rect class="cap" x="3163.9" y="1632.6" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="3174.1" y="1659.8" style="font-size:25.5px" xml:space="preserve">io</text>
+<text class="desc" x="3320.2" y="1660.0">block: if, for, while</text>
+<rect class="cap" x="3088.0" y="1681.9" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="3098.2" y="1709.1" style="font-size:25.5px" xml:space="preserve">af</text>
+<text class="sep" x="3151.2" y="1708.2" text-anchor="middle">/</text>
+<rect class="cap" x="3163.9" y="1681.9" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="3174.1" y="1709.1" style="font-size:25.5px" xml:space="preserve">aa</text>
+<text class="desc" x="3320.2" y="1709.3">function call / argument</text>
+<rect class="cap" x="3088.0" y="1731.2" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="3098.2" y="1758.4" style="font-size:25.5px" xml:space="preserve">at</text>
+<text class="sep" x="3151.2" y="1757.5" text-anchor="middle">/</text>
+<rect class="cap" x="3163.9" y="1731.2" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="3174.1" y="1758.4" style="font-size:25.5px" xml:space="preserve">a)</text>
+<text class="desc" x="3320.2" y="1758.6">HTML tag / brackets, quotes</text>
+<rect class="cap" x="3088.0" y="1780.5" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="3098.2" y="1807.7" style="font-size:25.5px" xml:space="preserve">sa</text>
+<text class="sep" x="3151.2" y="1806.8" text-anchor="middle">/</text>
+<rect class="cap" x="3163.9" y="1780.5" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="3174.1" y="1807.7" style="font-size:25.5px" xml:space="preserve">sd</text>
+<text class="sep" x="3227.1" y="1806.8" text-anchor="middle">/</text>
+<rect class="cap" x="3239.8" y="1780.5" width="50.4" height="37.4" rx="9"/>
+<text class="key" x="3250.0" y="1807.7" style="font-size:25.5px" xml:space="preserve">sr</text>
+<text class="desc" x="3320.2" y="1807.9">surround: add / delete / replace</text>
+</svg>
